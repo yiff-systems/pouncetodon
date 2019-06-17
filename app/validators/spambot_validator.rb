@@ -5,7 +5,10 @@ class SpambotValidator < ActiveModel::Validator
 
     @status = status
 
-    status.errors.add(:text, "Oopsie woopsie uwu") if should_filter?
+    if should_filter?
+      Rails.logger.warn("filtering status from account_id #{status.account_id}")
+      status.errors.add(:text, "Oopsie woopsie uwu")
+    end
   end
 
   private
