@@ -17,7 +17,7 @@ class SpambotValidator < ActiveModel::Validator
   private
 
   FILTER_MATCHERS = {
-    things_i_hate: /Things I hate: feminism, gays, blacks/.freeze
+    things_i_hate: /Things I hate: feminism, gays, blacks/.freeze,
     was_blog_link: %r{<a href="https?://womenare(?:stupid|dumb).site/blog/}.freeze
   }.freeze
 
