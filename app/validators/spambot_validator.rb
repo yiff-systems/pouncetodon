@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class SpambotValidator < ActiveModel::Validator
+  REDIS_LOG_KEY = "nilsding:spambotvalidator:log"
   def validate(status)
     # allow local spammers and potential reblogs
     return if status.local? || status.reblog?
@@ -25,6 +26,9 @@ class SpambotValidator < ActiveModel::Validator
       FILTER_MATCHERS.each do |reason, regexp|
         reasons << reason if @status.text =~ regexp
       end
+
+      next if reasons.empty?
+      Redis.current.lpush(REDIS_LOG_KEY, "#{Time.now.utc.to_f}$$#{reasons.join(',')}$$#{@status.account_id}")
     end
   end
 end
