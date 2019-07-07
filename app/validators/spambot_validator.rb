@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SpambotValidator < ActiveModel::Validator
   def validate(status)
     # allow local spammers and potential reblogs
@@ -5,17 +7,24 @@ class SpambotValidator < ActiveModel::Validator
 
     @status = status
 
-    if should_filter?
-      Rails.logger.warn("filtering status from account_id #{status.account_id}")
+    unless filter_reasons.empty?
+      Rails.logger.error("filtering status from account_id #{status.account_id} -- reason: #{filter_reasons.join(', ')}")
       status.errors.add(:text, "Oopsie woopsie uwu")
     end
   end
 
   private
 
-  def should_filter?
-    return true if @status.text =~ /Things I hate: feminism, gays, blacks/
+  FILTER_MATCHERS = {
+    things_i_hate: /Things I hate: feminism, gays, blacks/.freeze
+    was_blog_link: %r{<a href="https?://womenare(?:stupid|dumb).site/blog/}.freeze
+  }.freeze
 
-    false
+  def filter_reasons
+    @filter_reasons ||= [].tap do |reasons|
+      FILTER_MATCHERS.each do |reason, regexp|
+        reasons << reason if @status.text =~ regexp
+      end
+    end
   end
 end
