@@ -125,5 +125,12 @@ module Mastodon
       Devise::FailureApp.send :include, HttpAcceptLanguage::EasyAccess
       Devise::FailureApp.send :include, Localized
     end
+
+    sentry_path = Rails.root.join("config/sentry_dsn")
+    if File.exists?(sentry_path)
+      Raven.configure do |config|
+        config.dsn = IO.read(sentry_path).strip
+      end
+    end
   end
 end
