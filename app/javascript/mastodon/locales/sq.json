@@ -339,7 +339,7 @@
   "search_results.accounts": "Persona",
   "search_results.hashtags": "Hashtagë",
   "search_results.statuses": "Mesazhe",
-  "search_results.statuses_fts_disabled": "Searching toots by their content is not enabled on this Mastodon server.",
+  "search_results.statuses_fts_disabled": "Searching awoos by their content is not enabled on this Mastodon server.",
   "search_results.total": "{count, number} {count, plural, një {result} {results} të tjera}",
   "status.admin_account": "Hap ndërfaqe moderimi për @{name}",
   "status.admin_status": "Hape këtë gjendje te ndërfaqja e moderimit",

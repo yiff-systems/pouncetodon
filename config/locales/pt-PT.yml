@@ -1,7 +1,7 @@
 ---
 pt-PT:
   about:
-    about_hashtag_html: Estes são toots públicos marcados com <strong>#%{hashtag}</strong>. Podes interagir com eles se tiveres uma conta Mastodon.
+    about_hashtag_html: Estes são awoos públicos marcados com <strong>#%{hashtag}</strong>. Podes interagir com eles se tiveres uma conta Mastodon.
     about_mastodon_html: Mastodon é uma rede social baseada em protocolos abertos da web e software livre e gratuito. É descentralizado como e-mail.
     about_this: Sobre esta instância
     administered_by: 'Administrado por:'
@@ -748,7 +748,7 @@ pt-PT:
       unlisted: Público, mas não mostre no timeline público
       unlisted_long: Todos podem ver, porém não será postado nas timelines públicas
   stream_entries:
-    pinned: Toot fixado
+    pinned: Awoo fixado
     reblogged: partilhado
     sensitive_content: Conteúdo sensível
   terms:

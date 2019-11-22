@@ -339,7 +339,7 @@
   "search_results.accounts": "মানুষ",
   "search_results.hashtags": "হ্যাশট্যাগগুলি",
   "search_results.statuses": "টুট",
-  "search_results.statuses_fts_disabled": "Searching toots by their content is not enabled on this Mastodon server.",
+  "search_results.statuses_fts_disabled": "Searching awoos by their content is not enabled on this Mastodon server.",
   "search_results.total": "{count, number} {count, plural, one {ফলাফল} other {ফলাফল}}",
   "status.admin_account": "@{name} র জন্য পরিচালনার ইন্টারফেসে ঢুকুন",
   "status.admin_status": "যায় লেখাটি পরিচালনার ইন্টারফেসে খুলুন",

@@ -29,7 +29,7 @@ describe Api::V1::Accounts::CredentialsController do
 
           patch :update, params: {
             display_name: "Alice Isn't Dead",
-            note: "Hi!\n\nToot toot!",
+            note: "Hi!\n\nAwoo awoo!",
             avatar: fixture_file_upload('files/avatar.gif', 'image/gif'),
             header: fixture_file_upload('files/attachment.jpg', 'image/jpeg'),
             source: {
@@ -47,7 +47,7 @@ describe Api::V1::Accounts::CredentialsController do
           user.account.reload
 
           expect(user.account.display_name).to eq("Alice Isn't Dead")
-          expect(user.account.note).to eq("Hi!\n\nToot toot!")
+          expect(user.account.note).to eq("Hi!\n\nAwoo awoo!")
           expect(user.account.avatar).to exist
           expect(user.account.header).to exist
           expect(user.setting_default_privacy).to eq('unlisted')

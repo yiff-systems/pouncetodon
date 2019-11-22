@@ -70,9 +70,9 @@ tr:
       following: Onaylamak istediğiniz kişiyi zaten takip ediyor olmalısınız
     posts:
       one: Gönderi
-      other: Tootlar
-    posts_tab_heading: Tootlar
-    posts_with_replies: Tootlar ve yanıtlar
+      other: Awoolar
+    posts_tab_heading: Awoolar
+    posts_with_replies: Awoolar ve yanıtlar
     reserved_username: Kullanıcı adı saklıdır
     roles:
       admin: Yönetici

@@ -161,7 +161,7 @@ fr:
         listable: Autoriser ce hashtag à apparaître dans les recherches et dans l’annuaire des profils
         name: Hashtag
         trendable: Autoriser ce hashtag à apparaître sous les tendances du jour
-        usable: Autoriser les toots à utiliser ce hashtag
+        usable: Autoriser les awoos à utiliser ce hashtag
     'no': Non
     recommended: Recommandé
     required:

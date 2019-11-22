@@ -100,7 +100,7 @@ sk:
         setting_default_language: Píšeš v jazyku
         setting_default_privacy: Súkromie príspevkov
         setting_default_sensitive: Označ všetky mediálne súbory ako chúlostivé
-        setting_delete_modal: Zobrazuj potvrdzovacie okno pred vymazaním toot-u
+        setting_delete_modal: Zobrazuj potvrdzovacie okno pred vymazaním awoo-u
         setting_display_media: Zobrazovanie médií
         setting_display_media_default: Štandard
         setting_display_media_hide_all: Ukry všetky
@@ -136,7 +136,7 @@ sk:
         follow_request: Zaslať email, ak ti niekto pošle žiadosť o sledovanie
         mention: Zaslať email, ak ťa niekto spomenie vo svojom príspevku
         pending_account: Zaslať email, ak treba prehodnotiť nový účet
-        reblog: Zaslať email, ak niekto re-tootne tvoj príspevok
+        reblog: Zaslať email, ak niekto re-awoone tvoj príspevok
         report: Zaslať email, ak niekto podá nové nahlásenie
         trending_tag: Pošli email, ak sa neoverený haštag stane populárnym
       tag:

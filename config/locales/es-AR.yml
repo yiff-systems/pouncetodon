@@ -1,7 +1,7 @@
 ---
 es-AR:
   about:
-    about_hashtag_html: Estos son toots públicos etiquetados con <strong>#%{hashtag}</strong>. Si tenés una cuenta en cualquier parte del fediverso, podés interactuar con ellos.
+    about_hashtag_html: Estos son awoos públicos etiquetados con <strong>#%{hashtag}</strong>. Si tenés una cuenta en cualquier parte del fediverso, podés interactuar con ellos.
     about_mastodon_html: Mastodon es una red social basada en protocolos abiertos de la web y es software libre y de código abierto. Es descentralizada, como el correo electrónico.
     about_this: Acerca de Mastodon
     active_count_after: activo
@@ -11,7 +11,7 @@ es-AR:
     apps: Aplicaciones móviles
     apps_platforms: Usá Mastodon desde iOS, Android y otras plataformas
     browse_directory: Explorá el directorio de perfiles y filtrá por intereses
-    browse_public_posts: Explorá un flujo en tiempo real de toots públicos en Mastodon
+    browse_public_posts: Explorá un flujo en tiempo real de awoos públicos en Mastodon
     contact: Contacto
     contact_missing: No establecido
     contact_unavailable: No disponible
@@ -39,7 +39,7 @@ es-AR:
       domain: Servidor
       reason: Razón
       rejecting_media: 'Los archivos de medios de este servidor no van a ser procesados y no se mostrarán miniaturas, lo que requiere un clic manual hacia el archivo original:'
-      silenced: 'Los toots de estos servidores se ocultarán en las líneas temporales y conversaciones públicas, y no se generarán notificaciones de las interacciones de sus usuarios, a menos que los estés siguiendo:'
+      silenced: 'Los awoos de estos servidores se ocultarán en las líneas temporales y conversaciones públicas, y no se generarán notificaciones de las interacciones de sus usuarios, a menos que los estés siguiendo:'
       suspended: 'No se procesarán, almacenarán o intercambiarán datos de estos servidores, haciendo imposible cualquier interacción o comunicación con los usuarios de estos servidores:'
     unavailable_content_html: Mastodon generalmente te permite ver contenido e interactuar con usuarios de cualquier otro servidor en el fediverso. Estas son las excepciones que se hicieron en este servidor en particular.
     user_count_after:
@@ -69,10 +69,10 @@ es-AR:
     pin_errors:
       following: Ya tenés que estar siguiendo a la persona que querés recomendar
     posts:
-      one: Toot
-      other: Toots
-    posts_tab_heading: Toots
-    posts_with_replies: Toots con respuestas
+      one: Awoo
+      other: Awoos
+    posts_tab_heading: Awoos
+    posts_with_replies: Awoos con respuestas
     reserved_username: El nombre de usuario está reservado
     roles:
       admin: Administrador
@@ -298,9 +298,9 @@ es-AR:
       existing_domain_block_html: Ya le aplicaste límites más estrictos a %{name}, por lo que primero necesitás <a href="%{unblock_url}">desbloquearlo</a>.
       new:
         create: Crear bloqueo
-        hint: El bloqueo de dominio no va a prevenir la creación de toots de cuenta en la base de datos, pero se aplicarán métodos específicos de moderación en esas cuentas, retroactiva y automáticamente.
+        hint: El bloqueo de dominio no va a prevenir la creación de awoos de cuenta en la base de datos, pero se aplicarán métodos específicos de moderación en esas cuentas, retroactiva y automáticamente.
         severity:
-          desc_html: "<strong>Silenciar</strong> hará que los toots de la cuenta sean invisibles a quienes no estén siguiendo esa cuenta. <strong>Suspender</strong> quitará todo el contenido, archivos de medio y datos de perfil de la cuenta. Usá <strong>Ninguno</strong> si simplemente querés rechazar archivos de medios."
+          desc_html: "<strong>Silenciar</strong> hará que los awoos de la cuenta sean invisibles a quienes no estén siguiendo esa cuenta. <strong>Suspender</strong> quitará todo el contenido, archivos de medio y datos de perfil de la cuenta. Usá <strong>Ninguno</strong> si simplemente querés rechazar archivos de medios."
           noop: Ninguno
           silence: Silenciar
           suspend: Suspender
@@ -373,11 +373,11 @@ es-AR:
     relays:
       add_new: Agregar nuevo relé
       delete: Eliminar
-      description_html: Un <strong>relé de federación</strong> es un servidor intermedio que intercambia grandes volúmenes de toots públicos entre servidores que se suscriben y publican en él. <strong>Puede ayudar a servidores chicos y medianos a descubrir contenido del fediverso</strong>, que de otra manera requeriría que los usuarios locales siguiesen manualmente a personas de servidores remotos.
+      description_html: Un <strong>relé de federación</strong> es un servidor intermedio que intercambia grandes volúmenes de awoos públicos entre servidores que se suscriben y publican en él. <strong>Puede ayudar a servidores chicos y medianos a descubrir contenido del fediverso</strong>, que de otra manera requeriría que los usuarios locales siguiesen manualmente a personas de servidores remotos.
       disable: Deshabilitar
       disabled: Deshabilitado
       enable: Habilitar
-      enable_hint: Una vez habilitado, tu servidor se suscribirá a todos los toots públicos desde este relé, y comenzará a enviar los toots públicos de este servidor al relé.
+      enable_hint: Una vez habilitado, tu servidor se suscribirá a todos los awoos públicos desde este relé, y comenzará a enviar los awoos públicos de este servidor al relé.
       enabled: Habilitado
       inbox_url: Dirección web del relé
       pending: Esperando aprobación del relé

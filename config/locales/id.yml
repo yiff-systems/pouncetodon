@@ -1,7 +1,7 @@
 ---
 id:
   about:
-    about_hashtag_html: Ini adalah toot public yang ditandai dengan <strong>#%{hashtag}</strong>. Anda bisa berinteraksi dengan mereka jika anda memiliki akun dimanapun di fediverse.
+    about_hashtag_html: Ini adalah awoo public yang ditandai dengan <strong>#%{hashtag}</strong>. Anda bisa berinteraksi dengan mereka jika anda memiliki akun dimanapun di fediverse.
     about_mastodon_html: Mastodon adalah sebuah jejaring sosial <em>terbuka, open-source</em. Sebuah alternatif <em>desentralisasi</em> dari platform komersial, menjauhkan anda resiko dari sebuah perusahaan yang memonopoli komunikasi anda. Pilih server yang anda percayai &mdash; apapun yang anda pilih, anda tetap dapat berinteraksi dengan semua orang. Semua orang dapat menjalankan server Mastodon sendiri dan berpartisipasi dalam <em>jejaring sosial</em> dengan mudah.
     about_this: Tentang server ini
     active_count_after: aktif
@@ -66,9 +66,9 @@ id:
     pin_errors:
       following: Anda harus mengikuti orang yang ingin anda endorse
     posts:
-      other: Toot
-    posts_tab_heading: Toot
-    posts_with_replies: Toot dan balasan
+      other: Awoo
+    posts_tab_heading: Awoo
+    posts_with_replies: Awoo dan balasan
     reserved_username: Nama pengguna telah dipesan
     roles:
       admin: Admin
@@ -366,7 +366,7 @@ id:
       disable: Matikan
       disabled: Dimatikan
       enable: Aktifkan
-      enable_hint: Saat diaktifkan, server Anda akan melanggan semua toot publik dari relai ini, dan akan mengirim toot publik server ini ke sana.
+      enable_hint: Saat diaktifkan, server Anda akan melanggan semua awoo publik dari relai ini, dan akan mengirim awoo publik server ini ke sana.
       enabled: Diaktifkan
       inbox_url: URL Relai
       pending: Menunggu persetujuan relai

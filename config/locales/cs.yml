@@ -1,7 +1,7 @@
 ---
 cs:
   about:
-    about_hashtag_html: Tohle jsou veřejné tooty označené hashtagem <strong>#%{hashtag}</strong>. Pokud máte účet kdekoliv ve fedivesmíru, můžete s nimi interagovat.
+    about_hashtag_html: Tohle jsou veřejné awooy označené hashtagem <strong>#%{hashtag}</strong>. Pokud máte účet kdekoliv ve fedivesmíru, můžete s nimi interagovat.
     about_mastodon_html: 'Sociální síť budoucnosti: žádné reklamy, žádné korporátní sledování, etický design a decentralizace! S Mastodonem vlastníte svoje data!'
     about_this: O tomto serveru
     active_count_after: aktivních
@@ -29,10 +29,10 @@ cs:
     server_stats: 'Statistika serveru:'
     source_code: Zdrojový kód
     status_count_after:
-      few: tooty
-      many: tootů
-      one: toot
-      other: tootů
+      few: awooy
+      many: awooů
+      one: awoo
+      other: awooů
     status_count_before: Kteří napsali
     tagline: Sledujte své přátele a objevujte nové
     terms: Podmínky používání
@@ -75,12 +75,12 @@ cs:
     pin_errors:
       following: Musíte již sledovat osobu, kterou chcete podpořit
     posts:
-      few: Tooty
-      many: Tootů
-      one: Toot
-      other: Tootů
-    posts_tab_heading: Tooty
-    posts_with_replies: Tooty a odpovědi
+      few: Awooy
+      many: Awooů
+      one: Awoo
+      other: Awooů
+    posts_tab_heading: Awooy
+    posts_with_replies: Awooy a odpovědi
     reserved_username: Toto uživatelské jméno je rezervováno
     roles:
       admin: Administrátor
@@ -189,7 +189,7 @@ cs:
         targeted_reports: Nahlášeni ostatními
       silence: Utišit
       silenced: Utišen/a
-      statuses: Tooty
+      statuses: Awooy
       subscribe: Odebírat
       suspended: Pozastaven/a
       time_in_queue: Čeká ve frontě %{time}
@@ -215,7 +215,7 @@ cs:
         destroy_custom_emoji: "%{name} zničil/a emoji %{target}"
         destroy_domain_block: "%{name} odblokoval/a doménu %{target}"
         destroy_email_domain_block: "%{name} odebral/a e-mailovou doménu %{target} z černé listiny"
-        destroy_status: "%{name} odstranil/a toot uživatele %{target}"
+        destroy_status: "%{name} odstranil/a awoo uživatele %{target}"
         disable_2fa_user: "%{name} vypnul/a dvoufázové ověřování pro uživatele %{target}"
         disable_custom_emoji: "%{name} zakázal/a emoji %{target}"
         disable_user: "%{name} zakázal/a přihlašování pro uživatele %{target}"
@@ -233,8 +233,8 @@ cs:
         unsilence_account: "%{name} odtišil/a účet uživatele %{target}"
         unsuspend_account: "%{name} zrušil/a pozastavení účtu uživatele %{target}"
         update_custom_emoji: "%{name} aktualizoval/a emoji %{target}"
-        update_status: "%{name} aktualizoval/a toot uživatele %{target}"
-      deleted_status: "(smazaný toot)"
+        update_status: "%{name} aktualizoval/a awoo uživatele %{target}"
+      deleted_status: "(smazaný awoo)"
       title: Záznam auditu
     custom_emojis:
       assign_category: Přiřadit kategorii
@@ -389,11 +389,11 @@ cs:
     relays:
       add_new: Přidat nový most
       delete: Smazat
-      description_html: "<strong>Federovací most</strong> je přechodný server, který vyměňuje velká množství veřejných tootů mezi servery, které z něj odebírají a publikují na něj. <strong>Může pomoci malým a středně velkým serverům objevovat obsah z fedivesmíru</strong>, což by jinak vyžadovalo, aby místní uživatelé manuálně sledovali jiné lidi na vzdálených serverech."
+      description_html: "<strong>Federovací most</strong> je přechodný server, který vyměňuje velká množství veřejných awooů mezi servery, které z něj odebírají a publikují na něj. <strong>Může pomoci malým a středně velkým serverům objevovat obsah z fedivesmíru</strong>, což by jinak vyžadovalo, aby místní uživatelé manuálně sledovali jiné lidi na vzdálených serverech."
       disable: Zakázat
       disabled: Zakázáno
       enable: Povolit
-      enable_hint: Je-li tohle povoleno, začne váš server odebírat všechny veřejné tooty z tohoto mostu a odesílat na něj své vlastní veřejné tooty.
+      enable_hint: Je-li tohle povoleno, začne váš server odebírat všechny veřejné awooy z tohoto mostu a odesílat na něj své vlastní veřejné awooy.
       enabled: Povoleno
       inbox_url: URL mostu
       pending: Čekám na souhlas mostu
@@ -437,7 +437,7 @@ cs:
       updated_at: Aktualizováno
     settings:
       activity_api_enabled:
-        desc_html: Počty lokálně publikovaných tootů, aktivních uživatelů a nových registrací, v týdenních intervalech
+        desc_html: Počty lokálně publikovaných awooů, aktivních uživatelů a nových registrací, v týdenních intervalech
         title: Publikovat hromadné statistiky o uživatelské aktivitě
       bootstrap_timeline_accounts:
         desc_html: Je-li uživatelských jmen více, oddělujte je čárkami. Lze zadat pouze místní a odemknuté účty. Je-li tohle prázdné, jsou výchozí hodnotou všichni místní administrátoři.
@@ -535,8 +535,8 @@ cs:
       media:
         title: Média
       no_media: Žádná média
-      no_status_selected: Nebyly změněny žádné tooty, neboť žádné nebyly vybrány
-      title: Tooty účtu
+      no_status_selected: Nebyly změněny žádné awooy, neboť žádné nebyly vybrány
+      title: Awooy účtu
       with_media: S médii
     tags:
       accounts_today: Jedinečná použití dnes
@@ -593,7 +593,7 @@ cs:
     settings: 'Změnit volby e-mailu: %{link}'
     view: 'Zobrazit:'
     view_profile: Zobrazit profil
-    view_status: Zobrazit toot
+    view_status: Zobrazit awoo
   applications:
     created: Aplikace úspěšně vytvořena
     destroyed: Aplikace úspěšně smazána
@@ -716,7 +716,7 @@ cs:
     archive_takeout:
       date: Datum
       download: Stáhnout svůj archiv
-      hint_html: Můžete si vyžádat archiv vašich <strong>tootů a nahraných médií</strong>. Exportovaná data budou ve formátu ActivityPub a budou čitelná kterýmkoliv kompatibilním softwarem. Archiv si můžete vyžádat každých 7 dní.
+      hint_html: Můžete si vyžádat archiv vašich <strong>awooů a nahraných médií</strong>. Exportovaná data budou ve formátu ActivityPub a budou čitelná kterýmkoliv kompatibilním softwarem. Archiv si můžete vyžádat každých 7 dní.
       in_progress: Kompiluji váš archiv…
       request: Vyžádat svůj archiv
       size: Velikost
@@ -781,7 +781,7 @@ cs:
     i_am_html: Na %{service} jsem %{username}.
     identity: Identita
     inactive: Neaktivní
-    publicize_checkbox: 'A tootnout tohle:'
+    publicize_checkbox: 'A awoonout tohle:'
     publicize_toot: 'Je to dokázáno! Na %{service} jsem %{username}: %{url}'
     status: Stav ověření
     view_proof: Zobrazit důkaz
@@ -829,7 +829,7 @@ cs:
       limit: Dosáhl/a jste maximálního počtu seznamů
   media_attachments:
     validations:
-      images_and_video: K tootu, který již obsahuje obrázky, nelze připojit video
+      images_and_video: K awoou, který již obsahuje obrázky, nelze připojit video
       too_many: Nelze připojit více než 4 soubory
   migrations:
     acct: Přesunuto na
@@ -880,8 +880,8 @@ cs:
         other: "%{count} nových oznámení od vaší poslední návštěvy \U0001F418"
       title: Ve vaší nepřítomnosti…
     favourite:
-      body: 'Váš toot si oblíbil/a %{name}:'
-      subject: "%{name} si oblíbil/a váš toot"
+      body: 'Váš awoo si oblíbil/a %{name}:'
+      subject: "%{name} si oblíbil/a váš awoo"
       title: Nové oblíbení
     follow:
       body: "%{name} vás nyní sleduje!"
@@ -898,8 +898,8 @@ cs:
       subject: Byl/a jste zmíněn/a uživatelem %{name}
       title: Nová zmínka
     reblog:
-      body: 'Váš toot byl boostnutý uživatelem %{name}:'
-      subject: "%{name} boostnul/a váš toot"
+      body: 'Váš awoo byl boostnutý uživatelem %{name}:'
+      subject: "%{name} boostnul/a váš awoo"
       title: Nový boost
   number:
     human:
@@ -954,16 +954,16 @@ cs:
   remote_interaction:
     favourite:
       proceed: Pokračovat k oblíbení
-      prompt: 'Chcete si oblíbit tento toot:'
+      prompt: 'Chcete si oblíbit tento awoo:'
     reblog:
       proceed: Pokračovat k boostnutí
-      prompt: 'Chcete boostnout tento toot:'
+      prompt: 'Chcete boostnout tento awoo:'
     reply:
       proceed: Pokračovat k odpovězení
-      prompt: 'Chcete odpovědět na tento toot:'
+      prompt: 'Chcete odpovědět na tento awoo:'
   scheduled_statuses:
-    over_daily_limit: Překročil/a jste limit %{limit} plánovaných tootů pro tento den
-    over_total_limit: Překročil/a jste limit %{limit} plánovaných tootů
+    over_daily_limit: Překročil/a jste limit %{limit} plánovaných awooů pro tento den
+    over_total_limit: Překročil/a jste limit %{limit} plánovaných awooů
     too_soon: Plánované datum musí být v budoucnosti
   sessions:
     activity: Nejnovější aktivita
@@ -1053,9 +1053,9 @@ cs:
     open_in_web: Otevřít na webu
     over_character_limit: limit %{max} znaků byl překročen
     pin_errors:
-      limit: Už jste si připnul/a maximální počet tootů
-      ownership: Nelze připnout toot někoho jiného
-      private: Nelze připnout neveřejné tooty
+      limit: Už jste si připnul/a maximální počet awooů
+      ownership: Nelze připnout awoo někoho jiného
+      private: Nelze připnout neveřejné awooy
       reblog: Nelze připnout boost
     poll:
       total_people:
@@ -1080,7 +1080,7 @@ cs:
       unlisted: Neuvedené
       unlisted_long: Všichni mohou vidět, ale nebudou zahrnuty ve veřejných časových osách
   stream_entries:
-    pinned: Připnutý toot
+    pinned: Připnutý awoo
     reblogged: boostnul/a
     sensitive_content: Citlivý obsah
   tags:
@@ -1200,8 +1200,8 @@ cs:
     warning:
       explanation:
         disable: Zatímco je váš účet zmražen, zůstávají data vašeho účtu nedotčená, ale nemůžete vykonávat žádné akce, dokud nebude odemčen.
-        silence: Zatímco je váš účet omezen, mohou vaše tooty na tomto serveru vidět pouze lidé, kteří váš již sledují, a můžete být vyloučen/a z různých veřejných výpisů. Ostatní vás však pořád mohou manuálně sledovat.
-        suspend: Váš účet byl pozastaven a všechny vaše tooty a vaše nahrané mediální soubory byly nenávratně odstraněny z tohoto serveru a serverů, na kterých jste měl/a sledující.
+        silence: Zatímco je váš účet omezen, mohou vaše awooy na tomto serveru vidět pouze lidé, kteří váš již sledují, a můžete být vyloučen/a z různých veřejných výpisů. Ostatní vás však pořád mohou manuálně sledovat.
+        suspend: Váš účet byl pozastaven a všechny vaše awooy a vaše nahrané mediální soubory byly nenávratně odstraněny z tohoto serveru a serverů, na kterých jste měl/a sledující.
       get_in_touch: Můžete odpovědět na tento e-mail a spojit se s personálem serveru %{instance}.
       review_server_policies: Posoudit politiku serveru
       statuses: 'Konkrétně kvůli:'
