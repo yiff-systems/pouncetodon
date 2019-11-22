@@ -1143,6 +1143,7 @@ en:
     contrast: Mastodon (High contrast)
     default: Mastodon (Dark)
     mastodon-light: Mastodon (Light)
+    jyrkis-deluxe: "Jyrki's Deluxe"
   time:
     formats:
       default: "%b %d, %Y, %H:%M"
