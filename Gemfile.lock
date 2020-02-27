@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/getsentry/raven-ruby.git
+  revision: 2e4378d95dae95a31e3386b2b94c8520649c6876
+  specs:
+    sentry-raven (2.13.0)
+      faraday (>= 1.0)
+
+GIT
   remote: https://github.com/ianheggie/health_check
   revision: 0b799ead604f900ed50685e9b2d469cd2befba5b
   ref: 0b799ead604f900ed50685e9b2d469cd2befba5b
@@ -562,8 +569,6 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.8.0)
       nokogumbo (~> 2.0)
-    sentry-raven (2.11.3)
-      faraday (>= 0.7.6, < 1.0)
     sidekiq (5.2.7)
       connection_pool (~> 2.2, >= 2.2.2)
       rack (>= 1.5.0)
@@ -767,7 +772,7 @@ DEPENDENCIES
   rubocop-rails (~> 2.4)
   ruby-progressbar (~> 1.10)
   sanitize (~> 5.1)
-  sentry-raven (~> 2.11)
+  sentry-raven (~> 2.13)!
   sidekiq (~> 5.2)
   sidekiq-bulk (~> 0.2.0)
   sidekiq-scheduler (~> 3.0)
@@ -790,3 +795,9 @@ DEPENDENCIES
   webmock (~> 3.8)
   webpacker (~> 4.2)
   webpush
+
+RUBY VERSION
+   ruby 2.6.3p62
+
+BUNDLED WITH
+   2.1.2

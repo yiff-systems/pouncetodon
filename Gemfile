@@ -159,4 +159,4 @@ end
 gem 'concurrent-ruby', require: false
 gem 'connection_pool', require: false
 
-gem "sentry-raven", "~> 2.11"
+gem "sentry-raven", "~> 2.13", git: "https://github.com/getsentry/raven-ruby.git"
