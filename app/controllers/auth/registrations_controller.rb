@@ -13,6 +13,7 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   before_action :set_body_classes, only: [:new, :create, :edit, :update]
   before_action :require_not_suspended!, only: [:update]
   before_action :set_cache_headers, only: [:edit, :update]
+  before_action :check_captcha, only: [:create]
 
   skip_before_action :require_functional!, only: [:edit, :update]
 
@@ -97,6 +98,15 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   end
 
   private
+
+  def check_captcha
+    if ENV['HCAPTCHA_ENABLED'] == 'true' && !verify_hcaptcha
+      self.resource = resource_class.new(sign_up_params)
+      resource.validate
+      flash[:alert] = Hcaptcha::Helpers.to_error_message(:verification_failed)
+      respond_with_navigational(resource) { render :new }
+    end
+  end
 
   def set_instance_presenter
     @instance_presenter = InstancePresenter.new

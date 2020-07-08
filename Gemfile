@@ -100,6 +100,8 @@ gem 'tzinfo-data', '~> 1.2020'
 gem 'webpacker', '~> 5.1'
 gem 'webpush'
 
+gem "hcaptcha", "~> 6.0", git: "https://github.com/Retrospring/hcaptcha.git", ref: "v6.0.2", require: "hcaptcha/rails"
+
 gem 'json-ld'
 gem 'json-ld-preloaded', '~> 3.1'
 gem 'rdf-normalize', '~> 0.4'

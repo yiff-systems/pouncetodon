@@ -21,6 +21,8 @@ class Api::V1::AccountsController < Api::BaseController
   end
 
   def create
+    return not_found
+
     token    = AppSignUpService.new.call(doorkeeper_token.application, account_params)
     response = Doorkeeper::OAuth::TokenResponse.new(token)
 

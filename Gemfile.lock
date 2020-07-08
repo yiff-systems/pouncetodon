@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/Retrospring/hcaptcha.git
+  revision: 9feac4908097e3dc2afd6f08d07cbfbaa1073a1d
+  ref: v6.0.2
+  specs:
+    hcaptcha (6.0.2)
+      json
+
+GIT
   remote: https://github.com/getsentry/raven-ruby.git
   revision: 2e4378d95dae95a31e3386b2b94c8520649c6876
   specs:
@@ -716,6 +724,7 @@ DEPENDENCIES
   fuubar (~> 2.5)
   goldfinger (~> 2.1)
   hamlit-rails (~> 0.2)
+  hcaptcha (~> 6.0)!
   health_check!
   hiredis (~> 0.6)
   htmlentities (~> 4.3)
@@ -809,4 +818,4 @@ RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   2.1.2
+   2.1.4
