@@ -978,9 +978,9 @@ en:
       subject: You were mentioned by %{name}
       title: New mention
     reblog:
-      body: 'Your status was boosted by %{name}:'
-      subject: "%{name} boosted your status"
-      title: New boost
+      body: 'Your status was booped by %{name}:'
+      subject: "%{name} booped your status"
+      title: New boop
   notifications:
     email_events: Events for e-mail notifications
     email_events_hint: 'Select events that you want to receive notifications for:'
@@ -1049,8 +1049,8 @@ en:
       proceed: Proceed to favourite
       prompt: 'You want to favourite this awoo:'
     reblog:
-      proceed: Proceed to boost
-      prompt: 'You want to boost this awoo:'
+      proceed: Proceed to boop
+      prompt: 'You want to boop this awoo:'
     reply:
       proceed: Proceed to reply
       prompt: 'You want to reply to this awoo:'
@@ -1134,7 +1134,7 @@ en:
       video:
         one: "%{count} video"
         other: "%{count} videos"
-    boosted_from_html: Boosted from %{acct_link}
+    boosted_from_html: Booped from %{acct_link}
     content_warning: 'Content warning: %{warning}'
     disallowed_hashtags:
       one: 'contained a disallowed hashtag: %{tags}'
@@ -1148,7 +1148,7 @@ en:
       limit: You have already pinned the maximum number of awoos
       ownership: Someone else's awoo cannot be pinned
       private: Non-public awoo cannot be pinned
-      reblog: A boost cannot be pinned
+      reblog: A boop cannot be pinned
     poll:
       total_people:
         one: "%{count} person"
@@ -1170,7 +1170,7 @@ en:
       unlisted_long: Everyone can see, but not listed on public timelines
   stream_entries:
     pinned: Pinned awoo
-    reblogged: boosted
+    reblogged: booped
     sensitive_content: Sensitive content
   tags:
     does_not_match_previous_name: does not match the previous name
