@@ -723,9 +723,9 @@ en_GB:
       subject: You were mentioned by %{name}
       title: New mention
     reblog:
-      body: 'Your status was booped by %{name}:'
-      subject: "%{name} booped your status"
-      title: New boop
+      body: 'Your status was pounced by %{name}:'
+      subject: "%{name} pounced your status"
+      title: New pounce
   number:
     human:
       decimal_units:
@@ -777,8 +777,8 @@ en_GB:
       proceed: Proceed to favourite
       prompt: 'You want to favourite this awoo:'
     reblog:
-      proceed: Proceed to boop
-      prompt: 'You want to boop this awoo:'
+      proceed: Proceed to pounce
+      prompt: 'You want to pounce this awoo:'
     reply:
       proceed: Proceed to reply
       prompt: 'You want to reply to this awoo:'
@@ -855,7 +855,7 @@ en_GB:
       video:
         one: "%{count} video"
         other: "%{count} videos"
-    boosted_from_html: Booped from %{acct_link}
+    boosted_from_html: Pounced from %{acct_link}
     content_warning: 'Content warning: %{warning}'
     disallowed_hashtags:
       one: 'contained a disallowed hashtag: %{tags}'
@@ -867,7 +867,7 @@ en_GB:
       limit: You have already pinned the maximum number of awoos
       ownership: Someone else's awoo cannot be pinned
       private: Non-public awoo cannot be pinned
-      reblog: A boop cannot be pinned
+      reblog: A pounce cannot be pinned
     poll:
       total_votes:
         one: "%{count} vote"
@@ -885,7 +885,7 @@ en_GB:
       unlisted_long: Everyone can see, but not listed on public timelines
   stream_entries:
     pinned: Pinned awoo
-    reblogged: booped
+    reblogged: pounced
     sensitive_content: Sensitive content
   terms:
     body_html: |

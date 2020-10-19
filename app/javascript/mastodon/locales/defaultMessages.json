@@ -417,19 +417,19 @@
         "id": "status.replyAll"
       },
       {
-        "defaultMessage": "Boop",
+        "defaultMessage": "Pounce",
         "id": "status.reblog"
       },
       {
-        "defaultMessage": "Boop to original audience",
+        "defaultMessage": "Pounce to original audience",
         "id": "status.reblog_private"
       },
       {
-        "defaultMessage": "Unboop",
+        "defaultMessage": "Unpounce",
         "id": "status.cancel_reblog_private"
       },
       {
-        "defaultMessage": "This post cannot be booped",
+        "defaultMessage": "This post cannot be pounced",
         "id": "status.cannot_reblog"
       },
       {
@@ -551,7 +551,7 @@
         "id": "status.pinned"
       },
       {
-        "defaultMessage": "{name} booped",
+        "defaultMessage": "{name} pounced",
         "id": "status.reblogged_by"
       }
     ],
@@ -611,7 +611,7 @@
         "id": "confirmations.redraft.confirm"
       },
       {
-        "defaultMessage": "Are you sure you want to delete this status and re-draft it? Favourites and boops will be lost, and replies to the original post will be orphaned.",
+        "defaultMessage": "Are you sure you want to delete this status and re-draft it? Favourites and pounces will be lost, and replies to the original post will be orphaned.",
         "id": "confirmations.redraft.message"
       },
       {
@@ -789,11 +789,11 @@
         "id": "account.unblock_domain"
       },
       {
-        "defaultMessage": "Hide boops from @{name}",
+        "defaultMessage": "Hide pounces from @{name}",
         "id": "account.hide_reblogs"
       },
       {
-        "defaultMessage": "Show boops from @{name}",
+        "defaultMessage": "Show pounces from @{name}",
         "id": "account.show_reblogs"
       },
       {
@@ -1232,7 +1232,7 @@
         "id": "search.placeholder"
       },
       {
-        "defaultMessage": "Simple text returns statuses you have written, favourited, booped, or have been mentioned in, as well as matching usernames, display names, and hashtags.",
+        "defaultMessage": "Simple text returns statuses you have written, favourited, pounced, or have been mentioned in, as well as matching usernames, display names, and hashtags.",
         "id": "search_popout.tips.full_text"
       },
       {
@@ -1822,7 +1822,7 @@
         "id": "home.column_settings.basic"
       },
       {
-        "defaultMessage": "Show boops",
+        "defaultMessage": "Show pounces",
         "id": "home.column_settings.show_reblogs"
       },
       {
@@ -1908,11 +1908,11 @@
         "id": "introduction.interactions.reply.text"
       },
       {
-        "defaultMessage": "Boop",
+        "defaultMessage": "Pounce",
         "id": "introduction.interactions.reblog.headline"
       },
       {
-        "defaultMessage": "You can share other people's awoos with your followers by booping them.",
+        "defaultMessage": "You can share other people's awoos with your followers by pouncing them.",
         "id": "introduction.interactions.reblog.text"
       },
       {
@@ -1961,7 +1961,7 @@
         "id": "keyboard_shortcuts.favourite"
       },
       {
-        "defaultMessage": "to boop",
+        "defaultMessage": "to pounce",
         "id": "keyboard_shortcuts.boost"
       },
       {
@@ -2239,7 +2239,7 @@
         "id": "notifications.column_settings.mention"
       },
       {
-        "defaultMessage": "Boops:",
+        "defaultMessage": "Pounces:",
         "id": "notifications.column_settings.reblog"
       },
       {
@@ -2260,7 +2260,7 @@
         "id": "notifications.filter.favourites"
       },
       {
-        "defaultMessage": "Boops",
+        "defaultMessage": "Pounces",
         "id": "notifications.filter.boosts"
       },
       {
@@ -2310,7 +2310,7 @@
         "id": "notification.poll"
       },
       {
-        "defaultMessage": "{name} booped your status",
+        "defaultMessage": "{name} pounced your status",
         "id": "notification.reblog"
       },
       {
@@ -2388,7 +2388,7 @@
         "id": "refresh"
       },
       {
-        "defaultMessage": "No one has booped this awoo yet. When someone does, they will show up here.",
+        "defaultMessage": "No one has pounced this awoo yet. When someone does, they will show up here.",
         "id": "status.reblogs.empty"
       }
     ],
@@ -2417,19 +2417,19 @@
         "id": "status.reply"
       },
       {
-        "defaultMessage": "Boop",
+        "defaultMessage": "Pounce",
         "id": "status.reblog"
       },
       {
-        "defaultMessage": "Boop to original audience",
+        "defaultMessage": "Pounce to original audience",
         "id": "status.reblog_private"
       },
       {
-        "defaultMessage": "Unboop",
+        "defaultMessage": "Unpounce",
         "id": "status.cancel_reblog_private"
       },
       {
-        "defaultMessage": "This post cannot be booped",
+        "defaultMessage": "This post cannot be pounced",
         "id": "status.cannot_reblog"
       },
       {
@@ -2556,7 +2556,7 @@
         "id": "confirmations.redraft.confirm"
       },
       {
-        "defaultMessage": "Are you sure you want to delete this status and re-draft it? Favourites and boops will be lost, and replies to the original post will be orphaned.",
+        "defaultMessage": "Are you sure you want to delete this status and re-draft it? Favourites and pounces will be lost, and replies to the original post will be orphaned.",
         "id": "confirmations.redraft.message"
       },
       {
@@ -2585,7 +2585,7 @@
         "id": "confirmations.redraft.confirm"
       },
       {
-        "defaultMessage": "Are you sure you want to delete this status and re-draft it? Favourites and boops will be lost, and replies to the original post will be orphaned.",
+        "defaultMessage": "Are you sure you want to delete this status and re-draft it? Favourites and pounces will be lost, and replies to the original post will be orphaned.",
         "id": "confirmations.redraft.message"
       },
       {
@@ -2652,11 +2652,11 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "Unboop",
+        "defaultMessage": "Unpounce",
         "id": "status.cancel_reblog_private"
       },
       {
-        "defaultMessage": "Boop",
+        "defaultMessage": "Pounce",
         "id": "status.reblog"
       },
       {

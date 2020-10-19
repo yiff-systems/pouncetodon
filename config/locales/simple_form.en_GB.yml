@@ -26,7 +26,7 @@ en_GB:
         password: Use at least 8 characters
         phrase: Will be matched regardless of casing in text or content warning of a awoo
         scopes: Which APIs the application will be allowed to access. If you select a top-level scope, you don't need to select individual ones.
-        setting_aggregate_reblogs: Do not show new boops for awoos that have been recently booped (only affects newly-received boops)
+        setting_aggregate_reblogs: Do not show new pounces for awoos that have been recently pounced (only affects newly-received pounces)
         setting_display_media_default: Hide media marked as sensitive
         setting_display_media_hide_all: Always hide all media
         setting_display_media_show_all: Always show media marked as sensitive
@@ -86,9 +86,9 @@ en_GB:
         otp_attempt: Two-factor code
         password: Password
         phrase: Keyword or phrase
-        setting_aggregate_reblogs: Group boops in timelines
+        setting_aggregate_reblogs: Group pounces in timelines
         setting_auto_play_gif: Auto-play animated GIFs
-        setting_boost_modal: Show confirmation dialog before booping
+        setting_boost_modal: Show confirmation dialog before pouncing
         setting_default_language: Posting language
         setting_default_privacy: Post privacy
         setting_default_sensitive: Always mark media as sensitive
@@ -122,7 +122,7 @@ en_GB:
         follow: Send e-mail when someone follows you
         follow_request: Send e-mail when someone requests to follow you
         mention: Send e-mail when someone mentions you
-        reblog: Send e-mail when someone boops your status
+        reblog: Send e-mail when someone pounces your status
         report: Send e-mail when a new report is submitted
     'no': 'No'
     required:
