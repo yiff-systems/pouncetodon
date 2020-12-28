@@ -301,8 +301,6 @@ Rails.application.routes.draw do
         post :batch
       end
     end
-
-    resources :spambot_filter, only: [:index]
   end
 
   get '/admin', to: redirect('/admin/dashboard', status: 302)

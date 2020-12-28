@@ -78,8 +78,6 @@ class Status < ApplicationRecord
   validates :reblog, uniqueness: { scope: :account }, if: :reblog?
   validates :visibility, exclusion: { in: %w(direct limited) }, if: :reblog?
 
-  validates_with SpambotValidator
-
   accepts_nested_attributes_for :poll
 
   default_scope { recent.kept }
