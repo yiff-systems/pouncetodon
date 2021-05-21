@@ -446,7 +446,7 @@
         "id": "status.cancel_reblog_private"
       },
       {
-        "defaultMessage": "This post cannot be pounced",
+        "defaultMessage": "This awoo cannot be pounced",
         "id": "status.cannot_reblog"
       },
       {
@@ -2366,7 +2366,7 @@
         "id": "notification.reblog"
       },
       {
-        "defaultMessage": "{name} just posted",
+        "defaultMessage": "{name} just awoo'd",
         "id": "notification.status"
       },
       {
