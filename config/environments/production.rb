@@ -122,7 +122,7 @@ Rails.application.configure do
     'Server'                 => 'Mastodon',
     'X-Frame-Options'        => 'DENY',
     'X-Content-Type-Options' => 'nosniff',
-    'X-XSS-Protection'       => '1; mode=block',
+    'X-XSS-Protection'       => '0',
     'Permissions-Policy'     => 'interest-cohort=()',
   }
 
