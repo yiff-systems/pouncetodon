@@ -175,12 +175,5 @@ module Mastodon
       Devise::FailureApp.send :include, AbstractController::Callbacks
       Devise::FailureApp.send :include, Localized
     end
-
-    sentry_path = Rails.root.join("config/sentry_dsn")
-    if File.exists?(sentry_path)
-      Sentry.init do |config|
-        config.dsn = IO.read(sentry_path).strip
-      end
-    end
   end
 end

@@ -96,9 +96,6 @@ gem 'webauthn', '~> 3.0.0.alpha1'
 
 # rrerrNet patches
 gem "hcaptcha", "~> 6.0", git: "https://github.com/Retrospring/hcaptcha.git", ref: "v6.0.2", require: "hcaptcha/rails"
-gem "sentry-rails"
-gem "sentry-ruby"
-gem "sentry-sidekiq"
 gem "sidekiq-undertaker", "~> 1.0"
 
 gem 'json-ld'
