@@ -11,7 +11,7 @@ en_GB:
     apps: Mobile apps
     apps_platforms: Use Mastodon from iOS, Android and other platforms
     browse_directory: Browse a profile directory and filter by interests
-    browse_public_posts: Browse a live stream of public posts on Mastodon
+    browse_public_posts: Browse a live stream of public awoos on Mastodon
     contact: Contact
     contact_missing: Not set
     contact_unavailable: N/A
@@ -262,7 +262,7 @@ en_GB:
         create: Create block
         hint: The domain block will not prevent creation of account entries in the database, but will retroactively and automatically apply specific moderation methods on those accounts.
         severity:
-          desc_html: "<strong>Silence</strong> will make the account's posts invisible to anyone who isn't following them. <strong>Suspend</strong> will remove all of the account's content, media, and profile data. Use <strong>None</strong> if you just want to reject media files."
+          desc_html: "<strong>Silence</strong> will make the account's awoos invisible to anyone who isn't following them. <strong>Suspend</strong> will remove all of the account's content, media, and profile data. Use <strong>None</strong> if you just want to reject media files."
           noop: None
           silence: Silence
           suspend: Suspend
@@ -373,7 +373,7 @@ en_GB:
       updated_at: Updated
     settings:
       activity_api_enabled:
-        desc_html: Counts of locally posted statuses, active users, and new registrations in weekly buckets
+        desc_html: Counts of locally awooed statuses, active users, and new registrations in weekly buckets
         title: Publish aggregate statistics about user activity
       bootstrap_timeline_accounts:
         desc_html: Separate multiple usernames by comma. Only local and unlocked accounts will work. Default when empty is all local admins.
@@ -893,8 +893,8 @@ en_GB:
 
       <ul>
         <li><em>Basic account information</em>: If you register on this server, you may be asked to enter a username, an e-mail address and a password. You may also enter additional profile information such as a display name and biography, and upload a profile picture and header image. The username, display name, biography, profile picture and header image are always listed publicly.</li>
-        <li><em>Posts, following and other public information</em>: The list of people you follow is listed publicly, the same is true for your followers. When you submit a message, the date and time is stored as well as the application you submitted the message from. Messages may contain media attachments, such as pictures and videos. Public and unlisted posts are available publicly. When you feature a post on your profile, that is also publicly available information. Your posts are delivered to your followers, in some cases it means they are delivered to different servers and copies are stored there. When you delete posts, this is likewise delivered to your followers. The action of reblogging or favouriting another post is always public.</li>
-        <li><em>Direct and followers-only posts</em>: All posts are stored and processed on the server. Followers-only posts are delivered to your followers and users who are mentioned in them, and direct posts are delivered only to users mentioned in them. In some cases it means they are delivered to different servers and copies are stored there. We make a good faith effort to limit the access to those posts only to authorized persons, but other servers may fail to do so. Therefore it's important to review servers your followers belong to. You may toggle an option to approve and reject new followers manually in the settings. <em>Please keep in mind that the operators of the server and any receiving server may view such messages</em>, and that recipients may screenshot, copy or otherwise re-share them. <em>Do not share any dangerous information over Mastodon.</em></li>
+        <li><em>Awoos, following and other public information</em>: The list of people you follow is listed publicly, the same is true for your followers. When you submit a message, the date and time is stored as well as the application you submitted the message from. Messages may contain media attachments, such as pictures and videos. Public and unlisted awoos are available publicly. When you feature a awoo on your profile, that is also publicly available information. Your awoos are delivered to your followers, in some cases it means they are delivered to different servers and copies are stored there. When you delete awoos, this is likewise delivered to your followers. The action of reblogging or favouriting another awoo is always public.</li>
+        <li><em>Direct and followers-only awoos</em>: All awoos are stored and processed on the server. Followers-only awoos are delivered to your followers and users who are mentioned in them, and direct awoos are delivered only to users mentioned in them. In some cases it means they are delivered to different servers and copies are stored there. We make a good faith effort to limit the access to those awoos only to authorized persons, but other servers may fail to do so. Therefore it's important to review servers your followers belong to. You may toggle an option to approve and reject new followers manually in the settings. <em>Please keep in mind that the operators of the server and any receiving server may view such messages</em>, and that recipients may screenshot, copy or otherwise re-share them. <em>Do not share any dangerous information over Mastodon.</em></li>
         <li><em>IPs and other metadata</em>: When you log in, we record the IP address you log in from, as well as the name of your browser application. All the logged in sessions are available for your review and revocation in the settings. The latest IP address used is stored for up to 12 months. We also may retain server logs which include the IP address of every request to our server.</li>
       </ul>
 
@@ -905,7 +905,7 @@ en_GB:
       <p>Any of the information we collect from you may be used in the following ways:</p>
 
       <ul>
-        <li>To provide the core functionality of Mastodon. You can only interact with other people's content and post your own content when you are logged in. For example, you may follow other people to view their combined posts in your own personalized home timeline.</li>
+        <li>To provide the core functionality of Mastodon. You can only interact with other people's content and awoo your own content when you are logged in. For example, you may follow other people to view their combined awoos in your own personalized home timeline.</li>
         <li>To aid moderation of the community, for example comparing your IP address with other known ones to determine ban evasion or other violations.</li>
         <li>The email address you provide may be used to send you information, notifications about other people interacting with your content or sending you messages, and to respond to inquiries, and/or other requests or questions.</li>
       </ul>
@@ -927,7 +927,7 @@ en_GB:
         <li>Retain the IP addresses associated with registered users no more than 12 months.</li>
       </ul>
 
-      <p>You can request and download an archive of your content, including your posts, media attachments, profile picture, and header image.</p>
+      <p>You can request and download an archive of your content, including your awoos, media attachments, profile picture, and header image.</p>
 
       <p>You may irreversibly delete your account at any time.</p>
 
@@ -945,9 +945,9 @@ en_GB:
 
       <p>We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information. This does not include trusted third parties who assist us in operating our site, conducting our business, or servicing you, so long as those parties agree to keep this information confidential. We may also release your information when we believe release is appropriate to comply with the law, enforce our site policies, or protect ours or others rights, property, or safety.</p>
 
-      <p>Your public content may be downloaded by other servers in the network. Your public and followers-only posts are delivered to the servers where your followers reside, and direct messages are delivered to the servers of the recipients, in so far as those followers or recipients reside on a different server than this.</p>
+      <p>Your public content may be downloaded by other servers in the network. Your public and followers-only awoos are delivered to the servers where your followers reside, and direct messages are delivered to the servers of the recipients, in so far as those followers or recipients reside on a different server than this.</p>
 
-      <p>When you authorize an application to use your account, depending on the scope of permissions you approve, it may access your public profile information, your following list, your followers, your lists, all your posts, and your favourites. Applications can never access your e-mail address or password.</p>
+      <p>When you authorize an application to use your account, depending on the scope of permissions you approve, it may access your public profile information, your following list, your followers, your lists, all your awoos, and your favourites. Applications can never access your e-mail address or password.</p>
 
       <hr class="spacer" />
 
@@ -1018,12 +1018,12 @@ en_GB:
       edit_profile_action: Setup profile
       edit_profile_step: You can customize your profile by uploading an avatar, header, changing your display name and more. If you’d like to review new followers before they’re allowed to follow you, you can lock your account.
       explanation: Here are some tips to get you started
-      final_action: Start posting
-      final_step: 'Start posting! Even without followers your public messages may be seen by others, for example on the local timeline and in hashtags. You may want to introduce yourself on the #introductions hashtag.'
+      final_action: Start howling
+      final_step: 'Start howling! Even without followers your public messages may be seen by others, for example on the local timeline and in hashtags. You may want to introduce yourself on the #introductions hashtag.'
       full_handle: Your full handle
       full_handle_hint: This is what you would tell your friends so they can message or follow you from another server.
       review_preferences_action: Change preferences
-      review_preferences_step: Make sure to set your preferences, such as which emails you'd like to receive, or what privacy level you’d like your posts to default to. If you don’t have motion sickness, you could choose to enable GIF autoplay.
+      review_preferences_step: Make sure to set your preferences, such as which emails you'd like to receive, or what privacy level you’d like your awoos to default to. If you don’t have motion sickness, you could choose to enable GIF autoplay.
       subject: Welcome to Mastodon
       tip_federated_timeline: The federated timeline is a firehose view of the Mastodon network. But it only includes people your neighbours are subscribed to, so it's not complete.
       tip_following: You follow your server's admin(s) by default. To find more interesting people, check the local and federated timelines.
