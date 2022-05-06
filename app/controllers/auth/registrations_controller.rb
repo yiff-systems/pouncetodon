@@ -8,13 +8,13 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   before_action :set_invite, only: [:new, :create]
   before_action :check_enabled_registrations, only: [:new, :create]
   before_action :configure_sign_up_params, only: [:create]
+  before_action :set_pack
   before_action :set_sessions, only: [:edit, :update]
   before_action :set_strikes, only: [:edit, :update]
   before_action :set_instance_presenter, only: [:new, :create, :update]
   before_action :set_body_classes, only: [:new, :create, :edit, :update]
   before_action :require_not_suspended!, only: [:update]
   before_action :set_cache_headers, only: [:edit, :update]
-  before_action :check_captcha, only: [:create]
   before_action :set_registration_form_time, only: :new
 
   skip_before_action :require_functional!, only: [:edit, :update]
@@ -104,13 +104,8 @@ class Auth::RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def check_captcha
-    if ENV['HCAPTCHA_ENABLED'] == 'true' && !verify_hcaptcha
-      self.resource = resource_class.new(sign_up_params)
-      resource.validate
-      flash[:alert] = Hcaptcha::Helpers.to_error_message(:verification_failed)
-      respond_with_navigational(resource) { render :new }
-    end
+  def set_pack
+    use_pack %w(edit update).include?(action_name) ? 'admin' : 'auth'
   end
 
   def set_instance_presenter

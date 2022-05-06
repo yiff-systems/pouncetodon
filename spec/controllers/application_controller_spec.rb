@@ -73,37 +73,41 @@ describe ApplicationController, type: :controller do
     end
   end
 
-  describe 'helper_method :current_theme' do
-    it 'returns "default" when theme wasn\'t changed in admin settings' do
-      allow(Setting).to receive(:default_settings).and_return({ 'theme' => 'default' })
+  describe 'helper_method :current_flavour' do
+    it 'returns "glitch" when theme wasn\'t changed in admin settings' do
+      allow(Setting).to receive(:default_settings).and_return({'skin' => 'default'})
+      allow(Setting).to receive(:default_settings).and_return({'flavour' => 'glitch'})
 
-      expect(controller.view_context.current_theme).to eq 'default'
+      expect(controller.view_context.current_flavour).to eq 'glitch'
     end
 
-    it 'returns instances\'s theme when user is not signed in' do
-      allow(Setting).to receive(:[]).with('theme').and_return 'contrast'
+    it 'returns instances\'s flavour when user is not signed in' do
+      allow(Setting).to receive(:[]).with('skin').and_return 'default'
+      allow(Setting).to receive(:[]).with('flavour').and_return 'vanilla'
 
-      expect(controller.view_context.current_theme).to eq 'contrast'
+      expect(controller.view_context.current_flavour).to eq 'vanilla'
     end
 
-    it 'returns instances\'s default theme when user didn\'t set theme' do
+    it 'returns instances\'s default flavour when user didn\'t set theme' do
       current_user = Fabricate(:user)
       sign_in current_user
 
-      allow(Setting).to receive(:[]).with('theme').and_return 'contrast'
+      allow(Setting).to receive(:[]).with('skin').and_return 'default'
+      allow(Setting).to receive(:[]).with('flavour').and_return 'vanilla'
       allow(Setting).to receive(:[]).with('noindex').and_return false
 
-      expect(controller.view_context.current_theme).to eq 'contrast'
+      expect(controller.view_context.current_flavour).to eq 'vanilla'
     end
 
-    it 'returns user\'s theme when it is set' do
+    it 'returns user\'s flavour when it is set' do
       current_user = Fabricate(:user)
-      current_user.settings['theme'] = 'mastodon-light'
+      current_user.settings['flavour'] = 'glitch'
       sign_in current_user
 
-      allow(Setting).to receive(:[]).with('theme').and_return 'contrast'
+      allow(Setting).to receive(:[]).with('skin').and_return 'default'
+      allow(Setting).to receive(:[]).with('flavour').and_return 'vanilla'
 
-      expect(controller.view_context.current_theme).to eq 'mastodon-light'
+      expect(controller.view_context.current_flavour).to eq 'glitch'
     end
   end
 

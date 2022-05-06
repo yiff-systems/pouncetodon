@@ -15,6 +15,12 @@ SimpleNavigation::Configuration.run do |navigation|
       s.item :other, safe_join([fa_icon('cog fw'), t('preferences.other')]), settings_preferences_other_url
     end
 
+    n.item :flavours, safe_join([fa_icon('paint-brush fw'), t('settings.flavours')]), settings_flavours_url do |flavours|
+      Themes.instance.flavours.each do |flavour|
+        flavours.item flavour.to_sym, safe_join([fa_icon('star fw'), t("flavours.#{flavour}.name", default: flavour)]), settings_flavour_url(flavour)
+      end
+    end
+
     n.item :relationships, safe_join([fa_icon('users fw'), t('settings.relationships')]), relationships_url, if: -> { current_user.functional? }
     n.item :filters, safe_join([fa_icon('filter fw'), t('filters.index.title')]), filters_path, highlights_on: %r{/filters}, if: -> { current_user.functional? }
     n.item :statuses_cleanup, safe_join([fa_icon('history fw'), t('settings.statuses_cleanup')]), statuses_cleanup_url, if: -> { current_user.functional? }

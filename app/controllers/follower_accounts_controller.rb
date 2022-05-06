@@ -13,6 +13,7 @@ class FollowerAccountsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
+        use_pack 'public'
         expires_in 0, public: true unless user_signed_in?
 
         next if @account.hide_collections?
@@ -61,22 +62,22 @@ class FollowerAccountsController < ApplicationController
   end
 
   def collection_presenter
+    options = { type: :ordered }
+    options[:size] = @account.followers_count unless Setting.hide_followers_count || @account.user&.setting_hide_followers_count
     if page_requested?
       ActivityPub::CollectionPresenter.new(
         id: account_followers_url(@account, page: params.fetch(:page, 1)),
-        type: :ordered,
-        size: @account.followers_count,
         items: follows.map { |f| ActivityPub::TagManager.instance.uri_for(f.account) },
         part_of: account_followers_url(@account),
         next: next_page_url,
-        prev: prev_page_url
+        prev: prev_page_url,
+        **options
       )
     else
       ActivityPub::CollectionPresenter.new(
         id: account_followers_url(@account),
-        type: :ordered,
-        size: @account.followers_count,
-        first: page_url(1)
+        first: page_url(1),
+        **options
       )
     end
   end

@@ -17,6 +17,7 @@ class AccountsController < ApplicationController
   def show
     respond_to do |format|
       format.html do
+        use_pack 'public'
         expires_in 0, public: true unless user_signed_in?
 
         @pinned_statuses   = []
@@ -65,7 +66,7 @@ class AccountsController < ApplicationController
   end
 
   def filtered_pinned_statuses
-    @account.pinned_statuses.where(visibility: [:public, :unlisted])
+    @account.pinned_statuses.not_local_only.where(visibility: [:public, :unlisted])
   end
 
   def filtered_statuses
@@ -77,7 +78,7 @@ class AccountsController < ApplicationController
   end
 
   def default_statuses
-    @account.statuses.where(visibility: [:public, :unlisted])
+    @account.statuses.not_local_only.where(visibility: [:public, :unlisted])
   end
 
   def only_media_scope

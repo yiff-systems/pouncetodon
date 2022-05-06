@@ -659,7 +659,7 @@
         "id": "privacy.private.short"
       },
       {
-        "defaultMessage": "Direct",
+        "defaultMessage": "Mentioned people only",
         "id": "privacy.direct.short"
       },
       {
@@ -832,7 +832,7 @@
         "id": "empty_column.account_unavailable"
       },
       {
-        "defaultMessage": "No awoos here!",
+        "defaultMessage": "No awoos here",
         "id": "empty_column.account_timeline"
       }
     ],
@@ -1306,7 +1306,7 @@
         "id": "privacy.public.short"
       },
       {
-        "defaultMessage": "Visible for all, shown in public timelines",
+        "defaultMessage": "Visible for all",
         "id": "privacy.public.long"
       },
       {
@@ -1314,11 +1314,11 @@
         "id": "privacy.unlisted.short"
       },
       {
-        "defaultMessage": "Visible for all, but not in public timelines",
+        "defaultMessage": "Visible for all, but opted-out of discovery features",
         "id": "privacy.unlisted.long"
       },
       {
-        "defaultMessage": "Followers-only",
+        "defaultMessage": "Followers only",
         "id": "privacy.private.short"
       },
       {
@@ -1326,7 +1326,7 @@
         "id": "privacy.private.long"
       },
       {
-        "defaultMessage": "Direct",
+        "defaultMessage": "Mentioned people only",
         "id": "privacy.direct.short"
       },
       {
@@ -1508,8 +1508,8 @@
         "id": "compose_form.hashtag_warning"
       },
       {
-        "defaultMessage": "This awoo will only be sent to all the mentioned users.",
-        "id": "compose_form.direct_message_warning"
+        "defaultMessage": "Posts on Mastodon are not end-to-end encrypted. Do not share any dangerous information over Mastodon.",
+        "id": "compose_form.encryption_warning"
       },
       {
         "defaultMessage": "Learn more",
@@ -1618,6 +1618,14 @@
       {
         "defaultMessage": "Direct messages",
         "id": "column.direct"
+      },
+      {
+        "defaultMessage": "Posts on Mastodon are not end-to-end encrypted. Do not share any dangerous information over Mastodon.",
+        "id": "compose_form.encryption_warning"
+      },
+      {
+        "defaultMessage": "Learn more",
+        "id": "compose_form.direct_message_warning_learn_more"
       },
       {
         "defaultMessage": "You don't have any direct messages yet. When you send or receive one, it will show up here.",
@@ -1769,7 +1777,7 @@
         "id": "search_results.hashtags"
       },
       {
-        "defaultMessage": "Toots",
+        "defaultMessage": "Posts",
         "id": "search_results.statuses"
       }
     ],
@@ -2468,7 +2476,7 @@
         "id": "notifications.column_settings.poll"
       },
       {
-        "defaultMessage": "New toots:",
+        "defaultMessage": "New posts:",
         "id": "notifications.column_settings.status"
       },
       {
@@ -3202,6 +3210,19 @@
       }
     ],
     "path": "app/javascript/mastodon/features/ui/components/boost_modal.json"
+  },
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "Favourite",
+        "id": "status.favourite"
+      },
+      {
+        "defaultMessage": "You can press {combo} to skip this next time",
+        "id": "favourite_modal.combo"
+      }
+    ],
+    "path": "app/javascript/mastodon/features/ui/components/favourite_modal.json"
   },
   {
     "descriptors": [

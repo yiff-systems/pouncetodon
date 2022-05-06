@@ -146,7 +146,7 @@ const startWorker = async (workerId) => {
 
   const app = express();
 
-  app.set('trusted proxy', process.env.TRUSTED_PROXY_IP || 'loopback,uniquelocal');
+  app.set('trust proxy', process.env.TRUSTED_PROXY_IP ? process.env.TRUSTED_PROXY_IP.split(/(?:\s*,\s*|\s+)/) : 'loopback,uniquelocal');
 
   const pgPool = new pg.Pool(Object.assign(pgConfigs[env], dbUrlToConfig(process.env.DATABASE_URL)));
   const server = http.createServer(app);
@@ -384,6 +384,7 @@ const startWorker = async (workerId) => {
   const channelNameFromPath = req => {
     const { path, query } = req;
     const onlyMedia = isTruthy(query.only_media);
+    const allowLocalOnly = isTruthy(query.allow_local_only);
 
     switch (path) {
     case '/api/v1/streaming/user':
@@ -607,9 +608,10 @@ const startWorker = async (workerId) => {
    * @param {function(string, string): void} output
    * @param {function(string[], function(string): void): void} attachCloseHandler
    * @param {boolean=} needsFiltering
+   * @param {boolean=} allowLocalOnly
    * @return {function(string): void}
    */
-  const streamFrom = (ids, req, output, attachCloseHandler, needsFiltering = false) => {
+  const streamFrom = (ids, req, output, attachCloseHandler, needsFiltering = false, allowLocalOnly = false) => {
     const accountId = req.accountId || req.remoteAddress;
 
     log.verbose(req.requestId, `Starting stream from ${ids.join(', ')} for ${accountId}`);
@@ -629,6 +631,12 @@ const startWorker = async (workerId) => {
         log.silly(req.requestId, `Transmitting for ${accountId}: ${event} ${encodedPayload} Delay: ${delta}ms`);
         output(event, encodedPayload);
       };
+
+      // Only send local-only statuses to logged-in users
+      if (event === 'update' && payload.local_only && !(req.accountId && allowLocalOnly)) {
+        log.silly(req.requestId, `Message ${payload.id} filtered because it was local-only`);
+        return;
+      }
 
       // Only messages that may require filtering are statuses, since notifications
       // are already personalized and deletes do not matter
@@ -784,7 +792,7 @@ const startWorker = async (workerId) => {
       const onSend = streamToHttp(req, res);
       const onEnd = streamHttpEnd(req, subscriptionHeartbeat(channelIds));
 
-      streamFrom(channelIds, req, onSend, onEnd, options.needsFiltering);
+      streamFrom(channelIds, req, onSend, onEnd, options.needsFiltering, options.allowLocalOnly);
     }).catch(err => {
       log.verbose(req.requestId, 'Subscription error:', err.toString());
       httpNotFound(res);
@@ -829,63 +837,77 @@ const startWorker = async (workerId) => {
     case 'user':
       resolve({
         channelIds: channelsForUserStream(req),
-        options: { needsFiltering: false },
+        options: { needsFiltering: false, allowLocalOnly: true },
       });
 
       break;
     case 'user:notification':
       resolve({
         channelIds: [`timeline:${req.accountId}:notifications`],
-        options: { needsFiltering: false },
+        options: { needsFiltering: false, allowLocalOnly: true },
       });
 
       break;
     case 'public':
       resolve({
         channelIds: ['timeline:public'],
-        options: { needsFiltering: true },
+        options: { needsFiltering: true, allowLocalOnly: isTruthy(params.allow_local_only) },
+      });
+
+      break;
+    case 'public:allow_local_only':
+      resolve({
+        channelIds: ['timeline:public'],
+        options: { needsFiltering: true, allowLocalOnly: true },
       });
 
       break;
     case 'public:local':
       resolve({
         channelIds: ['timeline:public:local'],
-        options: { needsFiltering: true },
+        options: { needsFiltering: true, allowLocalOnly: true },
       });
 
       break;
     case 'public:remote':
       resolve({
         channelIds: ['timeline:public:remote'],
-        options: { needsFiltering: true },
+        options: { needsFiltering: true, allowLocalOnly: false },
       });
 
       break;
     case 'public:media':
       resolve({
         channelIds: ['timeline:public:media'],
-        options: { needsFiltering: true },
+        options: { needsFiltering: true, allowLocalOnly: isTruthy(query.allow_local_only) },
+      });
+
+      break;
+    case 'public:allow_local_only:media':
+      resolve({
+        channelIds: ['timeline:public:media'],
+        options: { needsFiltering: true, allowLocalOnly: true },
       });
 
       break;
     case 'public:local:media':
       resolve({
         channelIds: ['timeline:public:local:media'],
-        options: { needsFiltering: true },
+        options: { needsFiltering: true, allowLocalOnly: true },
       });
 
       break;
     case 'public:remote:media':
       resolve({
         channelIds: ['timeline:public:remote:media'],
-        options: { needsFiltering: true },
+        options: { needsFiltering: true, allowLocalOnly: false },
       });
 
       break;
     case 'direct':
       resolve({
         channelIds: [`timeline:direct:${req.accountId}`],
-        options: { needsFiltering: false },
+        options: { needsFiltering: false, allowLocalOnly: true },
       });
 
       break;
@@ -895,7 +917,7 @@ const startWorker = async (workerId) => {
       } else {
         resolve({
           channelIds: [`timeline:hashtag:${params.tag.toLowerCase()}`],
-          options: { needsFiltering: true },
+          options: { needsFiltering: true, allowLocalOnly: true },
         });
       }
 
@@ -906,7 +928,7 @@ const startWorker = async (workerId) => {
       } else {
         resolve({
           channelIds: [`timeline:hashtag:${params.tag.toLowerCase()}:local`],
-          options: { needsFiltering: true },
+          options: { needsFiltering: true, allowLocalOnly: true },
         });
       }
 
@@ -915,7 +937,7 @@ const startWorker = async (workerId) => {
       authorizeListAccess(params.list, req).then(() => {
         resolve({
           channelIds: [`timeline:list:${params.list}`],
-          options: { needsFiltering: false },
+          options: { needsFiltering: false, allowLocalOnly: true },
         });
       }).catch(() => {
         reject('Not authorized to stream this list');
@@ -965,7 +987,7 @@ const startWorker = async (workerId) => {
 
       const onSend = streamToWs(request, socket, streamNameFromChannelName(channelName, params));
       const stopHeartbeat = subscriptionHeartbeat(channelIds);
-      const listener = streamFrom(channelIds, request, onSend, undefined, options.needsFiltering);
+      const listener = streamFrom(channelIds, request, onSend, undefined, options.needsFiltering, options.allowLocalOnly);
 
       subscriptions[channelIds.join(';')] = {
         listener,

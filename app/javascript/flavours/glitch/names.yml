@@ -1,0 +1,23 @@
+en:
+  flavours:
+    glitch:
+      description: The default flavour for GlitchSoc instances.
+      name: Glitch Edition
+  skins:
+    glitch:
+      default: Default
+pl:
+  flavours:
+    glitch:
+      description: Domyślny motyw instancji GlitchSoc.
+  skins:
+    glitch:
+      default: Domyślny
+es:
+  flavours:
+    glitch:
+      description: El diseño predeterminado para las instancias con GlitchSoc.
+      name: Glitchsoc
+  skins:
+    glitch:
+      default: Predeterminado

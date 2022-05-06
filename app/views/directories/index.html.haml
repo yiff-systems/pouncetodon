@@ -43,7 +43,7 @@
               = friendly_number_to_human account.statuses_count
               %small= t('accounts.posts', count: account.statuses_count).downcase
             .account-card__counters__item
-              = friendly_number_to_human account.followers_count
+              = hide_followers_count?(account) ? '-' : (friendly_number_to_human account.followers_count)
               %small= t('accounts.followers', count: account.followers_count).downcase
             .account-card__counters__item
               = friendly_number_to_human account.following_count

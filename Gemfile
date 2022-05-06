@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '>= 2.5.0', '< 3.1.0'
+ruby '>= 2.6.0', '< 3.1.0'
 
 gem 'pkg-config', '~> 1.4'
 gem 'rexml', '~> 3.2'
@@ -26,7 +26,7 @@ gem 'blurhash', '~> 0.1'
 
 gem 'active_model_serializers', '~> 0.10'
 gem 'addressable', '~> 2.8'
-gem 'bootsnap', '~> 1.10.3', require: false
+gem 'bootsnap', '~> 1.11.1', require: false
 gem 'browser'
 gem 'charlock_holmes', '~> 0.7.7'
 gem 'chewy', '~> 7.2'
@@ -79,7 +79,7 @@ gem 'ruby-progressbar', '~> 1.11'
 gem 'sanitize', '~> 6.0'
 gem 'scenic', '~> 1.6'
 gem 'sidekiq', '~> 6.4'
-gem 'sidekiq-scheduler', '~> 3.1'
+gem 'sidekiq-scheduler', '~> 3.2'
 gem 'sidekiq-unique-jobs', '~> 7.1'
 gem 'sidekiq-bulk', '~>0.2.0'
 gem 'simple-navigation', '~> 4.3'
@@ -95,12 +95,13 @@ gem 'webpush', '~> 0.3'
 gem 'webauthn', '~> 3.0.0.alpha1'
 
 # rrerrNet patches
-gem "hcaptcha", "~> 6.0", git: "https://github.com/Retrospring/hcaptcha.git", ref: "v6.0.2", require: "hcaptcha/rails"
 gem "sidekiq-undertaker", "~> 1.0"
 
 gem 'json-ld'
 gem 'json-ld-preloaded', '~> 3.2'
 gem 'rdf-normalize', '~> 0.5'
+
+gem 'redcarpet', '~> 3.5'
 
 group :development, :test do
   gem 'fabrication', '~> 2.28'
@@ -136,7 +137,7 @@ group :development do
   gem 'letter_opener', '~> 1.8'
   gem 'letter_opener_web', '~> 2.0'
   gem 'memory_profiler'
-  gem 'rubocop', '~> 1.26', require: false
+  gem 'rubocop', '~> 1.28', require: false
   gem 'rubocop-rails', '~> 2.14', require: false
   gem 'brakeman', '~> 5.2', require: false
   gem 'bundler-audit', '~> 0.9', require: false
@@ -157,3 +158,5 @@ gem 'concurrent-ruby', require: false
 gem 'connection_pool', require: false
 
 gem 'xorcist', '~> 1.1'
+
+gem 'hcaptcha', '~> 7.1'

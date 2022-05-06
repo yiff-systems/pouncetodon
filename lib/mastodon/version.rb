@@ -13,7 +13,7 @@ module Mastodon
     end
 
     def patch
-      1
+      2
     end
 
     def flags
@@ -21,7 +21,7 @@ module Mastodon
     end
 
     def suffix
-      '+rrerrNet'
+      '+glitch+rrerrNet'
     end
 
     def to_a
@@ -33,7 +33,7 @@ module Mastodon
     end
 
     def repository
-      ENV.fetch('GITHUB_REPOSITORY', 'mastodon/mastodon')
+      ENV.fetch('GITHUB_REPOSITORY', 'glitch-soc/mastodon')
     end
 
     def source_base_url

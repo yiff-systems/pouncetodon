@@ -21,6 +21,7 @@ class TagsController < ApplicationController
   def show
     respond_to do |format|
       format.html do
+        use_pack 'about'
         expires_in 0, public: true
       end
 

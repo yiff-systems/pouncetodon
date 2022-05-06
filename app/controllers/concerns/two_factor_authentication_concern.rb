@@ -77,6 +77,8 @@ module TwoFactorAuthenticationConcern
   def prompt_for_two_factor(user)
     set_attempt_session(user)
 
+    use_pack 'auth'
+
     @body_classes     = 'lighter'
     @webauthn_enabled = user.webauthn_enabled?
     @scheme_type      = begin

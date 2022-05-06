@@ -5,6 +5,7 @@ class RemoteFollowController < ApplicationController
 
   layout 'modal'
 
+  before_action :set_pack
   before_action :set_body_classes
 
   skip_before_action :require_functional!
@@ -32,6 +33,10 @@ class RemoteFollowController < ApplicationController
 
   def session_params
     { acct: session[:remote_follow] || current_account&.username }
+  end
+
+  def set_pack
+    use_pack 'modal'
   end
 
   def set_body_classes

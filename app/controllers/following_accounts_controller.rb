@@ -13,6 +13,7 @@ class FollowingAccountsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
+        use_pack 'public'
         expires_in 0, public: true unless user_signed_in?
 
         next if @account.hide_collections?
@@ -21,7 +22,10 @@ class FollowingAccountsController < ApplicationController
       end
 
       format.json do
-        raise Mastodon::NotPermittedError if page_requested? && @account.hide_collections?
+        if page_requested? && @account.hide_collections?
+          forbidden
+          next
+        end
 
         expires_in(page_requested? ? 0 : 3.minutes, public: public_fetch_mode?)
 

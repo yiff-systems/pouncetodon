@@ -46,6 +46,7 @@ RSpec.describe PublicFeed, type: :model do
       let!(:remote_account) { Fabricate(:account, domain: 'test.com') }
       let!(:local_status)   { Fabricate(:status, account: local_account) }
       let!(:remote_status)  { Fabricate(:status, account: remote_account) }
+      let!(:local_only_status) { Fabricate(:status, account: local_account, local_only: true) }
 
       subject { described_class.new(viewer).get(20).map(&:id) }
 
@@ -59,6 +60,10 @@ RSpec.describe PublicFeed, type: :model do
         it 'includes local statuses' do
           expect(subject).to include(local_status.id)
         end
+
+        it 'does not include local-only statuses' do
+          expect(subject).not_to include(local_only_status.id)
+        end
       end
 
       context 'with a viewer' do
@@ -71,6 +76,54 @@ RSpec.describe PublicFeed, type: :model do
         it 'includes local statuses' do
           expect(subject).to include(local_status.id)
         end
+
+        it 'does not include local-only statuses' do
+          expect(subject).not_to include(local_only_status.id)
+        end
+      end
+    end
+
+    context 'without local_only option but allow_local_only' do
+      let(:viewer) { nil }
+
+      let!(:local_account)  { Fabricate(:account, domain: nil) }
+      let!(:remote_account) { Fabricate(:account, domain: 'test.com') }
+      let!(:local_status)   { Fabricate(:status, account: local_account) }
+      let!(:remote_status)  { Fabricate(:status, account: remote_account) }
+      let!(:local_only_status) { Fabricate(:status, account: local_account, local_only: true) }
+
+      subject { described_class.new(viewer, allow_local_only: true).get(20).map(&:id) }
+
+      context 'without a viewer' do
+        let(:viewer) { nil }
+
+        it 'includes remote instances statuses' do
+          expect(subject).to include(remote_status.id)
+        end
+
+        it 'includes local statuses' do
+          expect(subject).to include(local_status.id)
+        end
+
+        it 'does not include local-only statuses' do
+          expect(subject).not_to include(local_only_status.id)
+        end
+      end
+
+      context 'with a viewer' do
+        let(:viewer) { Fabricate(:account, username: 'viewer') }
+
+        it 'includes remote instances statuses' do
+          expect(subject).to include(remote_status.id)
+        end
+
+        it 'includes local statuses' do
+          expect(subject).to include(local_status.id)
+        end
+
+        it 'includes local-only statuses' do
+          expect(subject).to include(local_only_status.id)
+        end
       end
     end
 
@@ -79,6 +132,7 @@ RSpec.describe PublicFeed, type: :model do
       let!(:remote_account) { Fabricate(:account, domain: 'test.com') }
       let!(:local_status)   { Fabricate(:status, account: local_account) }
       let!(:remote_status)  { Fabricate(:status, account: remote_account) }
+      let!(:local_only_status) { Fabricate(:status, account: local_account, local_only: true) }
 
       subject { described_class.new(viewer, local: true).get(20).map(&:id) }
 
@@ -88,6 +142,10 @@ RSpec.describe PublicFeed, type: :model do
         it 'does not include remote instances statuses' do
           expect(subject).to include(local_status.id)
           expect(subject).not_to include(remote_status.id)
+        end
+
+        it 'does not include local-only statuses' do
+          expect(subject).not_to include(local_only_status.id)
         end
       end
 
@@ -103,6 +161,10 @@ RSpec.describe PublicFeed, type: :model do
           viewer.block_domain!('test.com')
           expect(subject).to include(local_status.id)
           expect(subject).not_to include(remote_status.id)
+        end
+
+        it 'includes local-only statuses' do
+          expect(subject).to include(local_only_status.id)
         end
       end
     end

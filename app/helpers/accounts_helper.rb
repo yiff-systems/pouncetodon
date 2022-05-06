@@ -79,8 +79,12 @@ module AccountsHelper
     end
   end
 
+  def hide_followers_count?(account)
+    Setting.hide_followers_count || account.user&.setting_hide_followers_count
+  end
+
   def account_description(account)
-    prepend_str = [
+    prepend_stats = [
       [
         number_to_human(account.statuses_count, precision: 3, strip_insignificant_zeros: true),
         I18n.t('accounts.posts', count: account.statuses_count),
@@ -90,14 +94,16 @@ module AccountsHelper
         number_to_human(account.following_count, precision: 3, strip_insignificant_zeros: true),
         I18n.t('accounts.following', count: account.following_count),
       ].join(' '),
+    ]
 
-      [
+    unless hide_followers_count?(account)
+      prepend_stats << [
         number_to_human(account.followers_count, precision: 3, strip_insignificant_zeros: true),
         I18n.t('accounts.followers', count: account.followers_count),
-      ].join(' '),
-    ].join(', ')
+      ].join(' ')
+    end
 
-    [prepend_str, account.note].join(' · ')
+    [prepend_stats.join(', '), account.note].join(' · ')
   end
 
   def svg_logo

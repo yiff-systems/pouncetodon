@@ -14,6 +14,8 @@ class FeedInsertWorker
     when :list
       @list     = List.find(id)
       @follower = @list.account
+    when :direct
+      @account  = Account.find(id)
     end
 
     check_and_insert
@@ -38,6 +40,8 @@ class FeedInsertWorker
       FeedManager.instance.filter?(:home, @status, @follower)
     when :list
       FeedManager.instance.filter?(:list, @status, @list)
+    when :direct
+      FeedManager.instance.filter?(:direct, @status, @account)
     end
   end
 
@@ -53,6 +57,8 @@ class FeedInsertWorker
       FeedManager.instance.push_to_home(@follower, @status, update: update?)
     when :list
       FeedManager.instance.push_to_list(@list, @status, update: update?)
+    when :direct
+      FeedManager.instance.push_to_direct(@account, @status, update: update?)
     end
   end
 
@@ -62,6 +68,8 @@ class FeedInsertWorker
       FeedManager.instance.unpush_from_home(@follower, @status, update: true)
     when :list
       FeedManager.instance.unpush_from_list(@list, @status, update: true)
+    when :direct
+      FeedManager.instance.unpush_from_direct(@account, @status, update: true)
     end
   end
 

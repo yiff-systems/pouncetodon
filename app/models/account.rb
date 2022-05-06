@@ -77,6 +77,10 @@ class Account < ApplicationRecord
   include DomainMaterializable
   include AccountMerging
 
+  MAX_DISPLAY_NAME_LENGTH = (ENV['MAX_DISPLAY_NAME_CHARS'] || 30).to_i
+  MAX_NOTE_LENGTH = (ENV['MAX_BIO_CHARS'] || 500).to_i
+  MAX_FIELDS = (ENV['MAX_PROFILE_FIELDS'] || 4).to_i
+
   enum protocol: [:ostatus, :activitypub]
   enum suspension_origin: [:local, :remote], _prefix: true
 
@@ -89,9 +93,9 @@ class Account < ApplicationRecord
   # Local user validations
   validates :username, format: { with: /\A[a-z0-9_]+\z/i }, length: { maximum: 30 }, if: -> { local? && will_save_change_to_username? && actor_type != 'Application' }
   validates_with UnreservedUsernameValidator, if: -> { local? && will_save_change_to_username? }
-  validates :display_name, length: { maximum: 30 }, if: -> { local? && will_save_change_to_display_name? }
-  validates :note, note_length: { maximum: 500 }, if: -> { local? && will_save_change_to_note? }
-  validates :fields, length: { maximum: 4 }, if: -> { local? && will_save_change_to_fields? }
+  validates :display_name, length: { maximum: MAX_DISPLAY_NAME_LENGTH }, if: -> { local? && will_save_change_to_display_name? }
+  validates :note, note_length: { maximum: MAX_NOTE_LENGTH }, if: -> { local? && will_save_change_to_note? }
+  validates :fields, length: { maximum: MAX_FIELDS }, if: -> { local? && will_save_change_to_fields? }
 
   scope :remote, -> { where.not(domain: nil) }
   scope :local, -> { where(domain: nil) }
@@ -324,15 +328,13 @@ class Account < ApplicationRecord
     self[:fields] = fields
   end
 
-  DEFAULT_FIELDS_SIZE = 4
-
   def build_fields
-    return if fields.size >= DEFAULT_FIELDS_SIZE
+    return if fields.size >= MAX_FIELDS
 
     tmp = self[:fields] || []
     tmp = [] if tmp.is_a?(Hash)
 
-    (DEFAULT_FIELDS_SIZE - tmp.size).times do
+    (MAX_FIELDS - tmp.size).times do
       tmp << { name: '', value: '' }
     end
 
@@ -558,6 +560,12 @@ class Account < ApplicationRecord
   before_validation :prepare_contents, if: :local?
   before_validation :prepare_username, on: :create
   before_destroy :clean_feed_manager
+
+  def ensure_keys!
+    return unless local? && private_key.blank? && public_key.blank?
+    generate_keys
+    save!
+  end
 
   private
 

@@ -42,7 +42,7 @@ Rails.application.configure do
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Allow to specify public IP of reverse proxy if it's needed
-  config.action_dispatch.trusted_proxies = ENV['TRUSTED_PROXY_IP'].split.map { |item| IPAddr.new(item) } if ENV['TRUSTED_PROXY_IP'].present?
+  config.action_dispatch.trusted_proxies = ENV['TRUSTED_PROXY_IP'].split(/(?:\s*,\s*|\s+)/).map { |item| IPAddr.new(item) } if ENV['TRUSTED_PROXY_IP'].present?
 
   config.force_ssl = true
   config.ssl_options = {
@@ -122,11 +122,13 @@ Rails.application.configure do
   config.action_mailer.delivery_method = ENV.fetch('SMTP_DELIVERY_METHOD', 'smtp').to_sym
 
   config.action_dispatch.default_headers = {
-    'Server'                 => 'Mastodon',
-    'X-Frame-Options'        => 'DENY',
-    'X-Content-Type-Options' => 'nosniff',
-    'X-XSS-Protection'       => '0',
-    'Permissions-Policy'     => 'interest-cohort=()',
+    'Server'                  => 'Mastodon',
+    'X-Frame-Options'         => 'DENY',
+    'X-Content-Type-Options'  => 'nosniff',
+    'X-XSS-Protection'        => '0',
+    'Permissions-Policy'      => 'interest-cohort=()',
+    'Referrer-Policy'         => 'same-origin',
+    'X-Clacks-Overhead' => 'GNU Natalie Nguyen'
   }
 
   config.x.otp_secret = ENV.fetch('OTP_SECRET')

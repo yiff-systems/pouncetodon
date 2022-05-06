@@ -17,7 +17,8 @@ class Form::AdminSettings
     timeline_preview
     show_staff_badge
     bootstrap_timeline_accounts
-    theme
+    flavour
+    skin
     min_invite_role
     activity_api_enabled
     peers_api_enabled
@@ -25,15 +26,22 @@ class Form::AdminSettings
     preview_sensitive_media
     custom_css
     profile_directory
+    hide_followers_count
+    flavour_and_skin
     thumbnail
     hero
     mascot
+    show_reblogs_in_public_timelines
+    show_replies_in_public_timelines
     trends
     trendable_by_default
+    trending_status_cw
     show_domain_blocks
     show_domain_blocks_rationale
     noindex
+    outgoing_spoilers
     require_invite_text
+    captcha_enabled
   ).freeze
 
   BOOLEAN_KEYS = %i(
@@ -45,16 +53,25 @@ class Form::AdminSettings
     show_known_fediverse_at_about_page
     preview_sensitive_media
     profile_directory
+    hide_followers_count
+    show_reblogs_in_public_timelines
+    show_replies_in_public_timelines
     trends
     trendable_by_default
+    trending_status_cw
     noindex
     require_invite_text
+    captcha_enabled
   ).freeze
 
   UPLOAD_KEYS = %i(
     thumbnail
     hero
     mascot
+  ).freeze
+
+  PSEUDO_KEYS = %i(
+    flavour_and_skin
   ).freeze
 
   attr_accessor(*KEYS)
@@ -78,6 +95,7 @@ class Form::AdminSettings
     return false unless valid?
 
     KEYS.each do |key|
+      next if PSEUDO_KEYS.include?(key)
       value = instance_variable_get("@#{key}")
 
       if UPLOAD_KEYS.include?(key) && !value.nil?
@@ -90,10 +108,19 @@ class Form::AdminSettings
     end
   end
 
+  def flavour_and_skin
+    "#{Setting.flavour}/#{Setting.skin}"
+  end
+
+  def flavour_and_skin=(value)
+    @flavour, @skin = value.split('/', 2)
+  end
+
   private
 
   def initialize_attributes
     KEYS.each do |key|
+      next if PSEUDO_KEYS.include?(key)
       instance_variable_set("@#{key}", Setting.public_send(key)) if instance_variable_get("@#{key}").nil?
     end
   end

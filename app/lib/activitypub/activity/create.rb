@@ -117,7 +117,7 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
         language: @status_parser.language,
         spoiler_text: converted_object_type? ? '' : (@status_parser.spoiler_text || ''),
         created_at: @status_parser.created_at,
-        edited_at: @status_parser.edited_at,
+        edited_at: @status_parser.edited_at && @status_parser.edited_at != @status_parser.created_at ? @status_parser.edited_at : nil,
         override_timestamps: @options[:override_timestamps],
         reply: @status_parser.reply,
         sensitive: @account.sensitized? || @status_parser.sensitive || false,
@@ -154,7 +154,7 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
       # If there is at least one silent mention, then the status can be considered
       # as a limited-audience status, and not strictly a direct message, but only
       # if we considered a direct message in the first place
-      @params[:visibility] = :limited if @params[:visibility] == :direct
+      @params[:visibility] = :limited if @params[:visibility] == :direct && !@object['directMessage']
     end
 
     # Accounts that are tagged but are not in the audience are not
@@ -166,7 +166,7 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
     return if @status.mentions.find_by(account_id: @options[:delivered_to_account_id])
 
     @status.mentions.create(account: delivered_to_account, silent: true)
-    @status.update(visibility: :limited) if @status.direct_visibility?
+    @status.update(visibility: :limited) if @status.direct_visibility? && !@object['directMessage']
 
     return unless delivered_to_account.following?(@account)
 

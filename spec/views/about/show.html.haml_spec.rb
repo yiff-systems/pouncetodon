@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 describe 'about/show.html.haml', without_verify_partial_doubles: true do
+  let(:commit_hash) { '8925731c9869f55780644304e4420a1998e52607' }
+
   before do
     allow(view).to receive(:site_hostname).and_return('example.com')
     allow(view).to receive(:site_title).and_return('example site')
@@ -26,6 +28,7 @@ describe 'about/show.html.haml', without_verify_partial_doubles: true do
       user_count: 420,
       status_count: 69,
       active_user_count: 420,
+      commit_hash: commit_hash,
       contact_account: nil,
       sample_accounts: []
     )

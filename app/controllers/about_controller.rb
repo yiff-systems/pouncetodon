@@ -3,6 +3,8 @@
 class AboutController < ApplicationController
   include RegistrationSpamConcern
 
+  before_action :set_pack
+
   layout 'public'
 
   before_action :require_open_federation!, only: [:show, :more]
@@ -52,6 +54,10 @@ class AboutController < ApplicationController
       user.build_account
       user.build_invite_request
     end
+  end
+
+  def set_pack
+    use_pack 'public'
   end
 
   def set_instance_presenter

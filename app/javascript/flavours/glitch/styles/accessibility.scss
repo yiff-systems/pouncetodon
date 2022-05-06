@@ -1,0 +1,35 @@
+$emojis-requiring-inversion: 'back' 'copyright' 'curly_loop' 'currency_exchange' 'end' 'heavy_check_mark' 'heavy_division_sign' 'heavy_dollar_sign' 'heavy_minus_sign' 'heavy_multiplication_x' 'heavy_plus_sign' 'on' 'registered' 'soon' 'spider' 'telephone_receiver' 'tm' 'top' 'wavy_dash' !default;
+
+%emoji-color-inversion {
+  filter: invert(1);
+}
+
+.emojione {
+  @each $emoji in $emojis-requiring-inversion {
+    &[title=':#{$emoji}:'] {
+      @extend %emoji-color-inversion;
+    }
+  }
+}
+
+.hicolor-privacy-icons {
+  .status__visibility-icon.fa-globe,
+  .composer--options--dropdown--content--item .fa-globe {
+    color: #1976d2;
+  }
+
+  .status__visibility-icon.fa-unlock,
+  .composer--options--dropdown--content--item .fa-unlock {
+    color: #388e3c;
+  }
+
+  .status__visibility-icon.fa-lock,
+  .composer--options--dropdown--content--item .fa-lock {
+    color: #ffa000;
+  }
+
+  .status__visibility-icon.fa-envelope,
+  .composer--options--dropdown--content--item .fa-envelope {
+    color: #d32f2f;
+  }
+}

@@ -22,6 +22,7 @@ class UserSettingsDecorator
     user.settings['default_language']    = default_language_preference if change?('setting_default_language')
     user.settings['unfollow_modal']      = unfollow_modal_preference if change?('setting_unfollow_modal')
     user.settings['boost_modal']         = boost_modal_preference if change?('setting_boost_modal')
+    user.settings['favourite_modal']     = favourite_modal_preference if change?('setting_favourite_modal')
     user.settings['delete_modal']        = delete_modal_preference if change?('setting_delete_modal')
     user.settings['auto_play_gif']       = auto_play_gif_preference if change?('setting_auto_play_gif')
     user.settings['display_media']       = display_media_preference if change?('setting_display_media')
@@ -29,11 +30,15 @@ class UserSettingsDecorator
     user.settings['reduce_motion']       = reduce_motion_preference if change?('setting_reduce_motion')
     user.settings['disable_swiping']     = disable_swiping_preference if change?('setting_disable_swiping')
     user.settings['system_font_ui']      = system_font_ui_preference if change?('setting_system_font_ui')
+    user.settings['system_emoji_font']   = system_emoji_font_preference if change?('setting_system_emoji_font')
     user.settings['noindex']             = noindex_preference if change?('setting_noindex')
-    user.settings['theme']               = theme_preference if change?('setting_theme')
+    user.settings['flavour']             = flavour_preference if change?('setting_flavour')
+    user.settings['skin']                = skin_preference if change?('setting_skin')
+    user.settings['hide_network']        = hide_network_preference if change?('setting_hide_network')
     user.settings['aggregate_reblogs']   = aggregate_reblogs_preference if change?('setting_aggregate_reblogs')
     user.settings['show_application']    = show_application_preference if change?('setting_show_application')
     user.settings['advanced_layout']     = advanced_layout_preference if change?('setting_advanced_layout')
+    user.settings['default_content_type']= default_content_type_preference if change?('setting_default_content_type')
     user.settings['use_blurhash']        = use_blurhash_preference if change?('setting_use_blurhash')
     user.settings['use_pending_items']   = use_pending_items_preference if change?('setting_use_pending_items')
     user.settings['trends']              = trends_preference if change?('setting_trends')
@@ -65,12 +70,20 @@ class UserSettingsDecorator
     boolean_cast_setting 'setting_boost_modal'
   end
 
+  def favourite_modal_preference
+    boolean_cast_setting 'setting_favourite_modal'
+  end
+
   def delete_modal_preference
     boolean_cast_setting 'setting_delete_modal'
   end
 
   def system_font_ui_preference
     boolean_cast_setting 'setting_system_font_ui'
+  end
+
+  def system_emoji_font_preference
+    boolean_cast_setting 'setting_system_emoji_font'
   end
 
   def auto_play_gif_preference
@@ -97,12 +110,20 @@ class UserSettingsDecorator
     boolean_cast_setting 'setting_noindex'
   end
 
-  def show_application_preference
-    boolean_cast_setting 'setting_show_application'
+  def flavour_preference
+    settings['setting_flavour']
   end
 
-  def theme_preference
-    settings['setting_theme']
+  def skin_preference
+    settings['setting_skin']
+  end
+
+  def hide_network_preference
+    boolean_cast_setting 'setting_hide_network'
+  end
+
+  def show_application_preference
+    boolean_cast_setting 'setting_show_application'
   end
 
   def default_language_preference
@@ -115,6 +136,10 @@ class UserSettingsDecorator
 
   def advanced_layout_preference
     boolean_cast_setting 'setting_advanced_layout'
+  end
+
+  def default_content_type_preference
+    settings['setting_default_content_type']
   end
 
   def use_blurhash_preference

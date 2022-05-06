@@ -21,6 +21,7 @@ class BatchedRemoveStatusService < BaseService
 
     statuses_with_account_conversations.each do |status|
       status.send(:unlink_from_conversations)
+      unpush_from_direct_timelines(status)
     end
 
     # We do not batch all deletes into one to avoid having a long-running
@@ -88,6 +89,12 @@ class BatchedRemoveStatusService < BaseService
     status.tags.map { |tag| tag.name.mb_chars.downcase }.each do |hashtag|
       redis.publish("timeline:hashtag:#{hashtag}", payload)
       redis.publish("timeline:hashtag:#{hashtag}:local", payload) if status.local?
+    end
+  end
+
+  def unpush_from_direct_timelines(status)
+    status.mentions.each do |mention|
+      FeedManager.instance.unpush_from_direct(mention.account, status) if mention.account.local?
     end
   end
 end

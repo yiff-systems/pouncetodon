@@ -7,6 +7,7 @@ class DirectoriesController < ApplicationController
   before_action :require_enabled!
   before_action :set_instance_presenter
   before_action :set_accounts
+  before_action :set_pack
 
   skip_before_action :require_functional!, unless: :whitelist_mode?
 
@@ -15,6 +16,10 @@ class DirectoriesController < ApplicationController
   end
 
   private
+
+  def set_pack
+    use_pack 'share'
+  end
 
   def require_enabled!
     return not_found unless Setting.profile_directory

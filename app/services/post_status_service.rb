@@ -49,8 +49,17 @@ class PostStatusService < BaseService
   private
 
   def preprocess_attributes!
+    if @text.blank? && @options[:spoiler_text].present?
+     @text = '.'
+     if @media&.find(&:video?) || @media&.find(&:gifv?)
+       @text = '📹'
+     elsif @media&.find(&:audio?)
+       @text = '🎵'
+     elsif @media&.find(&:image?)
+       @text = '🖼'
+     end
+    end
     @sensitive    = (@options[:sensitive].nil? ? @account.user&.setting_default_sensitive : @options[:sensitive]) || @options[:spoiler_text].present?
-    @text         = @options.delete(:spoiler_text) if @text.blank? && @options[:spoiler_text].present?
     @visibility   = @options[:visibility] || @account.user&.setting_default_privacy
     @visibility   = :unlisted if @visibility&.to_sym == :public && @account.silenced?
     @scheduled_at = @options[:scheduled_at]&.to_datetime
@@ -95,7 +104,7 @@ class PostStatusService < BaseService
     Trends.tags.register(@status)
     LinkCrawlWorker.perform_async(@status.id)
     DistributionWorker.perform_async(@status.id)
-    ActivityPub::DistributionWorker.perform_async(@status.id)
+    ActivityPub::DistributionWorker.perform_async(@status.id) unless @status.local_only?
     PollExpirationNotifyWorker.perform_at(@status.poll.expires_at, @status.poll.id) if @status.poll
   end
 
@@ -168,6 +177,7 @@ class PostStatusService < BaseService
       visibility: @visibility,
       language: valid_locale_cascade(@options[:language], @account.user&.preferred_posting_language, I18n.default_locale),
       application: @options[:application],
+      content_type: @options[:content_type] || @account.user&.setting_default_content_type,
       rate_limit: @options[:with_rate_limit],
     }.compact
   end

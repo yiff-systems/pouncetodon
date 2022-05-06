@@ -6,6 +6,7 @@ class FiltersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_filters, only: :index
   before_action :set_filter, only: [:edit, :update, :destroy]
+  before_action :set_pack
   before_action :set_body_classes
 
   def index
@@ -42,6 +43,10 @@ class FiltersController < ApplicationController
   end
 
   private
+
+  def set_pack
+    use_pack 'settings'
+  end
 
   def set_filters
     @filters = current_account.custom_filters
