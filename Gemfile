@@ -95,7 +95,7 @@ gem 'webpush', '~> 0.3'
 gem 'webauthn', '~> 3.0.0.alpha1'
 
 # rrerrNet patches
-gem "sidekiq-undertaker", "~> 1.0"
+gem "sidekiq-undertaker", "~> 1.3"
 
 gem 'json-ld'
 gem 'json-ld-preloaded', '~> 3.2'
