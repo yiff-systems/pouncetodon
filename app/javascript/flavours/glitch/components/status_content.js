@@ -5,8 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import Permalink from './permalink';
 import classnames from 'classnames';
 import Icon from 'flavours/glitch/components/icon';
-import { autoPlayGif } from 'flavours/glitch/util/initial_state';
-import { decode as decodeIDNA } from 'flavours/glitch/util/idna';
+import { autoPlayGif } from 'flavours/glitch/initial_state';
+import { decode as decodeIDNA } from 'flavours/glitch/utils/idna';
 
 const textMatchesTarget = (text, origin, host) => {
   return (text === origin || text === host
@@ -70,6 +70,7 @@ export default class StatusContent extends React.PureComponent {
     collapsed: PropTypes.bool,
     onExpandedToggle: PropTypes.func,
     media: PropTypes.node,
+    extraMedia: PropTypes.node,
     mediaIcons: PropTypes.arrayOf(PropTypes.string),
     parseClick: PropTypes.func,
     disabled: PropTypes.bool,
@@ -123,6 +124,9 @@ export default class StatusContent extends React.PureComponent {
         link.setAttribute('title', link.href);
         link.classList.add('unhandled-link');
 
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener nofollow noreferrer');
+
         try {
           if (tagLinks && isLinkMisleading(link)) {
             // Add a tag besides the link to display its origin
@@ -148,9 +152,6 @@ export default class StatusContent extends React.PureComponent {
           if (tagLinks && e instanceof TypeError) link.removeAttribute('href');
         }
       }
-
-      link.setAttribute('target', '_blank');
-      link.setAttribute('rel', 'noopener noreferrer');
     }
   }
 
@@ -256,6 +257,7 @@ export default class StatusContent extends React.PureComponent {
     const {
       status,
       media,
+      extraMedia,
       mediaIcons,
       parseClick,
       disabled,
@@ -267,6 +269,7 @@ export default class StatusContent extends React.PureComponent {
 
     const content = { __html: status.get('contentHtml') };
     const spoilerContent = { __html: status.get('spoilerHtml') };
+    const lang = status.get('language');
     const classNames = classnames('status__content', {
       'status__content--with-action': parseClick && !disabled,
       'status__content--with-spoiler': status.get('spoiler_text').length > 0,
@@ -327,9 +330,9 @@ export default class StatusContent extends React.PureComponent {
           <p
             style={{ marginBottom: hidden && status.get('mentions').isEmpty() ? '0px' : null }}
           >
-            <span dangerouslySetInnerHTML={spoilerContent} className='translate' />
+            <span dangerouslySetInnerHTML={spoilerContent} className='translate' lang={lang} />
             {' '}
-            <button tabIndex='0' className='status__content__spoiler-link' onClick={this.handleSpoilerClick}>
+            <button type='button' className='status__content__spoiler-link' onClick={this.handleSpoilerClick} aria-expanded={!hidden}>
               {toggleText}
             </button>
           </p>
@@ -345,9 +348,12 @@ export default class StatusContent extends React.PureComponent {
               className='status__content__text translate'
               onMouseEnter={this.handleMouseEnter}
               onMouseLeave={this.handleMouseLeave}
+              lang={lang}
             />
             {media}
           </div>
+
+          {extraMedia}
 
         </div>
       );
@@ -367,8 +373,10 @@ export default class StatusContent extends React.PureComponent {
             tabIndex='0'
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
+            lang={lang}
           />
           {media}
+          {extraMedia}
         </div>
       );
     } else {
@@ -385,8 +393,10 @@ export default class StatusContent extends React.PureComponent {
             tabIndex='0'
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
+            lang={lang}
           />
           {media}
+          {extraMedia}
         </div>
       );
     }
