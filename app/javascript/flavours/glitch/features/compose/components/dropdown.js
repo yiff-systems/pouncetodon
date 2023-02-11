@@ -2,20 +2,20 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Overlay from 'react-overlays/lib/Overlay';
+import Overlay from 'react-overlays/Overlay';
 
 //  Components.
 import IconButton from 'flavours/glitch/components/icon_button';
 import DropdownMenu from './dropdown_menu';
 
 //  Utils.
-import { isUserTouching } from 'flavours/glitch/is_mobile';
 import { assignHandlers } from 'flavours/glitch/utils/react_helpers';
 
 //  The component.
 export default class ComposerOptionsDropdown extends React.PureComponent {
 
   static propTypes = {
+    isUserTouching: PropTypes.func,
     disabled: PropTypes.bool,
     icon: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.shape({
@@ -45,11 +45,11 @@ export default class ComposerOptionsDropdown extends React.PureComponent {
   };
 
   //  Toggles opening and closing the dropdown.
-  handleToggle = ({ target, type }) => {
+  handleToggle = ({ type }) => {
     const { onModalOpen } = this.props;
     const { open } = this.state;
 
-    if (isUserTouching()) {
+    if (this.props.isUserTouching && this.props.isUserTouching()) {
       if (this.state.open) {
         this.props.onModalClose();
       } else {
@@ -59,14 +59,12 @@ export default class ComposerOptionsDropdown extends React.PureComponent {
         }
       }
     } else {
-      const { top } = target.getBoundingClientRect();
       if (this.state.open && this.activeElement) {
         this.activeElement.focus({ preventScroll: true });
       }
-      this.setState({ placement: top * 2 < innerHeight ? 'bottom' : 'top' });
       this.setState({ open: !this.state.open, openedViaKeyboard: type !== 'click' });
     }
-  }
+  };
 
   handleKeyDown = (e) => {
     switch (e.key) {
@@ -74,13 +72,13 @@ export default class ComposerOptionsDropdown extends React.PureComponent {
       this.handleClose();
       break;
     }
-  }
+  };
 
   handleMouseDown = () => {
     if (!this.state.open) {
       this.activeElement = document.activeElement;
     }
-  }
+  };
 
   handleButtonKeyDown = (e) => {
     switch(e.key) {
@@ -89,7 +87,7 @@ export default class ComposerOptionsDropdown extends React.PureComponent {
       this.handleMouseDown();
       break;
     }
-  }
+  };
 
   handleKeyPress = (e) => {
     switch(e.key) {
@@ -100,14 +98,14 @@ export default class ComposerOptionsDropdown extends React.PureComponent {
       e.preventDefault();
       break;
     }
-  }
+  };
 
   handleClose = () => {
     if (this.state.open && this.activeElement) {
       this.activeElement.focus({ preventScroll: true });
     }
     this.setState({ open: false });
-  }
+  };
 
   handleItemClick = (e) => {
     const {
@@ -153,10 +151,22 @@ export default class ComposerOptionsDropdown extends React.PureComponent {
           ...rest,
           active: value && name === value,
           name,
-        })
+        }),
       ),
     };
-  }
+  };
+
+  setTargetRef = c => {
+    this.target = c;
+  };
+
+  findTarget = () => {
+    return this.target;
+  };
+
+  handleOverlayEnter = (state) => {
+    this.setState({ placement: state.placement });
+  };
 
   //  Rendering.
   render () {
@@ -179,6 +189,7 @@ export default class ComposerOptionsDropdown extends React.PureComponent {
       <div
         className={classNames('privacy-dropdown', placement, { active: open })}
         onKeyDown={this.handleKeyDown}
+        ref={this.setTargetRef}
       >
         <div className={classNames('privacy-dropdown__value', { active })}>
           <IconButton
@@ -204,18 +215,26 @@ export default class ComposerOptionsDropdown extends React.PureComponent {
           containerPadding={20}
           placement={placement}
           show={open}
-          target={this}
+          flip
+          target={this.findTarget}
           container={container}
+          popperConfig={{ strategy: 'fixed', onFirstUpdate: this.handleOverlayEnter }}
         >
-          <DropdownMenu
-            items={items}
-            renderItemContents={renderItemContents}
-            onChange={onChange}
-            onClose={this.handleClose}
-            value={value}
-            openedViaKeyboard={this.state.openedViaKeyboard}
-            closeOnChange={closeOnChange}
-          />
+          {({ props, placement }) => (
+            <div {...props}>
+              <div className={`dropdown-animation privacy-dropdown__dropdown ${placement}`}>
+                <DropdownMenu
+                  items={items}
+                  renderItemContents={renderItemContents}
+                  onChange={onChange}
+                  onClose={this.handleClose}
+                  value={value}
+                  openedViaKeyboard={this.state.openedViaKeyboard}
+                  closeOnChange={closeOnChange}
+                />
+              </div>
+            </div>
+          )}
         </Overlay>
       </div>
     );

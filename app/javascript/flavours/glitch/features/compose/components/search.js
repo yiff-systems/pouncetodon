@@ -3,13 +3,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import spring from 'react-motion/lib/spring';
 import {
   injectIntl,
   FormattedMessage,
   defineMessages,
 } from 'react-intl';
-import Overlay from 'react-overlays/lib/Overlay';
+import Overlay from 'react-overlays/Overlay';
 
 //  Components.
 import Icon from 'flavours/glitch/components/icon';
@@ -17,7 +16,6 @@ import Icon from 'flavours/glitch/components/icon';
 //  Utils.
 import { focusRoot } from 'flavours/glitch/utils/dom_helpers';
 import { searchEnabled } from 'flavours/glitch/initial_state';
-import Motion from '../../ui/util/optional_motion';
 
 const messages = defineMessages({
   placeholder: { id: 'search.placeholder', defaultMessage: 'Search' },
@@ -26,31 +24,20 @@ const messages = defineMessages({
 
 class SearchPopout extends React.PureComponent {
 
-  static propTypes = {
-    style: PropTypes.object,
-  };
-
   render () {
-    const { style } = this.props;
     const extraInformation = searchEnabled ? <FormattedMessage id='search_popout.tips.full_text' defaultMessage='Simple text returns statuses you have written, favourited, boosted, or have been mentioned in, as well as matching usernames, display names, and hashtags.' /> : <FormattedMessage id='search_popout.tips.text' defaultMessage='Simple text returns matching display names, usernames and hashtags' />;
     return (
-      <div style={{ ...style, position: 'absolute', width: 285, zIndex: 2 }}>
-        <Motion defaultStyle={{ opacity: 0, scaleX: 0.85, scaleY: 0.75 }} style={{ opacity: spring(1, { damping: 35, stiffness: 400 }), scaleX: spring(1, { damping: 35, stiffness: 400 }), scaleY: spring(1, { damping: 35, stiffness: 400 }) }}>
-          {({ opacity, scaleX, scaleY }) => (
-            <div className='search-popout' style={{ opacity: opacity, transform: `scale(${scaleX}, ${scaleY})` }}>
-              <h4><FormattedMessage id='search_popout.search_format' defaultMessage='Advanced search format' /></h4>
+      <div className='search-popout'>
+        <h4><FormattedMessage id='search_popout.search_format' defaultMessage='Advanced search format' /></h4>
 
-              <ul>
-                <li><em>#example</em> <FormattedMessage id='search_popout.tips.hashtag' defaultMessage='hashtag' /></li>
-                <li><em>@username@domain</em> <FormattedMessage id='search_popout.tips.user' defaultMessage='user' /></li>
-                <li><em>URL</em> <FormattedMessage id='search_popout.tips.user' defaultMessage='user' /></li>
-                <li><em>URL</em> <FormattedMessage id='search_popout.tips.status' defaultMessage='status' /></li>
-              </ul>
+        <ul>
+          <li><em>#example</em> <FormattedMessage id='search_popout.tips.hashtag' defaultMessage='hashtag' /></li>
+          <li><em>@username@domain</em> <FormattedMessage id='search_popout.tips.user' defaultMessage='user' /></li>
+          <li><em>URL</em> <FormattedMessage id='search_popout.tips.user' defaultMessage='user' /></li>
+          <li><em>URL</em> <FormattedMessage id='search_popout.tips.status' defaultMessage='status' /></li>
+        </ul>
 
-              {extraInformation}
-            </div>
-          )}
-        </Motion>
+        {extraInformation}
       </div>
     );
   }
@@ -84,14 +71,14 @@ class Search extends React.PureComponent {
 
   setRef = c => {
     this.searchForm = c;
-  }
+  };
 
   handleChange = (e) => {
     const { onChange } = this.props;
     if (onChange) {
       onChange(e.target.value);
     }
-  }
+  };
 
   handleClear = (e) => {
     const {
@@ -103,11 +90,11 @@ class Search extends React.PureComponent {
     if (onClear && (submitted || value && value.length)) {
       onClear();
     }
-  }
+  };
 
   handleBlur = () => {
     this.setState({ expanded: false });
-  }
+  };
 
   handleFocus = () => {
     this.setState({ expanded: true });
@@ -119,7 +106,7 @@ class Search extends React.PureComponent {
         this.searchForm.scrollIntoView();
       }
     }
-  }
+  };
 
   handleKeyUp = (e) => {
     const { onSubmit } = this.props;
@@ -134,7 +121,11 @@ class Search extends React.PureComponent {
     case 'Escape':
       focusRoot();
     }
-  }
+  };
+
+  findTarget = () => {
+    return this.searchForm;
+  };
 
   render () {
     const { intl, value, submitted } = this.props;
@@ -144,34 +135,31 @@ class Search extends React.PureComponent {
 
     return (
       <div className='search'>
-        <label>
-          <span style={{ display: 'none' }}>{intl.formatMessage(messages.placeholder)}</span>
-          <input
-            ref={this.setRef}
-            className='search__input'
-            type='text'
-            placeholder={intl.formatMessage(signedIn ? messages.placeholderSignedIn : messages.placeholder)}
-            value={value || ''}
-            onChange={this.handleChange}
-            onKeyUp={this.handleKeyUp}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-          />
-        </label>
+        <input
+          ref={this.setRef}
+          className='search__input'
+          type='text'
+          placeholder={intl.formatMessage(signedIn ? messages.placeholderSignedIn : messages.placeholder)}
+          aria-label={intl.formatMessage(signedIn ? messages.placeholderSignedIn : messages.placeholder)}
+          value={value || ''}
+          onChange={this.handleChange}
+          onKeyUp={this.handleKeyUp}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+        />
 
-        <div
-          aria-label={intl.formatMessage(messages.placeholder)}
-          className='search__icon'
-          onClick={this.handleClear}
-          role='button'
-          tabIndex='0'
-        >
+        <div role='button' tabIndex='0' className='search__icon' onClick={this.handleClear}>
           <Icon id='search' className={hasValue ? '' : 'active'} />
           <Icon id='times-circle' className={hasValue ? 'active' : ''} />
         </div>
-
-        <Overlay show={expanded && !hasValue} placement='bottom' target={this}>
-          <SearchPopout />
+        <Overlay show={expanded && !hasValue} placement='bottom' target={this.findTarget} popperConfig={{ strategy: 'fixed' }}>
+          {({ props, placement }) => (
+            <div {...props} style={{ ...props.style, width: 285, zIndex: 2 }}>
+              <div className={`dropdown-animation ${placement}`}>
+                <SearchPopout />
+              </div>
+            </div>
+          )}
         </Overlay>
       </div>
     );

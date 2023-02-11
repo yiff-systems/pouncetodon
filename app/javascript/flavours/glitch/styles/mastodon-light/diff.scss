@@ -12,6 +12,14 @@ html {
   &.button-alternative-2 {
     color: $white;
   }
+
+  &.button-tertiary {
+    color: $highlight-text-color;
+  }
+}
+
+.simple_form .button.button-tertiary {
+  color: $highlight-text-color;
 }
 
 .status-card__actions button,
@@ -285,22 +293,8 @@ html {
 .dropdown-menu {
   background: $white;
 
-  &__arrow {
-    &.left {
-      border-left-color: $white;
-    }
-
-    &.top {
-      border-top-color: $white;
-    }
-
-    &.bottom {
-      border-bottom-color: $white;
-    }
-
-    &.right {
-      border-right-color: $white;
-    }
+  &__arrow::before {
+    background-color: $white;
   }
 
   &__item {
@@ -557,25 +551,6 @@ html {
   }
 }
 
-.directory__tag.active > a,
-.directory__tag.active > div {
-  border-color: $ui-highlight-color;
-
-  &,
-  h4,
-  h4 small,
-  .fa,
-  .trends__item__current {
-    color: $white;
-  }
-
-  &:hover,
-  &:active,
-  &:focus {
-    background: $ui-highlight-color;
-  }
-}
-
 .batch-table {
   &__toolbar,
   &__row,
@@ -711,6 +686,26 @@ html {
 }
 
 // Glitch-soc-specific changes
+
+.pillbar-button {
+  background: $ui-secondary-color;
+
+  &:not([disabled]) {
+    &:hover,
+    &:focus {
+      background: darken($ui-secondary-color, 10%);
+    }
+
+    &.active {
+      background-color: darken($ui-highlight-color, 2%);
+
+      &:hover,
+      &:focus {
+        background: lighten($ui-highlight-color, 10%);
+      }
+    }
+  }
+}
 
 .glitch.local-settings {
   background: $ui-base-color;

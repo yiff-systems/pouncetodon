@@ -34,13 +34,17 @@ class DetailedStatus extends ImmutablePureComponent {
     onOpenMedia: PropTypes.func.isRequired,
     onOpenVideo: PropTypes.func.isRequired,
     onToggleHidden: PropTypes.func,
+    onTranslate: PropTypes.func.isRequired,
     expanded: PropTypes.bool,
     measureHeight: PropTypes.bool,
     onHeightChange: PropTypes.func,
     domain: PropTypes.string.isRequired,
     compact: PropTypes.bool,
     showMedia: PropTypes.bool,
-    usingPiP: PropTypes.bool,
+    pictureInPicture: ImmutablePropTypes.contains({
+      inUse: PropTypes.bool,
+      available: PropTypes.bool,
+    }),
     onToggleMediaVisibility: PropTypes.func,
     intl: PropTypes.object.isRequired,
   };
@@ -52,28 +56,28 @@ class DetailedStatus extends ImmutablePureComponent {
   handleAccountClick = (e) => {
     if (e.button === 0 && !(e.ctrlKey || e.altKey || e.metaKey) && this.context.router) {
       e.preventDefault();
-      let state = {...this.context.router.history.location.state};
+      let state = { ...this.context.router.history.location.state };
       state.mastodonBackSteps = (state.mastodonBackSteps || 0) + 1;
       this.context.router.history.push(`/@${this.props.status.getIn(['account', 'acct'])}`, state);
     }
 
     e.stopPropagation();
-  }
+  };
 
   parseClick = (e, destination) => {
     if (e.button === 0 && !(e.ctrlKey || e.altKey || e.metaKey) && this.context.router) {
       e.preventDefault();
-      let state = {...this.context.router.history.location.state};
+      let state = { ...this.context.router.history.location.state };
       state.mastodonBackSteps = (state.mastodonBackSteps || 0) + 1;
       this.context.router.history.push(destination, state);
     }
 
     e.stopPropagation();
-  }
+  };
 
   handleOpenVideo = (options) => {
     this.props.onOpenVideo(this.props.status.getIn(['media_attachments', 0]), options);
-  }
+  };
 
   _measureHeight (heightJustChanged) {
     if (this.props.measureHeight && this.node) {
@@ -88,7 +92,7 @@ class DetailedStatus extends ImmutablePureComponent {
   setRef = c => {
     this.node = c;
     this._measureHeight();
-  }
+  };
 
   componentDidUpdate (prevProps, prevState) {
     this._measureHeight(prevState.height !== this.state.height);
@@ -96,7 +100,7 @@ class DetailedStatus extends ImmutablePureComponent {
 
   handleChildUpdate = () => {
     this._measureHeight();
-  }
+  };
 
   handleModalLink = e => {
     e.preventDefault();
@@ -110,11 +114,16 @@ class DetailedStatus extends ImmutablePureComponent {
     }
 
     window.open(href, 'mastodon-intent', 'width=445,height=600,resizable=no,menubar=no,status=no,scrollbars=yes');
-  }
+  };
+
+  handleTranslate = () => {
+    const { onTranslate, status } = this.props;
+    onTranslate(status);
+  };
 
   render () {
     const status = (this.props.status && this.props.status.get('reblog')) ? this.props.status.get('reblog') : this.props.status;
-    const { expanded, onToggleHidden, settings, usingPiP, intl } = this.props;
+    const { expanded, onToggleHidden, settings, pictureInPicture, intl } = this.props;
     const outerStyle = { boxSizing: 'border-box' };
     const { compact } = this.props;
 
@@ -147,7 +156,7 @@ class DetailedStatus extends ImmutablePureComponent {
       outerStyle.height = `${this.state.height}px`;
     }
 
-    if (usingPiP) {
+    if (pictureInPicture.get('inUse')) {
       media.push(<PictureInPicturePlaceholder />);
       mediaIcons.push('video-camera');
     } else if (status.get('media_attachments').size > 0) {
@@ -305,6 +314,7 @@ class DetailedStatus extends ImmutablePureComponent {
             expanded={expanded}
             collapsed={false}
             onExpandedToggle={onToggleHidden}
+            onTranslate={this.handleTranslate}
             parseClick={this.parseClick}
             onUpdate={this.handleChildUpdate}
             tagLinks={settings.get('tag_misleading_links')}

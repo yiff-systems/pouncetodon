@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Status from 'flavours/glitch/components/status';
 import { List as ImmutableList } from 'immutable';
-import { makeGetStatus } from 'flavours/glitch/selectors';
+import { makeGetStatus, makeGetPictureInPicture } from 'flavours/glitch/selectors';
 import {
   replyCompose,
   mentionCompose,
@@ -23,7 +23,9 @@ import {
   deleteStatus,
   hideStatus,
   revealStatus,
-  editStatus
+  editStatus,
+  translateStatus,
+  undoStatusTranslation,
 } from 'flavours/glitch/actions/statuses';
 import {
   initAddFilter,
@@ -58,6 +60,7 @@ const messages = defineMessages({
 
 const makeMapStateToProps = () => {
   const getStatus = makeGetStatus();
+  const getPictureInPicture = makeGetPictureInPicture();
 
   const mapStateToProps = (state, props) => {
 
@@ -81,11 +84,7 @@ const makeMapStateToProps = () => {
       account: account || props.account,
       settings: state.get('local_settings'),
       prepend: prepend || props.prepend,
-
-      pictureInPicture: {
-        inUse: state.getIn(['meta', 'layout']) !== 'mobile' && state.get('picture_in_picture').statusId === props.id,
-        available: state.getIn(['meta', 'layout']) !== 'mobile',
-      },
+      pictureInPicture: getPictureInPicture(state, props),
     };
   };
 
@@ -185,6 +184,14 @@ const mapDispatchToProps = (dispatch, { intl, contextType }) => ({
 
   onEdit (status, history) {
     dispatch(editStatus(status.get('id'), history));
+  },
+
+  onTranslate (status) {
+    if (status.get('translation')) {
+      dispatch(undoStatusTranslation(status.get('id')));
+    } else {
+      dispatch(translateStatus(status.get('id')));
+    }
   },
 
   onDirect (account, router) {
