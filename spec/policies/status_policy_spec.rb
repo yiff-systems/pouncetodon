@@ -39,6 +39,14 @@ RSpec.describe StatusPolicy, type: :model do
       expect(subject).to permit(alice, status)
     end
 
+    it 'grants access when direct and non-owner viewer is mentioned and mentions are loaded' do
+      status.visibility = :direct
+      status.mentions = [Fabricate(:mention, account: bob)]
+      status.mentions.load
+
+      expect(subject).to permit(bob, status)
+    end
+
     it 'denies access when direct and viewer is not mentioned' do
       viewer = Fabricate(:account)
       status.visibility = :direct
@@ -75,14 +83,14 @@ RSpec.describe StatusPolicy, type: :model do
     end
 
     it 'denies access when local-only and the viewer is not logged in' do
-      allow(status).to receive(:local_only?) { true }
+      allow(status).to receive(:local_only?).and_return(true)
 
       expect(subject).to_not permit(nil, status)
     end
 
     it 'denies access when local-only and the viewer is from another domain' do
       viewer = Fabricate(:account, domain: 'remote-domain')
-      allow(status).to receive(:local_only?) { true }
+      allow(status).to receive(:local_only?).and_return(true)
       expect(subject).to_not permit(viewer, status)
     end
   end

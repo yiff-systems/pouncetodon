@@ -171,7 +171,7 @@ zh-CN:
         chosen_languages: 语言过滤
         confirm_new_password: 确认新密码
         confirm_password: 确认密码
-        context: 过滤器环境
+        context: 过滤环境
         current_password: 当前密码
         data: 数据文件
         discoverable: 在本站用户目录中收录此账号
@@ -253,7 +253,7 @@ zh-CN:
         site_short_description: 本站简介
         site_terms: 隐私政策
         site_title: 本站名称
-        status_page_url: 静态页面地址
+        status_page_url: 状态页网址
         theme: 默认主题
         thumbnail: 本站缩略图
         timeline_preview: 时间轴预览

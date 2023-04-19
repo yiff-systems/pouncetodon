@@ -356,19 +356,6 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "Not found",
-        "id": "missing_indicator.label"
-      },
-      {
-        "defaultMessage": "This resource could not be found",
-        "id": "missing_indicator.sublabel"
-      }
-    ],
-    "path": "app/javascript/mastodon/components/missing_indicator.json"
-  },
-  {
-    "descriptors": [
-      {
         "defaultMessage": "You need to sign in to access this resource.",
         "id": "not_signed_in_indicator.not_signed_in"
       }
@@ -560,7 +547,7 @@
         "id": "status.edit"
       },
       {
-        "defaultMessage": "Direct message @{name}",
+        "defaultMessage": "Privately mention @{name}",
         "id": "status.direct"
       },
       {
@@ -652,7 +639,7 @@
         "id": "status.admin_account"
       },
       {
-        "defaultMessage": "Open this post in the moderation interface",
+        "defaultMessage": "Open this awoo in the moderation interface",
         "id": "status.admin_status"
       },
       {
@@ -660,11 +647,11 @@
         "id": "status.admin_domain"
       },
       {
-        "defaultMessage": "Copy link to post",
+        "defaultMessage": "Copy link to awoo",
         "id": "status.copy"
       },
       {
-        "defaultMessage": "Hide post",
+        "defaultMessage": "Hide awoo",
         "id": "status.hide"
       },
       {
@@ -762,6 +749,10 @@
         "id": "status.reblogged_by"
       },
       {
+        "defaultMessage": "Private mention",
+        "id": "status.direct_indicator"
+      },
+      {
         "defaultMessage": "Replied to {name}",
         "id": "status.replied_to"
       }
@@ -832,6 +823,14 @@
       {
         "defaultMessage": "Replying now will overwrite the message you are currently composing. Are you sure you want to proceed?",
         "id": "confirmations.reply.message"
+      },
+      {
+        "defaultMessage": "Edit",
+        "id": "confirmations.edit.confirm"
+      },
+      {
+        "defaultMessage": "Editing now will overwrite the message you are currently composing. Are you sure you want to proceed?",
+        "id": "confirmations.edit.message"
       },
       {
         "defaultMessage": "Hide entire domain",
@@ -947,6 +946,15 @@
       }
     ],
     "path": "app/javascript/mastodon/features/account_timeline/components/limited_account_hint.json"
+  },
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "In Memoriam.",
+        "id": "account.in_memoriam"
+      }
+    ],
+    "path": "app/javascript/mastodon/features/account_timeline/components/memorial_note.json"
   },
   {
     "descriptors": [
@@ -1101,7 +1109,7 @@
         "id": "account.mention"
       },
       {
-        "defaultMessage": "Direct message @{name}",
+        "defaultMessage": "Privately mention @{name}",
         "id": "account.direct"
       },
       {
@@ -1653,7 +1661,7 @@
         "id": "suggestions.header"
       },
       {
-        "defaultMessage": "People",
+        "defaultMessage": "Profiles",
         "id": "search_results.accounts"
       },
       {
@@ -1686,28 +1694,36 @@
         "id": "search.search_or_paste"
       },
       {
-        "defaultMessage": "Simple text returns statuses you have written, favourited, pounced, or have been mentioned in, as well as matching usernames, display names, and hashtags.",
-        "id": "search_popout.tips.full_text"
+        "defaultMessage": "Open URL in Mastodon",
+        "id": "search.quick_action.open_url"
       },
       {
-        "defaultMessage": "Simple text returns matching display names, usernames and hashtags",
-        "id": "search_popout.tips.text"
+        "defaultMessage": "Go to hashtag {x}",
+        "id": "search.quick_action.go_to_hashtag"
       },
       {
-        "defaultMessage": "Advanced search format",
-        "id": "search_popout.search_format"
+        "defaultMessage": "Go to profile {x}",
+        "id": "search.quick_action.go_to_account"
       },
       {
-        "defaultMessage": "hashtag",
-        "id": "search_popout.tips.hashtag"
+        "defaultMessage": "Posts matching {x}",
+        "id": "search.quick_action.status_search"
       },
       {
-        "defaultMessage": "user",
-        "id": "search_popout.tips.user"
+        "defaultMessage": "Profiles matching {x}",
+        "id": "search.quick_action.account_search"
       },
       {
-        "defaultMessage": "status",
-        "id": "search_popout.tips.status"
+        "defaultMessage": "Recent searches",
+        "id": "search_popout.recent"
+      },
+      {
+        "defaultMessage": "No recent searches",
+        "id": "search.no_recent_searches"
+      },
+      {
+        "defaultMessage": "Quick actions",
+        "id": "search_popout.quick_actions"
       }
     ],
     "path": "app/javascript/mastodon/features/compose/components/search.json"
@@ -1917,7 +1933,7 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "Direct messages",
+        "defaultMessage": "Private mentions",
         "id": "column.direct"
       },
       {
@@ -1929,7 +1945,7 @@
         "id": "compose_form.direct_message_warning_learn_more"
       },
       {
-        "defaultMessage": "You don't have any direct messages yet. When you send or receive one, it will show up here.",
+        "defaultMessage": "You don't have any private mentions yet. When you send or receive one, it will show up here.",
         "id": "empty_column.direct"
       }
     ],
@@ -2095,7 +2111,7 @@
         "id": "search_results.all"
       },
       {
-        "defaultMessage": "People",
+        "defaultMessage": "Profiles",
         "id": "search_results.accounts"
       },
       {
@@ -2424,7 +2440,7 @@
         "id": "navigation_bar.explore"
       },
       {
-        "defaultMessage": "Direct messages",
+        "defaultMessage": "Private mentions",
         "id": "navigation_bar.direct"
       },
       {
@@ -3542,7 +3558,7 @@
         "id": "status.edit"
       },
       {
-        "defaultMessage": "Direct message @{name}",
+        "defaultMessage": "Privately mention @{name}",
         "id": "status.direct"
       },
       {
@@ -3682,6 +3698,10 @@
       {
         "defaultMessage": "Direct",
         "id": "privacy.direct.short"
+      },
+      {
+        "defaultMessage": "Private mention",
+        "id": "status.direct_indicator"
       }
     ],
     "path": "app/javascript/mastodon/features/status/components/detailed_status.json"
@@ -4191,7 +4211,7 @@
         "id": "tabs_bar.federated_timeline"
       },
       {
-        "defaultMessage": "Direct messages",
+        "defaultMessage": "Private mentions",
         "id": "navigation_bar.direct"
       },
       {

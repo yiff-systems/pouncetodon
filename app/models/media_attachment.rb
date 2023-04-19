@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: media_attachments
@@ -33,16 +34,16 @@ class MediaAttachment < ApplicationRecord
 
   include Attachmentable
 
-  enum type: [:image, :gifv, :video, :unknown, :audio]
-  enum processing: [:queued, :in_progress, :complete, :failed], _prefix: true
+  enum type: { :image => 0, :gifv => 1, :video => 2, :unknown => 3, :audio => 4 }
+  enum processing: { :queued => 0, :in_progress => 1, :complete => 2, :failed => 3 }, _prefix: true
 
   MAX_DESCRIPTION_LENGTH = 1_500
 
-  IMAGE_LIMIT = (ENV['MAX_IMAGE_SIZE'] || 10.megabytes).to_i
-  VIDEO_LIMIT = (ENV['MAX_VIDEO_SIZE'] || 40.megabytes).to_i
+  IMAGE_LIMIT = (ENV['MAX_IMAGE_SIZE'] || 16.megabytes).to_i
+  VIDEO_LIMIT = (ENV['MAX_VIDEO_SIZE'] || 99.megabytes).to_i
 
-  MAX_VIDEO_MATRIX_LIMIT = 2_304_000 # 1920x1200px
-  MAX_VIDEO_FRAME_RATE   = 60
+  MAX_VIDEO_MATRIX_LIMIT = 8_294_400 # 3840x2160px
+  MAX_VIDEO_FRAME_RATE   = 120
 
   IMAGE_FILE_EXTENSIONS = %w(.jpg .jpeg .png .gif .webp .heic .heif .avif).freeze
   VIDEO_FILE_EXTENSIONS = %w(.webm .mp4 .m4v .mov).freeze
@@ -68,7 +69,7 @@ class MediaAttachment < ApplicationRecord
 
   IMAGE_STYLES = {
     original: {
-      pixels: 2_073_600, # 1920x1080px
+      pixels: 8_294_400, # 3840x2160px
       file_geometry_parser: FastGeometryParser,
     }.freeze,
 
@@ -372,7 +373,7 @@ class MediaAttachment < ApplicationRecord
     return {} if width.nil?
 
     {
-      width:  width,
+      width: width,
       height: height,
       size: "#{width}x#{height}",
       aspect: width.to_f / height,

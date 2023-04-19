@@ -7,13 +7,13 @@ describe StatusLengthValidator do
     it 'does not add errors onto remote statuses' do
       status = double(local?: false)
       subject.validate(status)
-      expect(status).not_to receive(:errors)
+      expect(status).to_not receive(:errors)
     end
 
     it 'does not add errors onto local reblogs' do
       status = double(local?: false, reblog?: true)
       subject.validate(status)
-      expect(status).not_to receive(:errors)
+      expect(status).to_not receive(:errors)
     end
 
     it 'adds an error when content warning is over MAX_CHARS characters' do
@@ -65,7 +65,7 @@ describe StatusLengthValidator do
     it 'counts only the front part of remote usernames' do
       username = '@alice'
       chars = StatusLengthValidator::MAX_CHARS - 1 - username.length
-      text   = ('a' * 475) + " #{username}@#{'b' * 30}.com"
+      text   = ('a' * chars) + " #{username}@#{'b' * 30}.com"
       status = double(spoiler_text: '', text: text, errors: double(add: nil), local?: true, reblog?: false)
 
       subject.validate(status)

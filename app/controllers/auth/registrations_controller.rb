@@ -31,9 +31,7 @@ class Auth::RegistrationsController < Devise::RegistrationsController
 
   def update
     super do |resource|
-      if resource.saved_change_to_encrypted_password?
-        resource.clear_other_sessions(current_session.session_id)
-      end
+      resource.clear_other_sessions(current_session.session_id) if resource.saved_change_to_encrypted_password?
     end
   end
 
@@ -49,7 +47,7 @@ class Auth::RegistrationsController < Devise::RegistrationsController
     super(hash)
 
     resource.locale                 = I18n.locale
-    resource.invite_code            = params[:invite_code] if resource.invite_code.blank?
+    resource.invite_code            = @invite&.code if resource.invite_code.blank?
     resource.registration_form_time = session[:registration_form_time]
     resource.sign_up_ip             = request.remote_ip
 

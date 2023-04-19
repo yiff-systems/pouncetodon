@@ -18,7 +18,7 @@
 
     .logo {
       height: 42px;
-      margin-right: 10px;
+      margin-inline-end: 10px;
     }
 
     a {
@@ -74,7 +74,8 @@
     width: 40px;
     height: 40px;
     @include avatar-size(40px);
-    margin-right: 10px;
+
+    margin-inline-end: 10px;
 
     img {
       width: 100%;
@@ -82,7 +83,7 @@
       display: block;
       margin: 0;
       border-radius: 4px;
-      @include avatar-radius();
+      @include avatar-radius;
     }
   }
 
@@ -103,6 +104,6 @@
     display: block;
     font-size: 32px;
     line-height: 40px;
-    margin-left: 10px;
+    margin-inline-start: 10px;
   }
 }

@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ReblogService, type: :service do
   let(:alice)  { Fabricate(:account, username: 'alice') }
 
   context 'creates a reblog with appropriate visibility' do
+    subject { ReblogService.new }
+
     let(:visibility)        { :public }
     let(:reblog_visibility) { :public }
     let(:status)            { Fabricate(:status, account: alice, visibility: visibility) }
-
-    subject { ReblogService.new }
 
     before do
       subject.call(alice, status, visibility: reblog_visibility)
@@ -36,7 +38,10 @@ RSpec.describe ReblogService, type: :service do
     let(:status) { Fabricate(:status, account: alice, visibility: :public) }
 
     before do
-      status.discard
+      # Update the in-database attribute without reflecting the change in
+      # the object. This cannot simulate all race conditions, but it is
+      # pretty close.
+      Status.where(id: status.id).update_all(deleted_at: Time.now.utc) # rubocop:disable Rails/SkipsModelValidations
     end
 
     it 'raises an exception' do
@@ -45,10 +50,10 @@ RSpec.describe ReblogService, type: :service do
   end
 
   context 'ActivityPub' do
+    subject { ReblogService.new }
+
     let(:bob)    { Fabricate(:account, username: 'bob', protocol: :activitypub, domain: 'example.com', inbox_url: 'http://example.com/inbox') }
     let(:status) { Fabricate(:status, account: bob) }
-
-    subject { ReblogService.new }
 
     before do
       stub_request(:post, bob.inbox_url)

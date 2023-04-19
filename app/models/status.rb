@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: statuses
@@ -50,12 +51,12 @@ class Status < ApplicationRecord
 
   update_index('statuses', :proper)
 
-  enum visibility: [:public, :unlisted, :private, :direct, :limited], _suffix: :visibility
+  enum visibility: { public: 0, unlisted: 1, private: 2, direct: 3, limited: 4 }, _suffix: :visibility
 
   belongs_to :application, class_name: 'Doorkeeper::Application', optional: true
 
   belongs_to :account, inverse_of: :statuses
-  belongs_to :in_reply_to_account, foreign_key: 'in_reply_to_account_id', class_name: 'Account', optional: true
+  belongs_to :in_reply_to_account, class_name: 'Account', optional: true
   belongs_to :conversation, optional: true
   belongs_to :preloadable_poll, class_name: 'Poll', foreign_key: 'poll_id', optional: true
 
@@ -97,23 +98,26 @@ class Status < ApplicationRecord
   scope :local,  -> { where(local: true).or(where(uri: nil)) }
   scope :with_accounts, ->(ids) { where(id: ids).includes(:account) }
   scope :without_replies, -> { where('statuses.reply = FALSE OR statuses.in_reply_to_account_id = statuses.account_id') }
-  scope :without_reblogs, -> { where('statuses.reblog_of_id IS NULL') }
+  scope :without_reblogs, -> { where(statuses: { reblog_of_id: nil }) }
   scope :with_public_visibility, -> { where(visibility: :public) }
   scope :tagged_with, ->(tag_ids) { joins(:statuses_tags).where(statuses_tags: { tag_id: tag_ids }) }
   scope :excluding_silenced_accounts, -> { left_outer_joins(:account).where(accounts: { silenced_at: nil }) }
   scope :including_silenced_accounts, -> { left_outer_joins(:account).where.not(accounts: { silenced_at: nil }) }
   scope :not_excluded_by_account, ->(account) { where.not(account_id: account.excluded_from_timeline_account_ids) }
   scope :not_domain_blocked_by_account, ->(account) { account.excluded_from_timeline_domains.blank? ? left_outer_joins(:account) : left_outer_joins(:account).where('accounts.domain IS NULL OR accounts.domain NOT IN (?)', account.excluded_from_timeline_domains) }
-  scope :tagged_with_all, ->(tag_ids) {
+  scope :tagged_with_all, lambda { |tag_ids|
     Array(tag_ids).map(&:to_i).reduce(self) do |result, id|
       result.joins("INNER JOIN statuses_tags t#{id} ON t#{id}.status_id = statuses.id AND t#{id}.tag_id = #{id}")
     end
   }
-  scope :tagged_with_none, ->(tag_ids) {
+  scope :tagged_with_none, lambda { |tag_ids|
     where('NOT EXISTS (SELECT * FROM statuses_tags forbidden WHERE forbidden.status_id = statuses.id AND forbidden.tag_id IN (?))', tag_ids)
   }
 
   scope :not_local_only, -> { where(local_only: [false, nil]) }
+
+  after_create_commit :trigger_create_webhooks
+  after_update_commit :trigger_update_webhooks
 
   cache_associated :application,
                    :media_attachments,
@@ -140,6 +144,10 @@ class Status < ApplicationRecord
   delegate :domain, to: :account, prefix: true
 
   REAL_TIME_WINDOW = 6.hours
+
+  def cache_key
+    "v2:#{super}"
+  end
 
   def searchable_by(preloaded = nil)
     ids = []
@@ -330,7 +338,7 @@ class Status < ApplicationRecord
       visibilities.keys - %w(direct limited)
     end
 
-    def as_direct_timeline(account, limit = 20, max_id = nil, since_id = nil, cache_ids = false)
+    def as_direct_timeline(account, limit = 20, max_id = nil, since_id = nil)
       # direct timeline is mix of direct message from_me and to_me.
       # 2 queries are executed with pagination.
       # constant expression using arel_table is required for partial index
@@ -361,14 +369,9 @@ class Status < ApplicationRecord
         query_to_me = query_to_me.where('mentions.status_id > ?', since_id)
       end
 
-      if cache_ids
-        # returns array of cache_ids object that have id and updated_at
-        (query_from_me.cache_ids.to_a + query_to_me.cache_ids.to_a).uniq(&:id).sort_by(&:id).reverse.take(limit)
-      else
-        # returns ActiveRecord.Relation
-        items = (query_from_me.select(:id).to_a + query_to_me.select(:id).to_a).uniq(&:id).sort_by(&:id).reverse.take(limit)
-        Status.where(id: items.map(&:id))
-      end
+      # returns ActiveRecord.Relation
+      items = (query_from_me.select(:id).to_a + query_to_me.select(:id).to_a).uniq(&:id).sort_by(&:id).reverse.take(limit)
+      Status.where(id: items.map(&:id))
     end
 
     def favourites_map(status_ids, account_id)
@@ -415,13 +418,12 @@ class Status < ApplicationRecord
       return [] if text.blank?
 
       text.scan(FetchLinkCardService::URL_PATTERN).map(&:second).uniq.filter_map do |url|
-        status = begin
-          if TagManager.instance.local_url?(url)
-            ActivityPub::TagManager.instance.uri_to_resource(url, Status)
-          else
-            EntityCache.instance.status(url)
-          end
-        end
+        status = if TagManager.instance.local_url?(url)
+                   ActivityPub::TagManager.instance.uri_to_resource(url, Status)
+                 else
+                   EntityCache.instance.status(url)
+                 end
+
         status&.distributable? ? status : nil
       end
     end
@@ -440,33 +442,41 @@ class Status < ApplicationRecord
     super || build_status_stat
   end
 
-  # Hack to use a "INSERT INTO ... SELECT ..." query instead of "INSERT INTO ... VALUES ..." query
+  # This is a hack to ensure that no reblogs of discarded statuses are created,
+  # as this cannot be enforced through database constraints the same way we do
+  # for reblogs of deleted statuses.
+  #
+  # To achieve this, we redefine the internal method responsible for issuing
+  # the "INSERT" statement and replace the "INSERT INTO ... VALUES ..." query
+  # with an "INSERT INTO ... SELECT ..." query with a "WHERE deleted_at IS NULL"
+  # clause on the reblogged status to ensure consistency at the database level.
+  #
+  # Otherwise, the code is kept as close as possible to ActiveRecord::Persistence
+  # code, and actually calls it if we are not handling a reblog.
   def self._insert_record(values)
-    if values.is_a?(Hash) && values['reblog_of_id'].present?
-      primary_key = self.primary_key
-      primary_key_value = nil
+    return super unless values.is_a?(Hash) && values['reblog_of_id'].present?
 
-      if primary_key
-        primary_key_value = values[primary_key]
+    primary_key = self.primary_key
+    primary_key_value = nil
 
-        if !primary_key_value && prefetch_primary_key?
-          primary_key_value = next_sequence_value
-          values[primary_key] = primary_key_value
-        end
+    if primary_key
+      primary_key_value = values[primary_key]
+
+      if !primary_key_value && prefetch_primary_key?
+        primary_key_value = next_sequence_value
+        values[primary_key] = primary_key_value
       end
-
-      # The following line is where we differ from stock ActiveRecord implementation
-      im = _compile_reblog_insert(values)
-
-      # Since we are using SELECT instead of VALUES, a non-error `nil` return is possible.
-      # For our purposes, it's equivalent to a foreign key constraint violation
-      result = connection.insert(im, "#{self} Create", primary_key || false, primary_key_value)
-      raise ActiveRecord::InvalidForeignKey, "(reblog_of_id)=(#{values['reblog_of_id']}) is not present in table \"statuses\"" if result.nil?
-
-      result
-    else
-      super
     end
+
+    # The following line is where we differ from stock ActiveRecord implementation
+    im = _compile_reblog_insert(values)
+
+    # Since we are using SELECT instead of VALUES, a non-error `nil` return is possible.
+    # For our purposes, it's equivalent to a foreign key constraint violation
+    result = connection.insert(im, "#{self} Create", primary_key || false, primary_key_value)
+    raise ActiveRecord::InvalidForeignKey, "(reblog_of_id)=(#{values['reblog_of_id']}) is not present in table \"statuses\"" if result.nil?
+
+    result
   end
 
   def self._compile_reblog_insert(values)
@@ -546,9 +556,9 @@ class Status < ApplicationRecord
   end
 
   def set_locality
-    if account.domain.nil? && !attribute_changed?(:local_only)
-      self.local_only = marked_local_only?
-    end
+    return unless account.domain.nil? && !attribute_changed?(:local_only)
+
+    self.local_only = marked_local_only?
   end
 
   def set_conversation
@@ -596,5 +606,13 @@ class Status < ApplicationRecord
     account&.decrement_count!(:statuses_count)
     reblog&.decrement_count!(:reblogs_count) if reblog?
     thread&.decrement_count!(:replies_count) if in_reply_to_id.present? && distributable?
+  end
+
+  def trigger_create_webhooks
+    TriggerWebhookWorker.perform_async('status.created', 'Status', id) if local?
+  end
+
+  def trigger_update_webhooks
+    TriggerWebhookWorker.perform_async('status.updated', 'Status', id) if local?
   end
 end

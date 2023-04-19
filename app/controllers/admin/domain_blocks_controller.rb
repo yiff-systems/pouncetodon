@@ -2,7 +2,7 @@
 
 module Admin
   class DomainBlocksController < BaseController
-    before_action :set_domain_block, only: [:show, :destroy, :edit, :update]
+    before_action :set_domain_block, only: [:destroy, :edit, :update]
 
     def batch
       authorize :domain_block, :create?
@@ -90,9 +90,7 @@ module Admin
     end
 
     def action_from_button
-      if params[:save]
-        'save'
-      end
+      'save' if params[:save]
     end
   end
 end
