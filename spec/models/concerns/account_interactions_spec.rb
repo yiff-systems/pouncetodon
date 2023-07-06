@@ -13,21 +13,21 @@ describe AccountInteractions do
   describe '.following_map' do
     subject { Account.following_map(target_account_ids, account_id) }
 
-    context 'account with Follow' do
-      it 'returns { target_account_id => { reblogs: true } }' do
+    context 'when Account with Follow' do
+      it 'returns { target_account_id => true }' do
         Fabricate(:follow, account: account, target_account: target_account)
         expect(subject).to eq(target_account_id => { reblogs: true, notify: false, languages: nil })
       end
     end
 
-    context 'account with Follow but with reblogs disabled' do
+    context 'when Account with Follow but with reblogs disabled' do
       it 'returns { target_account_id => { reblogs: false } }' do
         Fabricate(:follow, account: account, target_account: target_account, show_reblogs: false)
         expect(subject).to eq(target_account_id => { reblogs: false, notify: false, languages: nil })
       end
     end
 
-    context 'account without Follow' do
+    context 'when Account without Follow' do
       it 'returns {}' do
         expect(subject).to eq({})
       end
@@ -37,14 +37,14 @@ describe AccountInteractions do
   describe '.followed_by_map' do
     subject { Account.followed_by_map(target_account_ids, account_id) }
 
-    context 'account with Follow' do
+    context 'when Account with Follow' do
       it 'returns { target_account_id => true }' do
         Fabricate(:follow, account: target_account, target_account: account)
         expect(subject).to eq(target_account_id => true)
       end
     end
 
-    context 'account without Follow' do
+    context 'when Account without Follow' do
       it 'returns {}' do
         expect(subject).to eq({})
       end
@@ -54,14 +54,14 @@ describe AccountInteractions do
   describe '.blocking_map' do
     subject { Account.blocking_map(target_account_ids, account_id) }
 
-    context 'account with Block' do
+    context 'when Account with Block' do
       it 'returns { target_account_id => true }' do
         Fabricate(:block, account: account, target_account: target_account)
         expect(subject).to eq(target_account_id => true)
       end
     end
 
-    context 'account without Block' do
+    context 'when Account without Block' do
       it 'returns {}' do
         expect(subject).to eq({})
       end
@@ -71,12 +71,12 @@ describe AccountInteractions do
   describe '.muting_map' do
     subject { Account.muting_map(target_account_ids, account_id) }
 
-    context 'account with Mute' do
+    context 'when Account with Mute' do
       before do
         Fabricate(:mute, target_account: target_account, account: account, hide_notifications: hide)
       end
 
-      context 'if Mute#hide_notifications?' do
+      context 'when Mute#hide_notifications?' do
         let(:hide) { true }
 
         it 'returns { target_account_id => { notifications: true } }' do
@@ -84,7 +84,7 @@ describe AccountInteractions do
         end
       end
 
-      context 'unless Mute#hide_notifications?' do
+      context 'when not Mute#hide_notifications?' do
         let(:hide) { false }
 
         it 'returns { target_account_id => { notifications: false } }' do
@@ -93,7 +93,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'account without Mute' do
+    context 'when Account without Mute' do
       it 'returns {}' do
         expect(subject).to eq({})
       end
@@ -119,8 +119,8 @@ describe AccountInteractions do
   describe '#mute!' do
     subject { account.mute!(target_account, notifications: arg_notifications) }
 
-    context 'Mute does not exist yet' do
-      context 'arg :notifications is nil' do
+    context 'when Mute does not exist yet' do
+      context 'when arg :notifications is nil' do
         let(:arg_notifications) { nil }
 
         it 'creates Mute, and returns Mute' do
@@ -130,7 +130,7 @@ describe AccountInteractions do
         end
       end
 
-      context 'arg :notifications is false' do
+      context 'when arg :notifications is false' do
         let(:arg_notifications) { false }
 
         it 'creates Mute, and returns Mute' do
@@ -140,7 +140,7 @@ describe AccountInteractions do
         end
       end
 
-      context 'arg :notifications is true' do
+      context 'when arg :notifications is true' do
         let(:arg_notifications) { true }
 
         it 'creates Mute, and returns Mute' do
@@ -151,7 +151,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'Mute already exists' do
+    context 'when Mute already exists' do
       before do
         account.mute_relationships << mute
       end
@@ -163,10 +163,10 @@ describe AccountInteractions do
                   hide_notifications: hide_notifications)
       end
 
-      context 'mute.hide_notifications is true' do
+      context 'when mute.hide_notifications is true' do
         let(:hide_notifications) { true }
 
-        context 'arg :notifications is nil' do
+        context 'when arg :notifications is nil' do
           let(:arg_notifications) { nil }
 
           it 'returns Mute without updating mute.hide_notifications' do
@@ -176,7 +176,7 @@ describe AccountInteractions do
           end
         end
 
-        context 'arg :notifications is false' do
+        context 'when arg :notifications is false' do
           let(:arg_notifications) { false }
 
           it 'returns Mute, and updates mute.hide_notifications false' do
@@ -186,7 +186,7 @@ describe AccountInteractions do
           end
         end
 
-        context 'arg :notifications is true' do
+        context 'when arg :notifications is true' do
           let(:arg_notifications) { true }
 
           it 'returns Mute without updating mute.hide_notifications' do
@@ -197,10 +197,10 @@ describe AccountInteractions do
         end
       end
 
-      context 'mute.hide_notifications is false' do
+      context 'when mute.hide_notifications is false' do
         let(:hide_notifications) { false }
 
-        context 'arg :notifications is nil' do
+        context 'when arg :notifications is nil' do
           let(:arg_notifications) { nil }
 
           it 'returns Mute, and updates mute.hide_notifications true' do
@@ -210,7 +210,7 @@ describe AccountInteractions do
           end
         end
 
-        context 'arg :notifications is false' do
+        context 'when arg :notifications is false' do
           let(:arg_notifications) { false }
 
           it 'returns Mute without updating mute.hide_notifications' do
@@ -220,7 +220,7 @@ describe AccountInteractions do
           end
         end
 
-        context 'arg :notifications is true' do
+        context 'when arg :notifications is true' do
           let(:arg_notifications) { true }
 
           it 'returns Mute, and updates mute.hide_notifications true' do
@@ -260,7 +260,7 @@ describe AccountInteractions do
   describe '#unfollow!' do
     subject { account.unfollow!(target_account) }
 
-    context 'following target_account' do
+    context 'when following target_account' do
       it 'returns destroyed Follow' do
         account.active_relationships.create(target_account: target_account)
         expect(subject).to be_a Follow
@@ -268,7 +268,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'not following target_account' do
+    context 'when not following target_account' do
       it 'returns nil' do
         expect(subject).to be_nil
       end
@@ -278,7 +278,7 @@ describe AccountInteractions do
   describe '#unblock!' do
     subject { account.unblock!(target_account) }
 
-    context 'blocking target_account' do
+    context 'when blocking target_account' do
       it 'returns destroyed Block' do
         account.block_relationships.create(target_account: target_account)
         expect(subject).to be_a Block
@@ -286,7 +286,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'not blocking target_account' do
+    context 'when not blocking target_account' do
       it 'returns nil' do
         expect(subject).to be_nil
       end
@@ -296,7 +296,7 @@ describe AccountInteractions do
   describe '#unmute!' do
     subject { account.unmute!(target_account) }
 
-    context 'muting target_account' do
+    context 'when muting target_account' do
       it 'returns destroyed Mute' do
         account.mute_relationships.create(target_account: target_account)
         expect(subject).to be_a Mute
@@ -304,7 +304,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'not muting target_account' do
+    context 'when not muting target_account' do
       it 'returns nil' do
         expect(subject).to be_nil
       end
@@ -316,7 +316,7 @@ describe AccountInteractions do
 
     let(:conversation) { Fabricate(:conversation) }
 
-    context 'muting the conversation' do
+    context 'when muting the conversation' do
       it 'returns destroyed ConversationMute' do
         account.conversation_mutes.create(conversation: conversation)
         expect(subject).to be_a ConversationMute
@@ -324,7 +324,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'not muting the conversation' do
+    context 'when not muting the conversation' do
       it 'returns nil' do
         expect(subject).to be_nil
       end
@@ -336,7 +336,7 @@ describe AccountInteractions do
 
     let(:domain) { 'example.com' }
 
-    context 'blocking the domain' do
+    context 'when blocking the domain' do
       it 'returns destroyed AccountDomainBlock' do
         account_domain_block = Fabricate(:account_domain_block, domain: domain)
         account.domain_blocks << account_domain_block
@@ -345,7 +345,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'unblocking the domain' do
+    context 'when unblocking the domain' do
       it 'returns nil' do
         expect(subject).to be_nil
       end
@@ -355,14 +355,14 @@ describe AccountInteractions do
   describe '#following?' do
     subject { account.following?(target_account) }
 
-    context 'following target_account' do
+    context 'when following target_account' do
       it 'returns true' do
         account.active_relationships.create(target_account: target_account)
         expect(subject).to be true
       end
     end
 
-    context 'not following target_account' do
+    context 'when not following target_account' do
       it 'returns false' do
         expect(subject).to be false
       end
@@ -372,14 +372,14 @@ describe AccountInteractions do
   describe '#followed_by?' do
     subject { account.followed_by?(target_account) }
 
-    context 'followed by target_account' do
+    context 'when followed by target_account' do
       it 'returns true' do
         account.passive_relationships.create(account: target_account)
         expect(subject).to be true
       end
     end
 
-    context 'not followed by target_account' do
+    context 'when not followed by target_account' do
       it 'returns false' do
         expect(subject).to be false
       end
@@ -389,14 +389,14 @@ describe AccountInteractions do
   describe '#blocking?' do
     subject { account.blocking?(target_account) }
 
-    context 'blocking target_account' do
+    context 'when blocking target_account' do
       it 'returns true' do
         account.block_relationships.create(target_account: target_account)
         expect(subject).to be true
       end
     end
 
-    context 'not blocking target_account' do
+    context 'when not blocking target_account' do
       it 'returns false' do
         expect(subject).to be false
       end
@@ -408,7 +408,7 @@ describe AccountInteractions do
 
     let(:domain) { 'example.com' }
 
-    context 'blocking the domain' do
+    context 'when blocking the domain' do
       it 'returns true' do
         account_domain_block = Fabricate(:account_domain_block, domain: domain)
         account.domain_blocks << account_domain_block
@@ -416,7 +416,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'not blocking the domain' do
+    context 'when not blocking the domain' do
       it 'returns false' do
         expect(subject).to be false
       end
@@ -426,7 +426,7 @@ describe AccountInteractions do
   describe '#muting?' do
     subject { account.muting?(target_account) }
 
-    context 'muting target_account' do
+    context 'when muting target_account' do
       it 'returns true' do
         mute = Fabricate(:mute, account: account, target_account: target_account)
         account.mute_relationships << mute
@@ -434,7 +434,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'not muting target_account' do
+    context 'when not muting target_account' do
       it 'returns false' do
         expect(subject).to be false
       end
@@ -446,14 +446,14 @@ describe AccountInteractions do
 
     let(:conversation) { Fabricate(:conversation) }
 
-    context 'muting the conversation' do
+    context 'when muting the conversation' do
       it 'returns true' do
         account.conversation_mutes.create(conversation: conversation)
         expect(subject).to be true
       end
     end
 
-    context 'not muting the conversation' do
+    context 'when not muting the conversation' do
       it 'returns false' do
         expect(subject).to be false
       end
@@ -468,7 +468,7 @@ describe AccountInteractions do
       account.mute_relationships << mute
     end
 
-    context 'muting notifications of target_account' do
+    context 'when muting notifications of target_account' do
       let(:hide) { true }
 
       it 'returns true' do
@@ -476,7 +476,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'not muting notifications of target_account' do
+    context 'when not muting notifications of target_account' do
       let(:hide) { false }
 
       it 'returns false' do
@@ -488,14 +488,14 @@ describe AccountInteractions do
   describe '#requested?' do
     subject { account.requested?(target_account) }
 
-    context 'requested by target_account' do
+    context 'with requested by target_account' do
       it 'returns true' do
         Fabricate(:follow_request, account: account, target_account: target_account)
         expect(subject).to be true
       end
     end
 
-    context 'not requested by target_account' do
+    context 'when not requested by target_account' do
       it 'returns false' do
         expect(subject).to be false
       end
@@ -507,7 +507,7 @@ describe AccountInteractions do
 
     let(:status) { Fabricate(:status, account: account, favourites: favourites) }
 
-    context 'favorited' do
+    context 'when favorited' do
       let(:favourites) { [Fabricate(:favourite, account: account)] }
 
       it 'returns true' do
@@ -515,7 +515,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'not favorited' do
+    context 'when not favorited' do
       let(:favourites) { [] }
 
       it 'returns false' do
@@ -529,7 +529,7 @@ describe AccountInteractions do
 
     let(:status) { Fabricate(:status, account: account, reblogs: reblogs) }
 
-    context 'reblogged' do
+    context 'with reblogged' do
       let(:reblogs) { [Fabricate(:status, account: account)] }
 
       it 'returns true' do
@@ -537,7 +537,7 @@ describe AccountInteractions do
       end
     end
 
-    context 'not reblogged' do
+    context 'when not reblogged' do
       let(:reblogs) { [] }
 
       it 'returns false' do
@@ -551,14 +551,14 @@ describe AccountInteractions do
 
     let(:status) { Fabricate(:status, account: account) }
 
-    context 'pinned' do
+    context 'when pinned' do
       it 'returns true' do
         Fabricate(:status_pin, account: account, status: status)
         expect(subject).to be true
       end
     end
 
-    context 'not pinned' do
+    context 'when not pinned' do
       it 'returns false' do
         expect(subject).to be false
       end
@@ -567,17 +567,17 @@ describe AccountInteractions do
 
   describe '#remote_followers_hash' do
     let(:me) { Fabricate(:account, username: 'Me') }
-    let(:remote_1) { Fabricate(:account, username: 'alice', domain: 'example.org', uri: 'https://example.org/users/alice') }
-    let(:remote_2) { Fabricate(:account, username: 'bob', domain: 'example.org', uri: 'https://example.org/users/bob') }
-    let(:remote_3) { Fabricate(:account, username: 'instance-actor', domain: 'example.org', uri: 'https://example.org') }
-    let(:remote_4) { Fabricate(:account, username: 'eve', domain: 'foo.org', uri: 'https://foo.org/users/eve') }
+    let(:remote_alice) { Fabricate(:account, username: 'alice', domain: 'example.org', uri: 'https://example.org/users/alice') }
+    let(:remote_bob) { Fabricate(:account, username: 'bob', domain: 'example.org', uri: 'https://example.org/users/bob') }
+    let(:remote_instance_actor) { Fabricate(:account, username: 'instance-actor', domain: 'example.org', uri: 'https://example.org') }
+    let(:remote_eve) { Fabricate(:account, username: 'eve', domain: 'foo.org', uri: 'https://foo.org/users/eve') }
 
     before do
-      remote_1.follow!(me)
-      remote_2.follow!(me)
-      remote_3.follow!(me)
-      remote_4.follow!(me)
-      me.follow!(remote_1)
+      remote_alice.follow!(me)
+      remote_bob.follow!(me)
+      remote_instance_actor.follow!(me)
+      remote_eve.follow!(me)
+      me.follow!(remote_alice)
     end
 
     it 'returns correct hash for remote domains' do
@@ -589,33 +589,33 @@ describe AccountInteractions do
 
     it 'invalidates cache as needed when removing or adding followers' do
       expect(me.remote_followers_hash('https://example.org/')).to eq '20aecbe774b3d61c25094370baf370012b9271c5b172ecedb05caff8d79ef0c7'
-      remote_3.unfollow!(me)
+      remote_instance_actor.unfollow!(me)
       expect(me.remote_followers_hash('https://example.org/')).to eq '707962e297b7bd94468a21bc8e506a1bcea607a9142cd64e27c9b106b2a5f6ec'
-      remote_1.unfollow!(me)
+      remote_alice.unfollow!(me)
       expect(me.remote_followers_hash('https://example.org/')).to eq '241b00794ce9b46aa864f3220afadef128318da2659782985bac5ed5bd436bff'
-      remote_1.follow!(me)
+      remote_alice.follow!(me)
       expect(me.remote_followers_hash('https://example.org/')).to eq '707962e297b7bd94468a21bc8e506a1bcea607a9142cd64e27c9b106b2a5f6ec'
     end
   end
 
   describe '#local_followers_hash' do
     let(:me) { Fabricate(:account, username: 'Me') }
-    let(:remote_1) { Fabricate(:account, username: 'alice', domain: 'example.org', uri: 'https://example.org/users/alice') }
+    let(:remote_alice) { Fabricate(:account, username: 'alice', domain: 'example.org', uri: 'https://example.org/users/alice') }
 
     before do
-      me.follow!(remote_1)
+      me.follow!(remote_alice)
     end
 
     it 'returns correct hash for local users' do
-      expect(remote_1.local_followers_hash).to eq Digest::SHA256.hexdigest(ActivityPub::TagManager.instance.uri_for(me))
+      expect(remote_alice.local_followers_hash).to eq Digest::SHA256.hexdigest(ActivityPub::TagManager.instance.uri_for(me))
     end
 
     it 'invalidates cache as needed when removing or adding followers' do
-      expect(remote_1.local_followers_hash).to eq Digest::SHA256.hexdigest(ActivityPub::TagManager.instance.uri_for(me))
-      me.unfollow!(remote_1)
-      expect(remote_1.local_followers_hash).to eq '0000000000000000000000000000000000000000000000000000000000000000'
-      me.follow!(remote_1)
-      expect(remote_1.local_followers_hash).to eq Digest::SHA256.hexdigest(ActivityPub::TagManager.instance.uri_for(me))
+      expect(remote_alice.local_followers_hash).to eq Digest::SHA256.hexdigest(ActivityPub::TagManager.instance.uri_for(me))
+      me.unfollow!(remote_alice)
+      expect(remote_alice.local_followers_hash).to eq '0000000000000000000000000000000000000000000000000000000000000000'
+      me.follow!(remote_alice)
+      expect(remote_alice.local_followers_hash).to eq Digest::SHA256.hexdigest(ActivityPub::TagManager.instance.uri_for(me))
     end
   end
 
@@ -688,6 +688,34 @@ describe AccountInteractions do
       it 'does not mute reblogs' do
         expect(@me.muting_reblogs?(@you)).to be(false)
       end
+    end
+  end
+
+  describe '#lists_for_local_distribution' do
+    let(:account)                 { Fabricate(:user, current_sign_in_at: Time.now.utc).account }
+    let!(:inactive_follower_user) { Fabricate(:user, current_sign_in_at: 5.years.ago) }
+    let!(:follower_user)          { Fabricate(:user, current_sign_in_at: Time.now.utc) }
+    let!(:follow_request_user)    { Fabricate(:user, current_sign_in_at: Time.now.utc) }
+
+    let!(:inactive_follower_list) { Fabricate(:list, account: inactive_follower_user.account) }
+    let!(:follower_list)          { Fabricate(:list, account: follower_user.account) }
+    let!(:follow_request_list)    { Fabricate(:list, account: follow_request_user.account) }
+
+    let!(:self_list)              { Fabricate(:list, account: account) }
+
+    before do
+      inactive_follower_user.account.follow!(account)
+      follower_user.account.follow!(account)
+      follow_request_user.account.follow_requests.create!(target_account: account)
+
+      inactive_follower_list.accounts << account
+      follower_list.accounts << account
+      follow_request_list.accounts << account
+      self_list.accounts << account
+    end
+
+    it 'includes only the list from the active follower and from oneself' do
+      expect(account.lists_for_local_distribution.to_a).to contain_exactly(follower_list, self_list)
     end
   end
 end

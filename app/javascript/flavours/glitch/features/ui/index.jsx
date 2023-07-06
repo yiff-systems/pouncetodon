@@ -1,34 +1,43 @@
-import React from 'react';
-import NotificationsContainer from './containers/notifications_container';
 import PropTypes from 'prop-types';
-import LoadingBarContainer from './containers/loading_bar_container';
-import ModalContainer from './containers/modal_container';
-import { connect } from 'react-redux';
+import { PureComponent, Component } from 'react';
+
+import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
+
+import classNames from 'classnames';
 import { Redirect, Route, withRouter } from 'react-router-dom';
-import { layoutFromWindow } from 'flavours/glitch/is_mobile';
+
+import { connect } from 'react-redux';
+
+import Favico from 'favico.js';
 import { debounce } from 'lodash';
+import { HotKeys } from 'react-hotkeys';
+
+import { changeLayout } from 'flavours/glitch/actions/app';
 import { uploadCompose, resetCompose, changeComposeSpoilerness } from 'flavours/glitch/actions/compose';
-import { expandHomeTimeline } from 'flavours/glitch/actions/timelines';
+import { clearHeight } from 'flavours/glitch/actions/height_cache';
+import { synchronouslySubmitMarkers, submitMarkers, fetchMarkers } from 'flavours/glitch/actions/markers';
 import { expandNotifications, notificationsSetVisibility } from 'flavours/glitch/actions/notifications';
 import { fetchServer, fetchServerTranslationLanguages } from 'flavours/glitch/actions/server';
-import { clearHeight } from 'flavours/glitch/actions/height_cache';
-import { changeLayout } from 'flavours/glitch/actions/app';
-import { synchronouslySubmitMarkers, submitMarkers, fetchMarkers } from 'flavours/glitch/actions/markers';
-import { WrappedSwitch, WrappedRoute } from './util/react_router_helpers';
-import BundleColumnError from './components/bundle_column_error';
-import UploadArea from './components/upload_area';
+import { expandHomeTimeline } from 'flavours/glitch/actions/timelines';
 import PermaLink from 'flavours/glitch/components/permalink';
-import ColumnsAreaContainer from './containers/columns_area_container';
-import classNames from 'classnames';
-import Favico from 'favico.js';
 import PictureInPicture from 'flavours/glitch/features/picture_in_picture';
+import { layoutFromWindow } from 'flavours/glitch/is_mobile';
+
+import initialState, { me, owner, singleUserMode, showTrends, trendsAsLanding } from '../../initial_state';
+
+import BundleColumnError from './components/bundle_column_error';
+import Header from './components/header';
+import UploadArea from './components/upload_area';
+import ColumnsAreaContainer from './containers/columns_area_container';
+import LoadingBarContainer from './containers/loading_bar_container';
+import ModalContainer from './containers/modal_container';
+import NotificationsContainer from './containers/notifications_container';
 import {
   Compose,
   Status,
   GettingStarted,
   KeyboardShortcuts,
-  PublicTimeline,
-  CommunityTimeline,
+  Firehose,
   AccountTimeline,
   AccountGallery,
   HomeTimeline,
@@ -56,16 +65,10 @@ import {
   About,
   PrivacyPolicy,
 } from './util/async-components';
-import { HotKeys } from 'react-hotkeys';
-import initialState, { me, owner, singleUserMode, showTrends, trendsAsLanding } from '../../initial_state';
-import { closeOnboarding, INTRODUCTION_VERSION } from 'flavours/glitch/actions/onboarding';
-import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
-import { Helmet } from 'react-helmet';
-import Header from './components/header';
-
+import { WrappedSwitch, WrappedRoute } from './util/react_router_helpers';
 // Dummy import, to make sure that <Status /> ends up in the application bundle.
 // Without this it ends up in ~8 very commonly used bundles.
-import '../../../glitch/components/status';
+import "../../components/status";
 
 const messages = defineMessages({
   beforeUnload: { id: 'ui.beforeunload', defaultMessage: 'Your draft will be lost if you leave Mastodon.' },
@@ -76,16 +79,14 @@ const mapStateToProps = state => ({
   hasComposingText: state.getIn(['compose', 'text']).trim().length !== 0,
   hasMediaAttachments: state.getIn(['compose', 'media_attachments']).size > 0,
   canUploadMore: !state.getIn(['compose', 'media_attachments']).some(x => ['audio', 'video'].includes(x.get('type'))) && state.getIn(['compose', 'media_attachments']).size < 4,
-  layout: state.getIn(['meta', 'layout']),
   layout_local_setting: state.getIn(['local_settings', 'layout']),
   isWide: state.getIn(['local_settings', 'stretch']),
-  navbarUnder: state.getIn(['local_settings', 'navbar_under']),
   dropdownMenuIsOpen: state.getIn(['dropdown_menu', 'openId']) !== null,
   unreadNotifications: state.getIn(['notifications', 'unread']),
   showFaviconBadge: state.getIn(['local_settings', 'notifications', 'favicon_badge']),
   hicolorPrivacyIcons: state.getIn(['local_settings', 'hicolor_privacy_icons']),
   moved: state.getIn(['accounts', me, 'moved']) && state.getIn(['accounts', state.getIn(['accounts', me, 'moved'])]),
-  firstLaunch: state.getIn(['settings', 'introductionVersion'], 0) < INTRODUCTION_VERSION,
+  firstLaunch: false, // TODO: state.getIn(['settings', 'introductionVersion'], 0) < INTRODUCTION_VERSION,
   username: state.getIn(['accounts', me, 'username']),
 });
 
@@ -124,7 +125,7 @@ const keyMap = {
   openMedia: 'e',
 };
 
-class SwitchingColumnsArea extends React.PureComponent {
+class SwitchingColumnsArea extends PureComponent {
 
   static contextTypes = {
     identity: PropTypes.object,
@@ -133,11 +134,10 @@ class SwitchingColumnsArea extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node,
     location: PropTypes.object,
-    navbarUnder: PropTypes.bool,
     mobile: PropTypes.bool,
   };
 
-  componentWillMount () {
+  UNSAFE_componentWillMount () {
     if (this.props.mobile) {
       document.body.classList.toggle('layout-single-column', true);
       document.body.classList.toggle('layout-multiple-columns', false);
@@ -165,7 +165,7 @@ class SwitchingColumnsArea extends React.PureComponent {
   };
 
   render () {
-    const { children, mobile, navbarUnder } = this.props;
+    const { children, mobile } = this.props;
     const { signedIn } = this.context.identity;
 
     let redirect;
@@ -185,7 +185,7 @@ class SwitchingColumnsArea extends React.PureComponent {
     }
 
     return (
-      <ColumnsAreaContainer ref={this.setRef} singleColumn={mobile} navbarUnder={navbarUnder}>
+      <ColumnsAreaContainer ref={this.setRef} singleColumn={mobile}>
         <WrappedSwitch>
           {redirect}
 
@@ -195,8 +195,11 @@ class SwitchingColumnsArea extends React.PureComponent {
           <WrappedRoute path='/privacy-policy' component={PrivacyPolicy} content={children} />
 
           <WrappedRoute path={['/home', '/timelines/home']} component={HomeTimeline} content={children} />
-          <WrappedRoute path={['/public', '/timelines/public']} exact component={PublicTimeline} content={children} />
-          <WrappedRoute path={['/public/local', '/timelines/public/local']} exact component={CommunityTimeline} content={children} />
+          <Redirect from='/timelines/public' to='/public' exact />
+          <Redirect from='/timelines/public/local' to='/public/local' exact />
+          <WrappedRoute path='/public' exact component={Firehose} componentParams={{ feedType: 'public' }} content={children} />
+          <WrappedRoute path='/public/local' exact component={Firehose} componentParams={{ feedType: 'community' }} content={children} />
+          <WrappedRoute path='/public/remote' exact component={Firehose} componentParams={{ feedType: 'public:remote' }} content={children} />
           <WrappedRoute path={['/conversations', '/timelines/direct']} component={DirectTimeline} content={children} />
           <WrappedRoute path='/tags/:id' component={HashtagTimeline} content={children} />
           <WrappedRoute path='/lists/:id' component={ListTimeline} content={children} />
@@ -244,7 +247,7 @@ class SwitchingColumnsArea extends React.PureComponent {
 
 }
 
-class UI extends React.Component {
+class UI extends Component {
 
   static contextTypes = {
     identity: PropTypes.object.isRequired,
@@ -256,7 +259,6 @@ class UI extends React.Component {
     layout_local_setting: PropTypes.string,
     isWide: PropTypes.bool,
     systemFontUi: PropTypes.bool,
-    navbarUnder: PropTypes.bool,
     isComposing: PropTypes.bool,
     hasComposingText: PropTypes.bool,
     hasMediaAttachments: PropTypes.bool,
@@ -268,6 +270,7 @@ class UI extends React.Component {
     dropdownMenuIsOpen: PropTypes.bool,
     unreadNotifications: PropTypes.number,
     showFaviconBadge: PropTypes.bool,
+    hicolorPrivacyIcons: PropTypes.bool,
     moved: PropTypes.map,
     layout: PropTypes.string.isRequired,
     firstLaunch: PropTypes.bool,
@@ -382,7 +385,7 @@ class UI extends React.Component {
 
     if (layout !== this.props.layout) {
       this.handleLayoutChange.cancel();
-      this.props.dispatch(changeLayout(layout));
+      this.props.dispatch(changeLayout({ layout }));
     } else {
       this.handleLayoutChange();
     }
@@ -409,7 +412,7 @@ class UI extends React.Component {
     // On first launch, redirect to the follow recommendations page
     if (signedIn && this.props.firstLaunch) {
       this.context.router.history.replace('/start');
-      this.props.dispatch(closeOnboarding());
+      // TODO: this.props.dispatch(closeOnboarding());
     }
 
     if (signedIn) {
@@ -442,7 +445,7 @@ class UI extends React.Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     if (nextProps.layout_local_setting !== this.props.layout_local_setting) {
       const layout = layoutFromWindow(nextProps.layout_local_setting);
 
@@ -456,8 +459,8 @@ class UI extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.unreadNotifications != prevProps.unreadNotifications ||
-        this.props.showFaviconBadge != prevProps.showFaviconBadge) {
+    if (this.props.unreadNotifications !== prevProps.unreadNotifications ||
+        this.props.showFaviconBadge !== prevProps.showFaviconBadge) {
       if (this.favicon) {
         try {
           this.favicon.badge(this.props.showFaviconBadge ? this.props.unreadNotifications : 0);
@@ -606,7 +609,7 @@ class UI extends React.Component {
 
   render () {
     const { draggingOver } = this.state;
-    const { children, isWide, navbarUnder, location, dropdownMenuIsOpen, layout, moved } = this.props;
+    const { children, isWide, location, dropdownMenuIsOpen, layout, moved } = this.props;
 
     const columnsClass = layout => {
       switch (layout) {
@@ -622,7 +625,6 @@ class UI extends React.Component {
     const className = classNames('ui', columnsClass(layout), {
       'wide': isWide,
       'system-font': this.props.systemFontUi,
-      'navbar-under': navbarUnder,
       'hicolor-privacy-icons': this.props.hicolorPrivacyIcons,
     });
 
@@ -665,7 +667,7 @@ class UI extends React.Component {
 
           <Header />
 
-          <SwitchingColumnsArea location={location} mobile={layout === 'mobile' || layout === 'single-column'} navbarUnder={navbarUnder}>
+          <SwitchingColumnsArea location={location} mobile={layout === 'mobile' || layout === 'single-column'}>
             {children}
           </SwitchingColumnsArea>
 
