@@ -3,20 +3,24 @@ import PropTypes from 'prop-types';
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 
 import classNames from 'classnames';
+import { withRouter } from 'react-router-dom';
 
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 
 import { HotKeys } from 'react-hotkeys';
 
+import MoreHorizIcon from '@/material-icons/400-24px/more_horiz.svg?react';
+import ReplyIcon from '@/material-icons/400-24px/reply.svg?react';
 import AttachmentList from 'flavours/glitch/components/attachment_list';
 import AvatarComposite from 'flavours/glitch/components/avatar_composite';
 import { IconButton } from 'flavours/glitch/components/icon_button';
-import Permalink from 'flavours/glitch/components/permalink';
+import { Permalink } from 'flavours/glitch/components/permalink';
 import { RelativeTimestamp } from 'flavours/glitch/components/relative_timestamp';
 import StatusContent from 'flavours/glitch/components/status_content';
 import DropdownMenuContainer from 'flavours/glitch/containers/dropdown_menu_container';
 import { autoPlayGif } from 'flavours/glitch/initial_state';
+import { WithRouterPropTypes } from 'flavours/glitch/utils/react_router';
 
 const messages = defineMessages({
   more: { id: 'status.more', defaultMessage: 'More' },
@@ -30,10 +34,6 @@ const messages = defineMessages({
 
 class Conversation extends ImmutablePureComponent {
 
-  static contextTypes = {
-    router: PropTypes.object,
-  };
-
   static propTypes = {
     conversationId: PropTypes.string.isRequired,
     accounts: ImmutablePropTypes.list.isRequired,
@@ -45,6 +45,7 @@ class Conversation extends ImmutablePureComponent {
     markRead: PropTypes.func.isRequired,
     delete: PropTypes.func.isRequired,
     intl: PropTypes.object.isRequired,
+    ...WithRouterPropTypes,
   };
 
   state = {
@@ -52,9 +53,8 @@ class Conversation extends ImmutablePureComponent {
   };
 
   parseClick = (e, destination) => {
-    const { router } = this.context;
-    const { lastStatus, unread, markRead } = this.props;
-    if (!router) return;
+    const { history, lastStatus, unread, markRead } = this.props;
+    if (!history) return;
 
     if (e.button === 0 && !(e.ctrlKey || e.altKey || e.metaKey)) {
       if (destination === undefined) {
@@ -63,7 +63,7 @@ class Conversation extends ImmutablePureComponent {
         }
         destination = `/statuses/${lastStatus.get('id')}`;
       }
-      router.history.push(destination);
+      history.push(destination);
       e.preventDefault();
     }
   };
@@ -95,7 +95,7 @@ class Conversation extends ImmutablePureComponent {
   };
 
   handleClick = () => {
-    if (!this.context.router) {
+    if (!this.props.history) {
       return;
     }
 
@@ -105,7 +105,7 @@ class Conversation extends ImmutablePureComponent {
       markRead();
     }
 
-    this.context.router.history.push(`/@${lastStatus.getIn(['account', 'acct'])}/${lastStatus.get('id')}`);
+    this.props.history.push(`/@${lastStatus.getIn(['account', 'acct'])}/${lastStatus.get('id')}`);
   };
 
   handleMarkAsRead = () => {
@@ -113,7 +113,7 @@ class Conversation extends ImmutablePureComponent {
   };
 
   handleReply = () => {
-    this.props.reply(this.props.lastStatus, this.context.router.history);
+    this.props.reply(this.props.lastStatus, this.props.history);
   };
 
   handleDelete = () => {
@@ -210,7 +210,7 @@ class Conversation extends ImmutablePureComponent {
             />
 
             <div className='status__action-bar'>
-              <IconButton className='status__action-bar-button' title={intl.formatMessage(messages.reply)} icon='reply' onClick={this.handleReply} />
+              <IconButton className='status__action-bar-button' title={intl.formatMessage(messages.reply)} icon='reply' iconComponent={ReplyIcon} onClick={this.handleReply} />
 
               <div className='status__action-bar-dropdown'>
                 <DropdownMenuContainer
@@ -218,6 +218,7 @@ class Conversation extends ImmutablePureComponent {
                   status={lastStatus}
                   items={menu}
                   icon='ellipsis-h'
+                  iconComponent={MoreHorizIcon}
                   size={18}
                   direction='right'
                   title={intl.formatMessage(messages.more)}
@@ -232,4 +233,4 @@ class Conversation extends ImmutablePureComponent {
 
 }
 
-export default injectIntl(Conversation);
+export default withRouter(injectIntl(Conversation));
