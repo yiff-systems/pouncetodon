@@ -69,3 +69,8 @@ yarn-debug.log
 
 # Ignore Docker option files
 docker-compose.override.yml
+
+# ignore mastodon-modern style files as the dev does not want it to end up on github
+/app/javascript/styles/modern/modern.css
+/app/javascript/flavours/glitch/styles/modern/modern.css
+/app/javascript/flavours/glitch/styles/modern/glitch-fixes.css
