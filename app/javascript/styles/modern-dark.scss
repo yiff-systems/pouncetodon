@@ -1,0 +1,8 @@
+@import 'mastodon/variables';
+@import 'application';
+@import 'modern/modern';
+
+.layout-multiple-columns .column {
+  flex-grow: 1;
+  max-width: 500px;
+}
