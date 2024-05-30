@@ -31,7 +31,7 @@ namespace :assets do
     require "faraday"
 
     base_url = "https://codeberg.org/Freeplay/Mastodon-Modern/raw/commit/%<commit>s/%<filename>s"
-    commit = "7444eaef9edcf89f2f6c3c5586e0bb93f090fe1d"
+    commit = "19d1a933998443fdbc3519dc8889e3f3cf50980a"
     {
       "modern.css" => %w[
         app/javascript/styles/modern/modern.css
