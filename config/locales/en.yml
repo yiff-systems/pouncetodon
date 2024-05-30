@@ -285,6 +285,7 @@ en:
         update_custom_emoji_html: "%{name} updated emoji %{target}"
         update_domain_block_html: "%{name} updated domain block for %{target}"
         update_ip_block_html: "%{name} changed rule for IP %{target}"
+        update_report_html: "%{name} updated report %{target}"
         update_status_html: "%{name} updated awoo by %{target}"
         update_user_role_html: "%{name} changed %{target} role"
       deleted_account: deleted account
@@ -597,6 +598,9 @@ en:
       actions_description_html: Decide which action to take to resolve this report. If you take a punitive action against the reported account, an e-mail notification will be sent to them, except when the <strong>Spam</strong> category is selected.
       actions_description_remote_html: Decide which action to take to resolve this report. This will only affect how <strong>your</strong> server communicates with this remote account and handle its content.
       add_to_report: Add more to report
+      already_suspended_badges:
+        local: Already suspended on this server
+        remote: Already suspended on their server
       are_you_sure: Are you sure?
       assign_to_self: Assign to me
       assigned: Assigned moderator
@@ -641,13 +645,13 @@ en:
       statuses_description_html: Offending content will be cited in communication with the reported account
       summary:
         action_preambles:
-          delete_html: 'You are about to <strong>remove</strong> some of <strong>@%{acct}</strong>''s posts. This will:'
-          mark_as_sensitive_html: 'You are about to <strong>mark</strong> some of <strong>@%{acct}</strong>''s posts as <strong>sensitive</strong>. This will:'
+          delete_html: 'You are about to <strong>remove</strong> some of <strong>@%{acct}</strong>''s awoos. This will:'
+          mark_as_sensitive_html: 'You are about to <strong>mark</strong> some of <strong>@%{acct}</strong>''s awoos as <strong>sensitive</strong>. This will:'
           silence_html: 'You are about to <strong>limit</strong> <strong>@%{acct}</strong>''s account. This will:'
           suspend_html: 'You are about to <strong>suspend</strong> <strong>@%{acct}</strong>''s account. This will:'
         actions:
-          delete_html: Remove the offending posts
-          mark_as_sensitive_html: Mark the offending posts' media as sensitive
+          delete_html: Remove the offending awoos
+          mark_as_sensitive_html: Mark the offending awoos' media as sensitive
           silence_html: Severely limit <strong>@%{acct}</strong>'s reach by making their profile and contents only visible to people already following them or manually looking it profile up
           suspend_html: Suspend <strong>@%{acct}</strong>, making their profile and contents inaccessible and impossible to interact with
         close_report: 'Mark report #%{id} as resolved'
@@ -748,6 +752,7 @@ en:
         desc_html: This relies on external scripts from hCaptcha, which may be a security and privacy concern. In addition, <strong>this can make the registration process significantly less accessible to some (especially disabled) people</strong>. For these reasons, please consider alternative measures such as approval-based or invite-based registration.
         title: Require new users to solve a CAPTCHA to confirm their account
       content_retention:
+        danger_zone: Danger zone
         preamble: Control how user-generated content is stored in Mastodon.
         title: Content retention
       default_noindex:
@@ -767,6 +772,7 @@ en:
         disabled: To no one
         users: To logged-in local users
       registrations:
+        moderation_recommandation: Please make sure you have an adequate and reactive moderation team before you open registrations to everyone!
         preamble: Control who can create an account on your server.
         title: Registrations
       registrations_mode:
@@ -774,9 +780,10 @@ en:
           approved: Approval required for sign up
           none: Nobody can sign up
           open: Anyone can sign up
+        warning_hint: We recommend using “Approval required for sign up” unless you are confident your moderation team can handle spam and malicious registrations in a timely fashion.
       security:
         authorized_fetch: Require authentication from federated servers
-        authorized_fetch_hint: Requiring authentication from federated servers enables stricter enforcement of both user-level and server-level blocks. However, this comes at the cost of a performance penalty, reduces the reach of your replies, and may introduce compatibility issues with some federated services. In addition, this will not prevent dedicated actors from fetching your public posts and accounts.
+        authorized_fetch_hint: Requiring authentication from federated servers enables stricter enforcement of both user-level and server-level blocks. However, this comes at the cost of a performance penalty, reduces the reach of your replies, and may introduce compatibility issues with some federated services. In addition, this will not prevent dedicated actors from fetching your public awoos and accounts.
         authorized_fetch_overridden_hint: You are currently unable to change this setting because it is overridden by an environment variable.
         federation_authentication: Federation authentication enforcement
       title: Server settings
@@ -944,7 +951,7 @@ en:
       delete: Delete
       edit_preset: Edit warning preset
       empty: You haven't defined any warning presets yet.
-      title: Manage warning presets
+      title: Warning presets
     webhooks:
       add_new: Add endpoint
       delete: Delete
@@ -966,6 +973,9 @@ en:
       title: Webhooks
       webhook: Webhook
   admin_mailer:
+    auto_close_registrations:
+      body: Due to a lack of recent moderator activity, registrations on %{instance} have been automatically switched to requiring manual review, to prevent %{instance} from being used as a platform for potential bad actors. You can switch it back to open registrations at any time.
+      subject: Registrations for %{instance} have been automatically switched to requiring approval
     new_appeal:
       actions:
         delete_statuses: to delete their awoos
@@ -1192,7 +1202,7 @@ en:
     invalid_domain: is not a valid domain name
   edit_profile:
     basic_information: Basic information
-    hint_html: "<strong>Customize what people see on your public profile and next to your posts.</strong> Other people are more likely to follow you back and interact with you when you have a filled out profile and a profile picture."
+    hint_html: "<strong>Customize what people see on your public profile and next to your awoos.</strong> Other people are more likely to follow you back and interact with you when you have a filled out profile and a profile picture."
     other: Other
   errors:
     '400': The request you submitted was invalid or malformed.
@@ -1315,14 +1325,14 @@ en:
       overwrite_long: Replace current records with the new ones
     overwrite_preambles:
       blocking_html: You are about to <strong>replace your block list</strong> with up to <strong>%{total_items} accounts</strong> from <strong>%{filename}</strong>.
-      bookmarks_html: You are about to <strong>replace your bookmarks</strong> with up to <strong>%{total_items} posts</strong> from <strong>%{filename}</strong>.
+      bookmarks_html: You are about to <strong>replace your bookmarks</strong> with up to <strong>%{total_items} awoos</strong> from <strong>%{filename}</strong>.
       domain_blocking_html: You are about to <strong>replace your domain block list</strong> with up to <strong>%{total_items} domains</strong> from <strong>%{filename}</strong>.
       following_html: You are about to <strong>follow</strong> up to <strong>%{total_items} accounts</strong> from <strong>%{filename}</strong> and <strong>stop following anyone else</strong>.
       lists_html: You are about to <strong>replace your lists</strong> with contents of <strong>%{filename}</strong>. Up to <strong>%{total_items} accounts</strong> will be added to new lists.
       muting_html: You are about to <strong>replace your list of muted accounts</strong> with up to <strong>%{total_items} accounts</strong> from <strong>%{filename}</strong>.
     preambles:
       blocking_html: You are about to <strong>block</strong> up to <strong>%{total_items} accounts</strong> from <strong>%{filename}</strong>.
-      bookmarks_html: You are about to add up to <strong>%{total_items} posts</strong> from <strong>%{filename}</strong> to your <strong>bookmarks</strong>.
+      bookmarks_html: You are about to add up to <strong>%{total_items} awoos</strong> from <strong>%{filename}</strong> to your <strong>bookmarks</strong>.
       domain_blocking_html: You are about to <strong>block</strong> up to <strong>%{total_items} domains</strong> from <strong>%{filename}</strong>.
       following_html: You are about to <strong>follow</strong> up to <strong>%{total_items} accounts</strong> from <strong>%{filename}</strong>.
       lists_html: You are about to add up to <strong>%{total_items} accounts</strong> from <strong>%{filename}</strong> to your <strong>lists</strong>. New lists will be created if there is no list to add to.
@@ -1490,7 +1500,6 @@ en:
     administration_emails: Admin e-mail notifications
     email_events: Events for e-mail notifications
     email_events_hint: 'Select events that you want to receive notifications for:'
-    other_settings: Other notifications settings
   number:
     human:
       decimal_units:
@@ -1533,13 +1542,13 @@ en:
     posting_defaults: Awooing defaults
     public_timelines: Public timelines
   privacy:
-    hint_html: "<strong>Customize how you want your profile and your posts to be found.</strong> A variety of features in Mastodon can help you reach a wider audience when enabled. Take a moment to review these settings to make sure they fit your use case."
+    hint_html: "<strong>Customize how you want your profile and your awoos to be found.</strong> A variety of features in Mastodon can help you reach a wider audience when enabled. Take a moment to review these settings to make sure they fit your use case."
     privacy: Privacy
-    privacy_hint_html: Control how much you want to disclose for the benefit of others. People discover interesting profiles and cool apps by browsing other people's follows and seeing which apps they post from, but you may prefer to keep it hidden.
+    privacy_hint_html: Control how much you want to disclose for the benefit of others. People discover interesting profiles and cool apps by browsing other people's follows and seeing which apps they awoo from, but you may prefer to keep it hidden.
     reach: Reach
-    reach_hint_html: Control whether you want to be discovered and followed by new people. Do you want your posts to appear on the Explore screen? Do you want other people to see you in their follow recommendations? Do you want to accept all new followers automatically, or have granular control over each one?
+    reach_hint_html: Control whether you want to be discovered and followed by new people. Do you want your awoos to appear on the Explore screen? Do you want other people to see you in their follow recommendations? Do you want to accept all new followers automatically, or have granular control over each one?
     search: Search
-    search_hint_html: Control how you want to be found. Do you want people to find you by what you've publicly posted about? Do you want people outside Mastodon to find your profile when searching the web? Please mind that total exclusion from all search engines cannot be guaranteed for public information.
+    search_hint_html: Control how you want to be found. Do you want people to find you by what you've publicly awooed about? Do you want people outside Mastodon to find your profile when searching the web? Please mind that total exclusion from all search engines cannot be guaranteed for public information.
     title: Privacy and reach
   privacy_policy:
     title: Privacy Policy
@@ -1649,14 +1658,26 @@ en:
     import: Import
     import_and_export: Import and export
     migrate: Account migration
-    notifications: Notifications
+    notifications: E-mail notifications
     preferences: Preferences
     profile: Public profile
     relationships: Follows and followers
+    severed_relationships: Severed relationships
     statuses_cleanup: Automated awoo deletion
     strikes: Moderation strikes
     two_factor_authentication: Two-factor Auth
     webauthn_authentication: Security keys
+  severed_relationships:
+    download: Download (%{count})
+    event_type:
+      account_suspension: Account suspension (%{target_name})
+      domain_block: Server suspension (%{target_name})
+      user_domain_block: You blocked %{target_name}
+    lost_followers: Lost followers
+    lost_follows: Lost follows
+    preamble: You may lose follows and followers when you block a domain or when your moderators decide to suspend a remote server. When that happens, you will be able to download lists of severed relationships, to be inspected and possibly imported on another server.
+    purged: Information about this server has been purged by your server's administrators.
+    type: Event
   statuses:
     attached:
       audio:
@@ -1694,8 +1715,6 @@ en:
         other: "%{count} votes"
       vote: Vote
     show_more: Show more
-    show_newer: Show newer
-    show_older: Show older
     show_thread: Show thread
     title: '%{name}: "%{quote}"'
     visibilities:
@@ -1752,6 +1771,7 @@ en:
     contrast: Mastodon (High contrast)
     default: Mastodon (Dark)
     mastodon-light: Mastodon (Light)
+    system: Automatic (use system theme)
   time:
     formats:
       default: "%b %d, %Y, %H:%M"
@@ -1839,13 +1859,44 @@ en:
         silence: Account limited
         suspend: Account suspended
     welcome:
-      edit_profile_action: Setup profile
-      edit_profile_step: You can customize your profile by uploading a profile picture, changing your display name and more. You can opt-in to review new followers before they’re allowed to follow you.
+      apps_android_action: Get it on Google Play
+      apps_ios_action: Download on the App Store
+      apps_step: Download our official apps.
+      apps_title: Mastodon apps
+      checklist_subtitle: 'Let''s get you started on this new social frontier:'
+      checklist_title: Welcome Checklist
+      edit_profile_action: Personalize
+      edit_profile_step: Boost your interactions by having a comprehensive profile.
+      edit_profile_title: Personalize your profile
       explanation: Here are some tips to get you started
-      final_action: Start howling
-      final_step: 'Start howling! Even without followers your public awoos may be seen by others, for example on the local timeline and in hashtags. You may want to introduce yourself on the #introductions hashtag.'
-      full_handle: Your full handle
-      full_handle_hint: This is what you would tell your friends so they can message or follow you from another server.
+      feature_action: Learn more
+      feature_audience: Mastodon provides you with a unique possibility of managing your audience without middlemen. Mastodon deployed on your own infrastructure allows you to follow and be followed from any other Mastodon server online and is under no one's control but yours.
+      feature_audience_title: Build your audience in confidence
+      feature_control: You know best what you want to see on your home feed. No algorithms or ads to waste your time. Follow anyone across any Mastodon server from a single account and receive their awoos in chronological order, and make your corner of the internet a little more like you.
+      feature_control_title: Stay in control of your own timeline
+      feature_creativity: Mastodon supports audio, video and picture awoos, accessibility descriptions, polls, content warnings, animated avatars, custom emojis, thumbnail crop control, and more, to help you express yourself online. Whether you're publishing your art, your music, or your podcast, Mastodon is there for you.
+      feature_creativity_title: Unparalleled creativity
+      feature_moderation: Mastodon puts decision making back in your hands. Each server creates their own rules and regulations, which are enforced locally and not top-down like corporate social media, making it the most flexible in responding to the needs of different groups of people. Join a server with the rules you agree with, or host your own.
+      feature_moderation_title: Moderating the way it should be
+      follow_action: Follow
+      follow_step: Following interesting people is what Mastodon is all about.
+      follow_title: Personalize your home feed
+      follows_subtitle: Follow well-known accounts
+      follows_title: Who to follow
+      follows_view_more: View more people to follow
+      hashtags_recent_count:
+        one: "%{people} person in the past 2 days"
+        other: "%{people} people in the past 2 days"
+      hashtags_subtitle: Explore what’s trending since past 2 days
+      hashtags_title: Trending hashtags
+      hashtags_view_more: View more trending hashtags
+      post_action: Compose
+      post_step: Say hello to the world with text, photos, videos, or polls.
+      post_title: Make your first awoo
+      share_action: Share
+      share_step: Let your friends know how to find you on Mastodon.
+      share_title: Share your Mastodon profile
+      sign_in_action: Sign in
       subject: Welcome to Mastodon
       title: Welcome aboard, %{name}!
   users:

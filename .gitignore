@@ -24,7 +24,6 @@
 /public/packs-test
 .env
 .env.production
-.env.development
 /node_modules/
 /build/
 
@@ -74,3 +73,6 @@ docker-compose.override.yml
 /app/javascript/styles/modern/modern.css
 /app/javascript/flavours/glitch/styles/modern/modern.css
 /app/javascript/flavours/glitch/styles/modern/glitch-fixes.css
+
+# Ignore dotenv .local files
+.env*.local
