@@ -5,10 +5,11 @@
 # Table name: web_push_subscriptions
 #
 #  id              :bigint(8)        not null, primary key
-#  endpoint        :string           not null
-#  key_p256dh      :string           not null
-#  key_auth        :string           not null
 #  data            :json
+#  endpoint        :string           not null
+#  key_auth        :string           not null
+#  key_p256dh      :string           not null
+#  standard        :boolean          default(FALSE), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  access_token_id :bigint(8)
@@ -28,6 +29,8 @@ class Web::PushSubscription < ApplicationRecord
   validates_with WebPushKeyValidator
 
   delegate :locale, to: :associated_user
+
+  generates_token_for :unsubscribe, expires_in: Web::PushNotificationWorker::TTL
 
   def pushable?(notification)
     policy_allows_notification?(notification) && alert_enabled_for_notification_type?(notification)
