@@ -31,7 +31,7 @@ namespace :assets do
     require "faraday"
 
     base_url = "https://git.gay/freeplay/Mastodon-Modern/raw/commit/%<commit>s/%<filename>s"
-    commit = "67881ea524dfcdfc68bc1e1eea0d429d9115433b"
+    commit = "6f6cfefa310588c9c956f9fbd2f88aaf0cc7fd9e"
     {
       "modern.css" => %w[
         app/javascript/styles/modern/modern.css
