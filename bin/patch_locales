@@ -1,0 +1,105 @@
+#!/usr/bin/env ruby
+
+require "json"
+require "yaml"
+
+LOCALES = %w[en en-GB]
+FILES = %w[
+  app/javascript/flavours/glitch/locales/%<locale>s.json
+  app/javascript/mastodon/locales/%<locale>s.json
+  config/locales/%<locale>s.yml
+  config/locales-glitch/%<locale>s.yml
+  config/locales/simple_form.%<locale>s.yml
+]
+
+class Substitutor
+  attr_reader :counts
+
+  def initialize(content, locale:)
+    @content = content
+    @locale = locale
+    @counts = Hash.new(0)
+  end
+
+  def substituted
+    @substituted ||= @parsed.transform_values(&method(:substitute))
+  end
+
+  def result = NoMethodError
+
+  protected
+
+  def gsub(string, word, replacement, prefix_with = "a", past_replacement = nil, ing_replacement = nil)
+    string.gsub(/(?<prefix>an? ?)?(?<first_letter>#{word[0].downcase})#{word[1..]}(?<past_tense>e?d)?(?<inging>ing)?(?<post_ignore> (?:#{word}|#{replacement}|Office Box))?/i) do |match|
+      Regexp.last_match => { prefix:, first_letter:, past_tense:, inging:, post_ignore: }
+      next match if post_ignore
+      counts[word] += 1
+      [
+        prefix && (prefix[0] == prefix[0].downcase ? "#{prefix_with} " : "#{prefix_with[0].upcase}#{prefix_with[1..]} "),
+        first_letter == word[0].downcase ? replacement[0].downcase : replacement[0].upcase,
+        ((past_tense && past_replacement) ? past_replacement[1..]
+                                          : ((inging && ing_replacement) ? ing_replacement[1..]
+                                                                         : replacement[1..])),
+      ].compact.join
+    end
+  end
+
+  def substitute(value)
+    return value.transform_values(&method(:substitute)) if value.is_a? Hash
+
+    return value unless value =~ /toot|post|boost/i
+
+    value = gsub(value, "post", "awoo", "an")
+    value = gsub(value, "toot", "awoo", "an")
+    value = gsub(value, "boost", "pounce", "a", "pounced", "pouncing")
+    value = gsub(value, "awooctl", "tootctl")
+
+    value
+  end
+end
+
+class JSONSubstitutor < Substitutor
+  def initialize(...)
+    super
+    @parsed = JSON.parse(@content)
+  end
+
+  def result = JSON.pretty_generate(substituted)
+end
+
+class YAMLSubstitutor < Substitutor
+  def initialize(...)
+    super
+    @parsed = YAML.load(@content)
+  end
+
+  def result = substituted.to_yaml(line_width: -1)
+end
+
+def substitutor_for(path)
+  case path
+  when /\.json$/
+    JSONSubstitutor
+  when /\.ya?ml$/
+    YAMLSubstitutor
+  else
+    raise ArgumentError.new("no substitutor found for #{path.inspect}")
+  end
+end
+
+FILES.each do |file|
+  LOCALES.each do |locale|
+    path = format(file, locale:)
+    next unless File.exist?(path)
+
+    substitutor = substitutor_for(path).new(File.read(path), locale:)
+    substitutor.substituted
+    next if substitutor.counts.empty?
+    
+    puts "--> #{path.inspect}"
+    puts "replacements done: #{substitutor.counts}"
+    File.open path, "w" do |f|
+      f.puts substitutor.result
+    end
+  end
+end
