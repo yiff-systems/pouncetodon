@@ -51,7 +51,9 @@ class Substitutor
 
     value = gsub(value, "post", "awoo", "an")
     value = gsub(value, "toot", "awoo", "an")
+    value = gsub(value, "boost_icon", ":temprebl-icon:")
     value = gsub(value, "boost", "pounce", "a", "pounced", "pouncing")
+    value = gsub(value, ":temprebl-icon:", "boost_icon")
     value = gsub(value, "awooctl", "tootctl")
 
     value
