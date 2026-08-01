@@ -1,0 +1,10 @@
+@use 'mastodon-light/variables';
+@use 'mastodon-light/css_variables';
+@use 'application';
+@use 'mastodon-light/diff';
+@use 'modern/modern';
+
+.layout-multiple-columns .column {
+  flex-grow: 1;
+  max-width: 500px;
+}
