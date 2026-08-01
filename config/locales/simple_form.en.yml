@@ -4,10 +4,10 @@ en:
     hints:
       account:
         attribution_domains: One per line. Protects from false attributions.
-        discoverable: You may be featured in collections created by other users. You and your public posts may also be suggested to users in other discovery experiences throughout Mastodon.
+        discoverable: You may be featured in collections created by other users. You and your public awoos may also be suggested to users in other discovery experiences throughout Mastodon.
         display_name: Your full name or your fun name.
         fields: Your homepage, pronouns, age, anything you want.
-        indexable: Your public posts may appear in search results on Mastodon. People who have interacted with your posts may be able to search them regardless.
+        indexable: Your public awoos may appear in search results on Mastodon. People who have interacted with your awoos may be able to search them regardless.
         note: 'You can @mention other people or #hashtags.'
         show_collections: People will be able to browse through your follows and followers. People that you follow will see that you follow them regardless.
         unlocked: People will be able to follow you without requesting approval. Uncheck if you want to review follow requests and choose whether to accept or reject new followers.
@@ -16,18 +16,18 @@ en:
       account_migration:
         acct: Specify the username@domain of the account you want to move to
       account_warning_preset:
-        text: You can use post syntax, such as URLs, hashtags and mentions
+        text: You can use awoo syntax, such as URLs, hashtags and mentions
         title: Optional. Not visible to the recipient
       admin_account_action:
-        include_statuses: The user will see which posts have caused the moderation action or warning
+        include_statuses: The user will see which awoos have caused the moderation action or warning
         send_email_notification: The user will receive an explanation of what happened with their account
-        text_html: Optional. You can use post syntax. You can <a href="%{path}">add warning presets</a> to save time
+        text_html: Optional. You can use awoo syntax. You can <a href="%{path}">add warning presets</a> to save time
         type_html: Choose what to do with <strong>%{acct}</strong>
         types:
           disable: Prevent the user from using their account, but do not delete or hide their contents.
           none: Use this to send a warning to the user, without triggering any other action.
           sensitive: Force all this user's media attachments to be flagged as sensitive.
-          silence: Prevent the user from being able to post with public visibility, hide their posts and notifications from people not following them. Closes all reports against this account.
+          silence: Prevent the user from being able to awoo with public visibility, hide their awoos and notifications from people not following them. Closes all reports against this account.
           suspend: Prevent any interaction from or to this account and delete its contents. Revertible within 30 days. Closes all reports against this account.
         warning_preset_id: Optional. You can still add custom text to end of the preset
       announcement:
@@ -35,7 +35,7 @@ en:
         ends_at: Optional. Announcement will be automatically unpublished at this time
         scheduled_at: Leave blank to publish the announcement immediately
         starts_at: Optional. In case your announcement is bound to a specific time range
-        text: You can use post syntax. Please be mindful of the space the announcement will take up on the user's screen
+        text: You can use awoo syntax. Please be mindful of the space the announcement will take up on the user's screen
       appeal:
         text: You can only appeal a strike once
       defaults:
@@ -49,23 +49,23 @@ en:
         email: You will be sent a confirmation e-mail
         header: WEBP, PNG, GIF or JPG. At most %{size}. Will be downscaled to %{dimensions}px
         inbox_url: Copy the URL from the frontpage of the relay you want to use
-        irreversible: Filtered posts will disappear irreversibly, even if filter is later removed
+        irreversible: Filtered awoos will disappear irreversibly, even if filter is later removed
         locale: The language of the user interface, e-mails and push notifications
         password: Use at least 8 characters
-        phrase: Will be matched regardless of casing in text or content warning of a post
+        phrase: Will be matched regardless of casing in text or content warning of an awoo
         scopes: Which APIs the application will be allowed to access. If you select a top-level scope, you don't need to select individual ones.
         setting_advanced_layout: Display Mastodon as a multi-column layout, allowing you to view the timeline, notifications, and a third column of your choosing. Not recommended for smaller screens.
-        setting_aggregate_reblogs: Do not show new boosts for posts that have been recently boosted (only affects newly-received boosts)
+        setting_aggregate_reblogs: Do not show new pounces for awoos that have been recently pounced (only affects newly-received pounces)
         setting_always_send_emails: Normally e-mail notifications won't be sent when you are actively using Mastodon
-        setting_boost_modal: When enabled, boosting will first open a confirmation dialog in which you can change the visibility of your boost.
-        setting_default_quote_policy_private: Followers-only posts authored on Mastodon can't be quoted by others.
-        setting_default_quote_policy_unlisted: When people quote you, their post will also be hidden from trending timelines.
+        setting_boost_modal: When enabled, pouncing will first open a confirmation dialog in which you can change the visibility of your pounce.
+        setting_default_quote_policy_private: Followers-only awoos authored on Mastodon can't be quoted by others.
+        setting_default_quote_policy_unlisted: When people quote you, their awoo will also be hidden from trending timelines.
         setting_default_sensitive: Sensitive media is hidden by default and can be revealed with a click
         setting_display_media_default: Warn before showing media marked as sensitive
         setting_display_media_hide_all: Warn before showing all media
         setting_display_media_show_all: Show all media without warning, including media marked as sensitive
         setting_emoji_style: How to display emojis. "Auto" will try using native emoji, but falls back to Twemoji for legacy browsers.
-        setting_quick_boosting_html: When enabled, clicking on the %{boost_icon} Boost icon will immediately boost instead of opening the boost/quote dropdown menu. Relocates the quoting action to the %{options_icon} (Options) menu.
+        setting_quick_boosting_html: When enabled, clicking on the %{boost_icon} Pounce icon will immediately pounce instead of opening the pounce/quote dropdown menu. Relocates the quoting action to the %{options_icon} (Options) menu.
         setting_use_blurhash: Gradients are based on the colors of the hidden visuals but obfuscate any details
         setting_use_pending_items: Hide timeline updates behind a click instead of automatically scrolling the feed
         username: You can use letters, numbers, and underscores
@@ -78,24 +78,24 @@ en:
       featured_tag:
         name: 'Here are some of the hashtags you used the most recently:'
       filters:
-        action: Choose which action to perform when a post matches the filter
+        action: Choose which action to perform when an awoo matches the filter
         actions:
           blur: Hide media behind a warning, without hiding the text itself
           hide: Completely hide the filtered content, behaving as if it did not exist
           warn: Hide the filtered content behind a warning mentioning the filter's title
       form_admin_settings:
-        activity_api_enabled: Counts of locally published posts, active users, and new registrations in weekly buckets
+        activity_api_enabled: Counts of locally published awoos, active users, and new registrations in weekly buckets
         app_icon: WEBP, PNG, GIF or JPG. Overrides the default app icon on mobile devices with a custom icon.
-        backups_retention_period: Users have the ability to generate archives of their posts to download later. When set to a positive value, these archives will be automatically deleted from your storage after the specified number of days.
+        backups_retention_period: Users have the ability to generate archives of their awoos to download later. When set to a positive value, these archives will be automatically deleted from your storage after the specified number of days.
         bootstrap_timeline_accounts: These accounts will be pinned to the top of new users' follow recommendations. Provide a comma-separated list of accounts.
         closed_registrations_message: Displayed when sign-ups are closed
-        content_cache_retention_period: All posts from other servers (including boosts and replies) will be deleted after the specified number of days, without regard to any local user interaction with those posts. This includes posts where a local user has marked it as bookmarks or favorites. Private mentions between users from different instances will also be lost and impossible to restore. Use of this setting is intended for special purpose instances and breaks many user expectations when implemented for general purpose use.
+        content_cache_retention_period: All awoos from other servers (including pounces and replies) will be deleted after the specified number of days, without regard to any local user interaction with those awoos. This includes awoos where a local user has marked it as bookmarks or favorites. Private mentions between users from different instances will also be lost and impossible to restore. Use of this setting is intended for special purpose instances and breaks many user expectations when implemented for general purpose use.
         custom_css: You can apply custom styles on the web version of Mastodon.
         email_footer_text: Optional text that appears in the footer of newsletter emails only.
         favicon: WEBP, PNG, GIF or JPG. Overrides the default Mastodon favicon with a custom icon.
-        landing_page: Selects what page new visitors see when they first arrive on your server. If you select "Trends", then trends needs to be enabled in the Discovery Settings. If you select "Local feed", then "Access to live feeds featuring local posts" needs to be set to "Everyone" in the Discovery Settings.
+        landing_page: Selects what page new visitors see when they first arrive on your server. If you select "Trends", then trends needs to be enabled in the Discovery Settings. If you select "Local feed", then "Access to live feeds featuring local awoos" needs to be set to "Everyone" in the Discovery Settings.
         mascot: Overrides the illustration in the advanced web interface.
-        media_cache_retention_period: Media files from posts made by remote users are cached on your server. When set to a positive value, media will be deleted after the specified number of days. If the media data is requested after it is deleted, it will be re-downloaded, if the source content is still available. Due to restrictions on how often link preview cards poll third-party sites, it is recommended to set this value to at least 14 days, or link preview cards will not be updated on demand before that time.
+        media_cache_retention_period: Media files from awoos made by remote users are cached on your server. When set to a positive value, media will be deleted after the specified number of days. If the media data is requested after it is deleted, it will be re-downloaded, if the source content is still available. Due to restrictions on how often link preview cards poll third-party sites, it is recommended to set this value to at least 14 days, or link preview cards will not be updated on demand before that time.
         min_age: Users will be asked to confirm their date of birth during sign-up
         peers_api_enabled: A list of domain names this server has encountered in the fediverse. No data is included here about whether you federate with a given server, just that your server knows about it. This is used by services that collect statistics on federation in a general sense.
         profile_directory: The profile directory lists all users who have opted-in to be discoverable.
@@ -111,8 +111,8 @@ en:
         thumbnail: A roughly 2:1 image displayed alongside your server information.
         thumbnail_description: A description of the image to help people with visual impairments understand its content.
         trendable_by_default: Skip manual review of trending content. Individual items can still be removed from trends after the fact.
-        trends: Trends show which posts, hashtags and news stories are gaining traction on your server.
-        wrapstodon: Offer local users to generate a playful summary of their Mastodon use during the year. This feature is available between the 10th and 31st of December of each year, and is offered to users who made at least one Public or Quiet Public post and used at least one hashtag within the year.
+        trends: Trends show which awoos, hashtags and news stories are gaining traction on your server.
+        wrapstodon: Offer local users to generate a playful summary of their Mastodon use during the year. This feature is available between the 10th and 31st of December of each year, and is offered to users who made at least one Public or Quiet Public awoo and used at least one hashtag within the year.
       form_challenge:
         current_password: You are entering a secure area
       imports:
@@ -137,7 +137,7 @@ en:
       settings:
         email_subscriptions: Disabling retains existing subscribers but stops sending emails.
         indexable: Your profile page may appear in search results on Google, Bing, and others.
-        show_application: You will always be able to see which app published your post regardless.
+        show_application: You will always be able to see which app published your awoo regardless.
       tag:
         name: You can only change the casing of the letters, for example, to make it more readable
       terms_of_service:
@@ -155,7 +155,7 @@ en:
         jurisdiction: List the country where whoever pays the bills lives. If it’s a company or other entity, list the country where it’s incorporated, and the city, region, territory or state as appropriate.
         min_age: Should not be below the minimum age required by the laws of your jurisdiction.
       user:
-        chosen_languages: When checked, only posts in selected languages will be displayed in public timelines. This setting does not affect your Home timeline and lists.
+        chosen_languages: When checked, only awoos in selected languages will be displayed in public timelines. This setting does not affect your Home timeline and lists.
         date_of_birth:
           one: We have to make sure you're at least %{count} to use %{domain}. We won't store this.
           other: We have to make sure you're at least %{count} to use %{domain}. We won't store this.
@@ -183,7 +183,7 @@ en:
         fields:
           name: Label
           value: Content
-        indexable: Include public posts in search results
+        indexable: Include public awoos in search results
         show_collections: Show follows and followers on profile
         unlocked: Automatically accept new followers
       account_alias:
@@ -194,7 +194,7 @@ en:
         text: Preset text
         title: Title
       admin_account_action:
-        include_statuses: Include reported posts in the e-mail
+        include_statuses: Include reported awoos in the e-mail
         send_email_notification: Notify the user per e-mail
         text: Custom warning
         type: Action
@@ -240,17 +240,17 @@ en:
         password: Password
         phrase: Keyword or phrase
         setting_advanced_layout: Enable advanced web interface
-        setting_aggregate_reblogs: Group boosts in timelines
+        setting_aggregate_reblogs: Group pounces in timelines
         setting_always_send_emails: Always send e-mail notifications
         setting_auto_play_gif: Auto-play animated GIFs
-        setting_boost_modal: Control boosting visibility
+        setting_boost_modal: Control pouncing visibility
         setting_color_scheme: Color scheme
         setting_contrast: Contrast
-        setting_default_language: Posting language
-        setting_default_privacy: Posting visibility
+        setting_default_language: Awoo language
+        setting_default_privacy: Awoo visibility
         setting_default_quote_policy: Who can quote
         setting_default_sensitive: Always mark media as sensitive
-        setting_delete_modal: Warn me before deleting a post
+        setting_delete_modal: Warn me before deleting an awoo
         setting_disable_hover_cards: Disable profile preview on hover
         setting_disable_swiping: Disable swiping motions
         setting_display_media: Media display
@@ -258,10 +258,10 @@ en:
         setting_display_media_hide_all: Hide all
         setting_display_media_show_all: Show all
         setting_emoji_style: Emoji style
-        setting_expand_spoilers: Always expand posts marked with content warnings
+        setting_expand_spoilers: Always expand awoos marked with content warnings
         setting_hide_network: Hide your social graph
-        setting_missing_alt_text_modal: Warn me before posting media without alt text
-        setting_quick_boosting: Enable quick boosting
+        setting_missing_alt_text_modal: Warn me before awoo media without alt text
+        setting_quick_boosting: Enable quick pouncing
         setting_reduce_motion: Reduce motion in animations
         setting_system_font_ui: Use system's default font
         setting_system_scrollbars_ui: Use system's default scrollbar
@@ -297,16 +297,16 @@ en:
         email_footer_text: Additional footer text
         favicon: Favicon
         landing_page: Landing page for new visitors
-        local_live_feed_access: Access to live feeds featuring local posts
-        local_topic_feed_access: Access to hashtag and link feeds featuring local posts
+        local_live_feed_access: Access to live feeds featuring local awoos
+        local_topic_feed_access: Access to hashtag and link feeds featuring local awoos
         mascot: Custom mascot (legacy)
         media_cache_retention_period: Media cache retention period
         min_age: Minimum age requirement
         peers_api_enabled: Publish list of discovered servers in the API
         profile_directory: Enable profile directory
         registrations_mode: Who can sign-up
-        remote_live_feed_access: Access to live feeds featuring remote posts
-        remote_topic_feed_access: Access to hashtag and link feeds featuring remote posts
+        remote_live_feed_access: Access to live feeds featuring remote awoos
+        remote_topic_feed_access: Access to hashtag and link feeds featuring remote awoos
         require_invite_text: Require a reason to join
         show_domain_blocks: Show domain blocks
         show_domain_blocks_rationale: Show why domains were blocked
@@ -346,13 +346,13 @@ en:
         appeal: Someone appeals a moderator decision
         digest: Send digest e-mails
         end_of_support: The current Mastodon version is nearing end of support
-        favourite: Someone favourited your post
+        favourite: Someone favourited your awoo
         follow: Someone followed you
         follow_request: Someone requested to follow you
         mention: Someone mentioned you
         pending_account: New account needs review
         quote: Someone quoted you
-        reblog: Someone boosted your post
+        reblog: Someone pounced your awoo
         report: New report is submitted
         software_updates:
           all: Notify on all updates
@@ -367,12 +367,12 @@ en:
       settings:
         email_subscriptions: Enable email sign-ups
         indexable: Include profile page in search engines
-        show_application: Display from which app you sent a post
+        show_application: Display from which app you sent an awoo
       tag:
         listable: Allow this hashtag to appear in searches and suggestions
         name: Hashtag
         trendable: Allow this hashtag to appear under trends
-        usable: Allow posts to use this hashtag locally
+        usable: Allow awoos to use this hashtag locally
       terms_of_service:
         changelog: What's changed?
         effective_date: Effective date

@@ -17,17 +17,17 @@ en:
         preamble: Various glitch-soc settings not fitting in other categories.
         title: Other
       outgoing_spoilers:
-        desc_html: When federating toots, add this content warning to toots that do not have one. It is useful if your server is specialized in content other servers might want to have under a Content Warning. Media will also be marked as sensitive.
-        title: Content warning for outgoing toots
+        desc_html: When federating awoos, add this content warning to awoos that do not have one. It is useful if your server is specialized in content other servers might want to have under a Content Warning. Media will also be marked as sensitive.
+        title: Content warning for outgoing awoos
       show_reblogs_in_public_timelines:
-        desc_html: Show public boosts of public toots in local and public timelines.
-        title: Show boosts in public timelines
+        desc_html: Show public pounces of public awoos in local and public timelines.
+        title: Show pounces in public timelines
       show_replies_in_public_timelines:
         desc_html: In addition to public self-replies (threads), show public replies in local and public timelines.
         title: Show replies in public timelines
       trending_status_cw:
-        desc_html: When trending posts are enabled, allow posts with Content Warnings to be eligible. Changes to this setting are not retroactive.
-        title: Allow posts with Content Warnings to trend
+        desc_html: When trending awoos are enabled, allow awoos with Content Warnings to be eligible. Changes to this setting are not retroactive.
+        title: Allow awoos with Content Warnings to trend
   appearance:
     localization:
       glitch_guide_link: https://crowdin.com/project/glitch-soc
@@ -40,8 +40,8 @@ en:
     use_this: Use this
   notification_mailer:
     reaction:
-      body: "%{name} reacted to your post:"
-      subject: "%{name} reacted to your post"
+      body: "%{name} reacted to your awoo:"
+      subject: "%{name} reacted to your awoo"
       title: New reaction
   settings:
     flavours: Flavours

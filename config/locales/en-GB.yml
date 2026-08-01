@@ -22,9 +22,9 @@ en-GB:
     pin_errors:
       following: You must be already following the person you want to endorse
     posts:
-      one: Post
-      other: Posts
-    posts_tab_heading: Posts
+      one: Awoo
+      other: Awoos
+    posts_tab_heading: Awoos
     self_follow_error: Following your own account is not allowed
   admin:
     account_actions:
@@ -154,7 +154,7 @@ en-GB:
         targeted_reports: Reported by others
       silence: Limit
       silenced: Limited
-      statuses: Posts
+      statuses: Awoos
       strikes: Previous strikes
       subscribe: Subscribe
       suspend: Suspend
@@ -206,7 +206,7 @@ en-GB:
         destroy_instance: Purge Domain
         destroy_ip_block: Delete IP rule
         destroy_relay: Delete Relay
-        destroy_status: Delete Post
+        destroy_status: Delete Awoo
         destroy_unavailable_domain: Delete Unavailable Domain
         destroy_user_role: Destroy Role
         destroy_username_block: Delete Username Rule
@@ -242,7 +242,7 @@ en-GB:
         update_domain_block: Update Domain Block
         update_ip_block: Update IP rule
         update_report: Update Report
-        update_status: Update Post
+        update_status: Update Awoo
         update_user_role: Update Role
         update_username_block: Update Username Rule
       actions:
@@ -275,7 +275,7 @@ en-GB:
         destroy_instance_html: "%{name} purged domain %{target}"
         destroy_ip_block_html: "%{name} deleted rule for IP %{target}"
         destroy_relay_html: "%{name} deleted the relay %{target}"
-        destroy_status_html: "%{name} removed post by %{target}"
+        destroy_status_html: "%{name} removed awoo by %{target}"
         destroy_unavailable_domain_html: "%{name} stopped delivery to domain %{target}"
         destroy_user_role_html: "%{name} deleted %{target} role"
         destroy_username_block_html: "%{name} removed rule for usernames containing %{target}"
@@ -312,7 +312,7 @@ en-GB:
         update_domain_block_html: "%{name} updated domain block for %{target}"
         update_ip_block_html: "%{name} changed rule for IP %{target}"
         update_report_html: "%{name} updated report %{target}"
-        update_status_html: "%{name} updated post by %{target}"
+        update_status_html: "%{name} updated awoo by %{target}"
         update_user_role_html: "%{name} changed %{target} role"
         update_username_block_html: "%{name} updated rule for usernames containing %{target}"
       deleted_account: deleted account
@@ -447,7 +447,7 @@ en-GB:
         create: Create block
         hint: The domain block will not prevent creation of account entries in the database, but will retroactively and automatically apply specific moderation methods on those accounts.
         severity:
-          desc_html: "<strong>Limit</strong> will make posts from accounts at this domain invisible to anyone who isn't following them. <strong>Suspend</strong> will remove all content, media, and profile data for this domain's accounts from your server. Use <strong>None</strong> if you just want to reject media files."
+          desc_html: "<strong>Limit</strong> will make awoos from accounts at this domain invisible to anyone who isn't following them. <strong>Suspend</strong> will remove all content, media, and profile data for this domain's accounts from your server. Use <strong>None</strong> if you just want to reject media files."
           noop: None
           silence: Limit
           suspend: Suspend
@@ -580,7 +580,7 @@ en-GB:
         instance_languages_dimension: Top languages
         instance_media_attachments_measure: stored media attachments
         instance_reports_measure: reports about them
-        instance_statuses_measure: stored posts
+        instance_statuses_measure: stored awoos
       delivery:
         all: All
         clear: Clear delivery errors
@@ -647,11 +647,11 @@ en-GB:
     relays:
       add_new: Add new relay
       delete: Delete
-      description_html: A <strong>federation relay</strong> is an intermediary server that exchanges large volumes of public posts between servers that subscribe and publish to it. <strong>It can help small and medium servers discover content from the fediverse</strong>, which would otherwise require local users manually following other people on remote servers.
+      description_html: A <strong>federation relay</strong> is an intermediary server that exchanges large volumes of public awoos between servers that subscribe and publish to it. <strong>It can help small and medium servers discover content from the fediverse</strong>, which would otherwise require local users manually following other people on remote servers.
       disable: Disable
       disabled: Disabled
       enable: Enable
-      enable_hint: Once enabled, your server will subscribe to all public posts from this relay, and will begin sending this server's public posts to it.
+      enable_hint: Once enabled, your server will subscribe to all public awoos from this relay, and will begin sending this server's public awoos to it.
       enabled: Enabled
       inbox_url: Relay URL
       pending: Waiting for relay's approval
@@ -671,14 +671,14 @@ en-GB:
       action_log: Audit log
       action_taken_by: Action taken by
       actions:
-        mark_as_sensitive_description_html: The media in the reported posts will be marked as sensitive and a strike will be recorded to help you escalate on future infractions by the same account.
+        mark_as_sensitive_description_html: The media in the reported awoos will be marked as sensitive and a strike will be recorded to help you escalate on future infractions by the same account.
         other_description_html: See more options for controlling the account's behaviour and customising communication to the reported account.
         resolve_description_html: No action will be taken against the reported account, no strike recorded, and the report will be closed.
         silence_description_html: The account will be visible only to those who already follow it or manually look it up, severely limiting its reach. This can always be reverted. This closes all reports against this account.
         suspend_description_html: The account and all its contents will be inaccessible and eventually deleted, and interacting with it will be impossible. This is reversible within 30 days. This closes all reports against this account.
       actions_description_html: Decide which action to take to resolve this report. If you take a punitive action against the reported account, an email notification will be sent to them, except when the <strong>Spam</strong> category is selected.
       actions_description_remote_html: Decide which action to take to resolve this report. This will only affect how <strong>your</strong> server communicates with this remote account and handles its content.
-      actions_no_posts: This report doesn't have any associated posts to delete
+      actions_no_posts: This report doesn't have any associated awoos to delete
       add_to_report: Add more to report
       already_suspended_badges:
         local: Already suspended on this server
@@ -725,17 +725,17 @@ en-GB:
       resolved_msg: Report successfully resolved!
       skip_to_actions: Skip to actions
       status: Status
-      statuses: Posts (%{count})
+      statuses: Awoos (%{count})
       statuses_description_html: Offending content will be cited in communication with the reported account
       summary:
         action_preambles:
-          delete_html: 'You are about to <strong>remove</strong> some of <strong>@%{acct}</strong>''s posts. This will:'
-          mark_as_sensitive_html: 'You are about to <strong>mark</strong> some of <strong>@%{acct}</strong>''s posts as <strong>sensitive</strong>. This will:'
+          delete_html: 'You are about to <strong>remove</strong> some of <strong>@%{acct}</strong>''s awoos. This will:'
+          mark_as_sensitive_html: 'You are about to <strong>mark</strong> some of <strong>@%{acct}</strong>''s awoos as <strong>sensitive</strong>. This will:'
           silence_html: 'You are about to <strong>limit</strong> <strong>@%{acct}</strong>''s account. This will:'
           suspend_html: 'You are about to <strong>suspend</strong> <strong>@%{acct}</strong>''s account. This will:'
         actions:
-          delete_html: Remove the offending posts
-          mark_as_sensitive_html: Mark the offending posts' media as sensitive
+          delete_html: Remove the offending awoos
+          mark_as_sensitive_html: Mark the offending awoos' media as sensitive
           silence_html: Severely limit <strong>@%{acct}</strong>'s reach by making their profile and contents only visible to people already following them or manually looking it profile up
           suspend_html: Suspend <strong>@%{acct}</strong>, making their profile and contents inaccessible and impossible to interact with
         close_report: 'Mark report #%{id} as resolved'
@@ -889,7 +889,7 @@ en-GB:
         warning_hint: We recommend using “Approval required for sign up” unless you are confident your moderation team can handle spam and malicious registrations in a timely fashion.
       security:
         authorized_fetch: Require authentication from federated servers
-        authorized_fetch_hint: Requiring authentication from federated servers enables stricter enforcement of both user-level and server-level blocks. However, this comes at the cost of a performance penalty, reduces the reach of your replies, and may introduce compatibility issues with some federated services. In addition, this will not prevent dedicated actors from fetching your public posts and accounts.
+        authorized_fetch_hint: Requiring authentication from federated servers enables stricter enforcement of both user-level and server-level blocks. However, this comes at the cost of a performance penalty, reduces the reach of your replies, and may introduce compatibility issues with some federated services. In addition, this will not prevent dedicated actors from fetching your public awoos and accounts.
         authorized_fetch_overridden_hint: You are currently unable to change this setting because it is overridden by an environment variable.
         federation_authentication: Federation authentication enforcement
       title: Server settings
@@ -926,26 +926,26 @@ en-GB:
       media:
         title: Media
       metadata: Metadata
-      no_history: This post hasn't been edited
-      no_status_selected: No posts were changed as none were selected
-      open: Open post
-      original_status: Original post
+      no_history: This awoo hasn't been edited
+      no_status_selected: No awoos were changed as none were selected
+      open: Open awoo
+      original_status: Original awoo
       quotes: Quotes
       reblogs: Reblogs
       replied_to_html: Replied to %{acct_link}
-      status_changed: Post changed
-      status_title: Post by @%{name}
-      title: Account posts – @%{name}
+      status_changed: Awoo changed
+      status_title: Awoo by @%{name}
+      title: Account awoos – @%{name}
       trending: Trending
       view_publicly: View publicly
-      view_quoted_post: View quoted post
+      view_quoted_post: View quoted awoo
       visibility: Visibility
       with_media: With media
     strikes:
       actions:
-        delete_statuses: "%{name} deleted %{target}'s posts"
+        delete_statuses: "%{name} deleted %{target}'s awoos"
         disable: "%{name} froze %{target}'s account"
-        mark_statuses_as_sensitive: "%{name} marked %{target}'s posts as sensitive"
+        mark_statuses_as_sensitive: "%{name} marked %{target}'s awoos as sensitive"
         none: "%{name} sent a warning to %{target}"
         sensitive: "%{name} marked %{target}'s account as sensitive"
         silence: "%{name} limited %{target}'s account"
@@ -1061,7 +1061,7 @@ en-GB:
         confirm_allow_provider: Are you sure you want to allow selected providers?
         confirm_disallow: Are you sure you want to disallow selected links?
         confirm_disallow_provider: Are you sure you want to disallow selected providers?
-        description_html: These are links that are currently being shared a lot by accounts from which your server sees posts. It can help your users find out what's going on in the world. No links are displayed publicly until you approve the publisher. You can also allow or reject individual links.
+        description_html: These are links that are currently being shared a lot by accounts from which your server sees awoos. It can help your users find out what's going on in the world. No links are displayed publicly until you approve the publisher. You can also allow or reject individual links.
         disallow: Disallow link
         disallow_provider: Disallow publisher
         no_link_selected: No links were changed, as none were selected
@@ -1082,21 +1082,21 @@ en-GB:
         title: Publishers
       rejected: Rejected
       statuses:
-        allow: Allow post
+        allow: Allow awoo
         allow_account: Allow author
         confirm_allow: Are you sure you want to allow selected statuses?
         confirm_allow_account: Are you sure you want to allow selected accounts?
         confirm_disallow: Are you sure you want to disallow selected statuses?
         confirm_disallow_account: Are you sure you want to disallow selected accounts?
-        description_html: These are posts that your server knows about that are currently being shared and favourited a lot at the moment. It can help your new and returning users to find more people to follow. No posts are displayed publicly until you approve the author, and the author allows their account to be suggested to others. You can also allow or reject individual posts.
-        disallow: Disallow post
+        description_html: These are awoos that your server knows about that are currently being shared and favourited a lot at the moment. It can help your new and returning users to find more people to follow. No awoos are displayed publicly until you approve the author, and the author allows their account to be suggested to others. You can also allow or reject individual awoos.
+        disallow: Disallow awoo
         disallow_account: Disallow author
-        no_status_selected: No trending posts were changed, as none were selected
+        no_status_selected: No trending awoos were changed, as none were selected
         not_discoverable: Author has not opted-in to being discoverable
         shared_by:
           one: Shared or favourited one time
           other: Shared and favourited %{friendly_count} times
-        title: Trending posts
+        title: Trending awoos
       tags:
         current_score: Current score %{score}
         dashboard:
@@ -1105,7 +1105,7 @@ en-GB:
           tag_servers_dimension: Top servers
           tag_servers_measure: different servers
           tag_uses_measure: total uses
-        description_html: These are hashtags that are currently appearing in a lot of posts that your server sees. It can help your users find out what people are talking the most about at the moment. No hashtags are displayed publicly until you approve them.
+        description_html: These are hashtags that are currently appearing in a lot of awoos that your server sees. It can help your users find out what people are talking the most about at the moment. No hashtags are displayed publicly until you approve them.
         listable: Can be suggested
         no_tag_selected: No tags were changed, as none were selected
         not_listable: Won't be suggested
@@ -1173,9 +1173,9 @@ en-GB:
       subject: Registrations for %{instance} have been automatically switched to requiring approval
     new_appeal:
       actions:
-        delete_statuses: to delete their posts
+        delete_statuses: to delete their awoos
         disable: to freeze their account
-        mark_statuses_as_sensitive: to mark their posts as sensitive
+        mark_statuses_as_sensitive: to mark their awoos as sensitive
         none: a warning
         sensitive: to mark their account as sensitive
         silence: to limit their account
@@ -1201,7 +1201,7 @@ en-GB:
       new_trending_links:
         title: Trending links
       new_trending_statuses:
-        title: Trending posts
+        title: Trending awoos
       new_trending_tags:
         title: Trending hashtags
       subject: New trends up for review on %{instance}
@@ -1215,8 +1215,8 @@ en-GB:
   appearance:
     advanced_settings: Advanced settings
     animations_and_accessibility: Animations and accessibility
-    boosting_preferences: Boosting preferences
-    boosting_preferences_info_html: "<strong>Tip:</strong> Regardless of settings, <kbd>Shift</kbd> + <kbd>Click</kbd> on the %{icon} Boost icon will immediately boost."
+    boosting_preferences: Pouncing preferences
+    boosting_preferences_info_html: "<strong>Tip:</strong> Regardless of settings, <kbd>Shift</kbd> + <kbd>Click</kbd> on the %{icon} Pounce icon will immediately pounce."
     discovery: Discovery
     localization:
       body: Mastodon is translated by volunteers.
@@ -1229,7 +1229,7 @@ en-GB:
     unsubscribe: Unsubscribe
     view: 'View:'
     view_profile: View profile
-    view_status: View post
+    view_status: View awoo
   applications:
     created: Application successfully created
     destroyed: Application successfully deleted
@@ -1259,7 +1259,7 @@ en-GB:
     description:
       prefix_invited_by_user: "@%{name} invites you to join this server of Mastodon!"
       prefix_sign_up: Sign up on Mastodon today!
-      suffix: With an account, you will be able to follow people, post updates, and exchange messages with users from any Mastodon server and more!
+      suffix: With an account, you will be able to follow people, awoo updates, and exchange messages with users from any Mastodon server and more!
     didnt_get_confirmation: Didn't receive a confirmation link?
     dont_have_your_security_key: Don't have your security key?
     forgot_password: Forgot your password?
@@ -1371,7 +1371,7 @@ en-GB:
     warning:
       before: 'Before proceeding, please read these notes carefully:'
       caches: Content that has been cached by other servers may persist
-      data_removal: Your posts and other data will be permanently removed
+      data_removal: Your awoos and other data will be permanently removed
       email_change_html: You can <a href="%{path}">change your email address</a> without deleting your account
       email_contact_html: If it still doesn't arrive, you can email <a href="mailto:%{email}">%{email}</a> for help
       email_reconfirmation_html: If you are not receiving the confirmation email, you can <a href="%{path}">request it again</a>
@@ -1395,13 +1395,13 @@ en-GB:
       description_html: These are actions taken against your account and warnings that have been sent to you by the staff of %{instance}.
       recipient: Addressed to
       reject_appeal: Reject appeal
-      status: 'Post #%{id}'
-      status_removed: Post already removed from system
+      status: 'Awoo #%{id}'
+      status_removed: Awoo already removed from system
       title: "%{action} from %{date}"
       title_actions:
-        delete_statuses: Post removal
+        delete_statuses: Awoo removal
         disable: Freezing of account
-        mark_statuses_as_sensitive: Marking of posts as sensitive
+        mark_statuses_as_sensitive: Marking of awoos as sensitive
         none: Warning
         sensitive: Marking of account as sensitive
         silence: Limitation of account
@@ -1417,7 +1417,7 @@ en-GB:
   email_subscription_mailer:
     confirmation:
       action: Confirm email address
-      instructions_to_confirm: Confirm you'd like to receive emails from %{name} (@%{acct}) when they publish new posts.
+      instructions_to_confirm: Confirm you'd like to receive emails from %{name} (@%{acct}) when they publish new awoos.
       instructions_to_ignore: If you're not sure why you received this email, you can delete it. You will not be subscribed if you don't click on the link above.
       subject: Confirm your email address
       title: Get email updates from %{name}?
@@ -1427,20 +1427,20 @@ en-GB:
         privacy_html: Emails are sent from %{domain}, a server powered by Mastodon. To understand how this server processes your personal data, refer to the <a href="%{privacy_policy_path}">Privacy Policy</a>.
         reason_for_email_html: You're receiving this email because you opted into email updates from %{name}. Don't want to receive these emails? <a href="%{unsubscribe_path}">Unsubscribe</a>
       interact_with_this_post:
-        one: Interact with this post and discover more like it.
-        other: Interact with these posts and discover more.
+        one: Interact with this awoo and discover more like it.
+        other: Interact with these awoos and discover more.
       subject:
-        plural: New posts from %{name}
-        singular: 'New post: "%{excerpt}"'
+        plural: New awoos from %{name}
+        singular: 'New awoo: "%{excerpt}"'
       title:
-        plural: New posts from %{name}
-        singular: 'New post: "%{excerpt}"'
+        plural: New awoos from %{name}
+        singular: 'New awoo: "%{excerpt}"'
   email_subscriptions:
     active: Active
     confirmations:
       show:
         changed_your_mind: Changed your mind?
-        success_html: You'll now start receiving emails when %{name} publishes new posts. Add %{sender} to your contacts so these posts don't end up in your Spam folder.
+        success_html: You'll now start receiving emails when %{name} publishes new awoos. Add %{sender} to your contacts so these awoos don't end up in your Spam folder.
         title: You're signed up
         unsubscribe: Unsubscribe
     inactive: Inactive
@@ -1472,7 +1472,7 @@ en-GB:
     archive_takeout:
       date: Date
       download: Download your archive
-      hint_html: You can request an archive of your <strong>posts and uploaded media</strong>. The exported data will be in the ActivityPub format, readable by any compliant software. You can request an archive every seven days.
+      hint_html: You can request an archive of your <strong>awoos and uploaded media</strong>. The exported data will be in the ActivityPub format, readable by any compliant software. You can request an archive every seven days.
       in_progress: Compiling your archive...
       request: Request your archive
       size: Size
@@ -1496,8 +1496,8 @@ en-GB:
     edit:
       add_keyword: Add keyword
       keywords: Keywords
-      statuses: Individual posts
-      statuses_hint_html: This filter applies to select individual posts regardless of whether they match the keywords below. <a href="%{path}">Review or remove posts from the filter</a>.
+      statuses: Individual awoos
+      statuses_hint_html: This filter applies to select individual awoos regardless of whether they match the keywords below. <a href="%{path}">Review or remove awoos from the filter</a>.
       title: Edit filter
     errors:
       deprecated_api_multiple_keywords: These parameters cannot be changed from this application because they apply to more than one filter keyword. Use a more recent application or the web interface.
@@ -1512,11 +1512,11 @@ en-GB:
         one: "%{count} keyword"
         other: "%{count} keywords"
       statuses:
-        one: "%{count} post"
-        other: "%{count} posts"
+        one: "%{count} awoo"
+        other: "%{count} awoos"
       statuses_long:
-        one: "%{count} individual post hidden"
-        other: "%{count} individual posts hidden"
+        one: "%{count} individual awoo hidden"
+        other: "%{count} individual awoos hidden"
       title: Filters
     new:
       save: Save new filter
@@ -1526,8 +1526,8 @@ en-GB:
       batch:
         remove: Remove from filter
       index:
-        hint: This filter applies to select individual posts regardless of other criteria. You can add more posts to this filter from the web interface.
-        title: Filtered posts
+        hint: This filter applies to select individual awoos regardless of other criteria. You can add more awoos to this filter from the web interface.
+        title: Filtered awoos
   generic:
     all: All
     all_items_on_page_selected_html:
@@ -1572,8 +1572,8 @@ en-GB:
         one: You are about to <strong>replace your block list</strong> with up to <strong>%{count} account</strong> from <strong>%{filename}</strong>.
         other: You are about to <strong>replace your block list</strong> with up to <strong>%{count} accounts</strong> from <strong>%{filename}</strong>.
       bookmarks_html:
-        one: You are about to <strong>replace your bookmarks</strong> with up to <strong>%{count} post</strong> from <strong>%{filename}</strong>.
-        other: You are about to <strong>replace your bookmarks</strong> with up to <strong>%{count} posts</strong> from <strong>%{filename}</strong>.
+        one: You are about to <strong>replace your bookmarks</strong> with up to <strong>%{count} awoo</strong> from <strong>%{filename}</strong>.
+        other: You are about to <strong>replace your bookmarks</strong> with up to <strong>%{count} awoos</strong> from <strong>%{filename}</strong>.
       domain_blocking_html:
         one: You are about to <strong>replace your domain block list</strong> with up to <strong>%{count} domain</strong> from <strong>%{filename}</strong>.
         other: You are about to <strong>replace your domain block list</strong> with up to <strong>%{count} domains</strong> from <strong>%{filename}</strong>.
@@ -1591,8 +1591,8 @@ en-GB:
         one: You are about to <strong>block</strong> up to <strong>%{count} account</strong> from <strong>%{filename}</strong>.
         other: You are about to <strong>block</strong> up to <strong>%{count} accounts</strong> from <strong>%{filename}</strong>.
       bookmarks_html:
-        one: You are about to add up to <strong>%{count} post</strong> from <strong>%{filename}</strong> to your <strong>bookmarks</strong>.
-        other: You are about to add up to <strong>%{count} posts</strong> from <strong>%{filename}</strong> to your <strong>bookmarks</strong>.
+        one: You are about to add up to <strong>%{count} awoo</strong> from <strong>%{filename}</strong> to your <strong>bookmarks</strong>.
+        other: You are about to add up to <strong>%{count} awoos</strong> from <strong>%{filename}</strong> to your <strong>bookmarks</strong>.
       domain_blocking_html:
         one: You are about to <strong>block</strong> up to <strong>%{count} domain</strong> from <strong>%{filename}</strong>.
         other: You are about to <strong>block</strong> up to <strong>%{count} domains</strong> from <strong>%{filename}</strong>.
@@ -1680,8 +1680,8 @@ en-GB:
     title: Authentication history
   media_attachments:
     validations:
-      images_and_video: Cannot attach a video to a post that already contains images
-      not_found: Media %{ids} not found or already attached to another post
+      images_and_video: Cannot attach a video to an awoo that already contains images
+      not_found: Media %{ids} not found or already attached to another awoo
       not_ready: Cannot attach files that have not finished processing. Try again in a moment!
       too_many: Cannot attach more than four files
   migrations:
@@ -1713,7 +1713,7 @@ en-GB:
       disabled_account: Your current account will not be fully usable afterwards. However, you will have access to data export as well as re-activation.
       followers: This action will move all followers from the current account to the new account
       only_redirect_html: Alternatively, you can <a href="%{path}">only put up a redirect on your profile</a>.
-      other_data: No other data will be moved automatically (including your posts and the list of accounts you follow)
+      other_data: No other data will be moved automatically (including your awoos and the list of accounts you follow)
       redirect: Your current account's profile will be updated with a redirect notice and be excluded from searches
   moderation:
     title: Moderation
@@ -1730,8 +1730,8 @@ en-GB:
       sign_up:
         subject: "%{name} signed up"
     favourite:
-      body: 'Your post was favourited by %{name}:'
-      subject: "%{name} favourited your post"
+      body: 'Your awoo was favourited by %{name}:'
+      subject: "%{name} favourited your awoo"
       title: New favourite
     follow:
       body: "%{name} is now following you!"
@@ -1752,21 +1752,21 @@ en-GB:
     poll:
       subject: A poll by %{name} has ended
     quote:
-      body: 'Your post was quoted by %{name}:'
-      subject: "%{name} quoted your post"
+      body: 'Your awoo was quoted by %{name}:'
+      subject: "%{name} quoted your awoo"
       title: New quote
     quoted_update:
-      subject: "%{name} edited a post you have quoted"
+      subject: "%{name} edited an awoo you have quoted"
     reblog:
-      body: 'Your post was boosted by %{name}:'
-      subject: "%{name} boosted your post"
-      title: New boost
+      body: 'Your awoo was pounced by %{name}:'
+      subject: "%{name} pounced your awoo"
+      title: New pounce
     severed_relationships:
       subject: You have lost connections due to a moderation decision
     status:
-      subject: "%{name} just posted"
+      subject: "%{name} just awoo"
     update:
-      subject: "%{name} edited a post"
+      subject: "%{name} edited an awoo"
   notifications:
     administration_emails: Admin email notifications
     email_events: Events for email notifications
@@ -1808,21 +1808,21 @@ en-GB:
       too_many_options: can't contain more than %{max} items
     vote: Vote
   posting_defaults:
-    explanation: These settings will be used as defaults when you create new posts, but you can edit them per post within the composer.
+    explanation: These settings will be used as defaults when you create new awoos, but you can edit them per awoo within the composer.
   preferences:
     other: Other
-    posting_defaults: Posting defaults
+    posting_defaults: Awoo defaults
     public_timelines: Public timelines
   privacy:
-    email_subscriptions: Send posts via email
-    email_subscriptions_hint_html: Add an email sign-up form to your profile that appears for logged-out users. When visitors enter their email address and opt in, Mastodon will send email updates for your public posts.
-    hint_html: "<strong>Customise how you want your profile and your posts to be found.</strong> A variety of features in Mastodon can help you reach a wider audience when enabled. Take a moment to review these settings to make sure they fit your use case."
+    email_subscriptions: Send awoos via email
+    email_subscriptions_hint_html: Add an email sign-up form to your profile that appears for logged-out users. When visitors enter their email address and opt in, Mastodon will send email updates for your public awoos.
+    hint_html: "<strong>Customise how you want your profile and your awoos to be found.</strong> A variety of features in Mastodon can help you reach a wider audience when enabled. Take a moment to review these settings to make sure they fit your use case."
     privacy: Privacy
-    privacy_hint_html: Control how much you want to disclose for the benefit of others. People discover interesting profiles and cool apps by browsing other people's follows and seeing from which apps they post, but you may prefer to keep it hidden.
+    privacy_hint_html: Control how much you want to disclose for the benefit of others. People discover interesting profiles and cool apps by browsing other people's follows and seeing from which apps they awoo, but you may prefer to keep it hidden.
     reach: Reach
-    reach_hint_html: Control whether you want to be discovered and followed by new people. Do you want your posts to appear on the Explore screen? Do you want other people to see you in their follow recommendations? Do you want to accept all new followers automatically, or have granular control over each one?
+    reach_hint_html: Control whether you want to be discovered and followed by new people. Do you want your awoos to appear on the Explore screen? Do you want other people to see you in their follow recommendations? Do you want to accept all new followers automatically, or have granular control over each one?
     search: Search
-    search_hint_html: Control how you want to be found. Do you want people to find you by what you've publicly posted about? Do you want people outside Mastodon to find your profile when searching the web? Please bear in mind that total exclusion from all search engines cannot be guaranteed for public information.
+    search_hint_html: Control how you want to be found. Do you want people to find you by what you've publicly awoo about? Do you want people outside Mastodon to find your profile when searching the web? Please bear in mind that total exclusion from all search engines cannot be guaranteed for public information.
     title: Privacy and reach
   privacy_policy:
     title: Privacy Policy
@@ -1862,11 +1862,11 @@ en-GB:
   rss:
     content_warning: 'Content warning:'
     descriptions:
-      account: Public posts from @%{acct}
-      tag: 'Public posts tagged #%{hashtag}'
+      account: Public awoos from @%{acct}
+      tag: 'Public awoos tagged #%{hashtag}'
   scheduled_statuses:
-    over_daily_limit: You have exceeded the limit of %{limit} scheduled posts for today
-    over_total_limit: You have exceeded the limit of %{limit} scheduled posts
+    over_daily_limit: You have exceeded the limit of %{limit} scheduled awoos for today
+    over_total_limit: You have exceeded the limit of %{limit} scheduled awoos
     too_soon: date must be in the future
   self_destruct:
     lead_html: Unfortunately, <strong>%{domain}</strong> is permanently closing down. If you had an account there, you will not be able to continue using it, but you can still request a backup of your data.
@@ -1937,7 +1937,7 @@ en-GB:
     profile: Profile
     relationships: Follows and followers
     severed_relationships: Severed relationships
-    statuses_cleanup: Automated post deletion
+    statuses_cleanup: Automated awoo deletion
     strikes: Moderation strikes
     two_factor_authentication: Two-factor Auth
     webauthn_authentication: Security keys
@@ -1964,10 +1964,10 @@ en-GB:
       video:
         one: "%{count} video"
         other: "%{count} videos"
-    boosted_from_html: Boosted from %{acct_link}
+    boosted_from_html: Pounced from %{acct_link}
     content_warning: 'Content warning: %{warning}'
     content_warnings:
-      hide: Hide post
+      hide: Hide awoo
       show: Show more
     default_language: Same as interface language
     disallowed_hashtags:
@@ -1975,24 +1975,24 @@ en-GB:
       other: 'contained the disallowed hashtags: %{tags}'
     edited_at_html: Edited %{date}
     errors:
-      in_reply_not_found: The post you are trying to reply to does not appear to exist.
-      quoted_status_not_found: The post you are trying to quote does not appear to exist.
-      quoted_user_not_mentioned: Cannot quote a non-mentioned user in a Private Mention post.
+      in_reply_not_found: The awoo you are trying to reply to does not appear to exist.
+      quoted_status_not_found: The awoo you are trying to quote does not appear to exist.
+      quoted_user_not_mentioned: Cannot quote a non-mentioned user in a Private Mention awoo.
     over_character_limit: character limit of %{max} exceeded
     pin_errors:
-      direct: Posts that are only visible to mentioned users cannot be pinned
-      limit: You have already pinned the maximum number of posts
-      ownership: Someone else's post cannot be pinned
-      reblog: A boost cannot be pinned
+      direct: Awoos that are only visible to mentioned users cannot be pinned
+      limit: You have already pinned the maximum number of awoos
+      ownership: Someone else's awoo cannot be pinned
+      reblog: A pounce cannot be pinned
     quote_error:
-      not_available: Post unavailable
-      pending_approval: Post pending
-      revoked: Post removed by author
+      not_available: Awoo unavailable
+      pending_approval: Awoo pending
+      revoked: Awoo removed by author
     quote_policies:
       followers: Followers only
       nobody: Just me
       public: Anyone
-    quote_post_author: Quoted a post by %{acct}
+    quote_post_author: Quoted an awoo by %{acct}
     title: '%{name}: "%{quote}"'
     visibilities:
       direct: Private mention
@@ -2002,26 +2002,26 @@ en-GB:
       unlisted: Quiet public
       unlisted_long: Hidden from Mastodon search results, trending, and public timelines
   statuses_cleanup:
-    enabled: Automatically delete old posts
-    enabled_hint: Automatically deletes your posts once they reach a specified age threshold, unless they match one of the exceptions below
+    enabled: Automatically delete old awoos
+    enabled_hint: Automatically deletes your awoos once they reach a specified age threshold, unless they match one of the exceptions below
     exceptions: Exceptions
     explanation: Automated deletion is performed with low priority. There may be a delay between reaching the age threshold and being removed.
     ignore_favs: Ignore favourites
-    ignore_reblogs: Ignore boosts
+    ignore_reblogs: Ignore pounces
     interaction_exceptions: Exceptions based on interactions
-    interaction_exceptions_explanation: Posts which temporarily exceed the favourite or boost threshold may be retained even if they are later decreased.
+    interaction_exceptions_explanation: Awoos which temporarily exceed the favourite or pounce threshold may be retained even if they are later decreased.
     keep_direct: Keep direct messages
     keep_direct_hint: Doesn't delete any of your direct messages
-    keep_media: Keep posts with media attachments
-    keep_media_hint: Doesn't delete any of your posts that have media attachments
-    keep_pinned: Keep pinned posts
-    keep_pinned_hint: Doesn't delete any of your pinned posts
+    keep_media: Keep awoos with media attachments
+    keep_media_hint: Doesn't delete any of your awoos that have media attachments
+    keep_pinned: Keep pinned awoos
+    keep_pinned_hint: Doesn't delete any of your pinned awoos
     keep_polls: Keep polls
     keep_polls_hint: Doesn't delete any of your polls
-    keep_self_bookmark: Keep posts you bookmarked
-    keep_self_bookmark_hint: Doesn't delete your own posts if you have bookmarked them
-    keep_self_fav: Keep posts you favourited
-    keep_self_fav_hint: Doesn't delete your own posts if you have favourited them
+    keep_self_bookmark: Keep awoos you bookmarked
+    keep_self_bookmark_hint: Doesn't delete your own awoos if you have bookmarked them
+    keep_self_fav: Keep awoos you favourited
+    keep_self_fav_hint: Doesn't delete your own awoos if you have favourited them
     min_age:
       '1209600': 2 weeks
       '15778476': 6 months
@@ -2032,10 +2032,10 @@ en-GB:
       '63113904': 2 years
       '7889238': 3 months
     min_age_label: Age threshold
-    min_favs: Keep posts favourited at least
-    min_favs_hint: Doesn't delete any of your posts that have received at least this number of favourites. Leave blank to delete posts regardless of their number of favourites
-    min_reblogs: Keep posts boosted at least
-    min_reblogs_hint: Doesn't delete any of your posts that have been boosted at least this number of times. Leave blank to delete posts regardless of their number of boosts
+    min_favs: Keep awoos favourited at least
+    min_favs_hint: Doesn't delete any of your awoos that have received at least this number of favourites. Leave blank to delete awoos regardless of their number of favourites
+    min_reblogs: Keep awoos pounced at least
+    min_reblogs_hint: Doesn't delete any of your awoos that have been pounced at least this number of times. Leave blank to delete awoos regardless of their number of pounces
   stream_entries:
     sensitive_content: Sensitive content
   strikes:
@@ -2092,11 +2092,11 @@ en-GB:
       follow: follow notification emails
       follow_request: follow request emails
       mention: mention notification emails
-      reblog: boost notification emails
+      reblog: pounce notification emails
     show:
       action: Unsubscribe
       email_subscription:
-        confirmation_html: You'll stop receiving emails when this account publishes new posts.
+        confirmation_html: You'll stop receiving emails when this account publishes new awoos.
         title: Unsubscribe from %{name}?
       user:
         confirmation_html: You'll stop receiving %{type} from Mastodon on %{domain}.
@@ -2151,26 +2151,26 @@ en-GB:
         spam: Spam
         violation: Content violates the following community guidelines
       explanation:
-        delete_statuses: Some of your posts have been found to violate one or more community guidelines and have been subsequently removed by the moderators of %{instance}.
+        delete_statuses: Some of your awoos have been found to violate one or more community guidelines and have been subsequently removed by the moderators of %{instance}.
         disable: You can no longer use your account, but your profile and other data remains intact. You can request a backup of your data, change account settings or delete your account.
-        mark_statuses_as_sensitive: Some of your posts have been marked as sensitive by the moderators of %{instance}. This means that people will need to tap the media in the posts before a preview is displayed. You can mark media as sensitive yourself when posting in the future.
+        mark_statuses_as_sensitive: Some of your awoos have been marked as sensitive by the moderators of %{instance}. This means that people will need to tap the media in the awoos before a preview is displayed. You can mark media as sensitive yourself when awoo in the future.
         sensitive: From now on, all your uploaded media files will be marked as sensitive and hidden behind a click-through warning.
-        silence: You can still use your account but only people who are already following you will see your posts on this server, and you may be excluded from various discovery features. However, others may still manually follow you.
+        silence: You can still use your account but only people who are already following you will see your awoos on this server, and you may be excluded from various discovery features. However, others may still manually follow you.
         suspend: You can no longer use your account, and your profile and other data are no longer accessible. You can still log in to request a backup of your data until the data is fully removed in about 30 days, but we will retain some basic data to prevent you from evading the suspension.
       reason: 'Reason:'
-      statuses: 'Posts cited:'
+      statuses: 'Awoos cited:'
       subject:
-        delete_statuses: Your posts on %{acct} have been removed
+        delete_statuses: Your awoos on %{acct} have been removed
         disable: Your account %{acct} has been frozen
-        mark_statuses_as_sensitive: Your posts on %{acct} have been marked as sensitive
+        mark_statuses_as_sensitive: Your awoos on %{acct} have been marked as sensitive
         none: Warning for %{acct}
-        sensitive: Your posts on %{acct} will be marked as sensitive from now on
+        sensitive: Your awoos on %{acct} will be marked as sensitive from now on
         silence: Your account %{acct} has been limited
         suspend: Your account %{acct} has been suspended
       title:
-        delete_statuses: Posts removed
+        delete_statuses: Awoos removed
         disable: Account frozen
-        mark_statuses_as_sensitive: Posts marked as sensitive
+        mark_statuses_as_sensitive: Awoos marked as sensitive
         none: Warning
         sensitive: Account marked as sensitive
         silence: Account limited
@@ -2183,15 +2183,15 @@ en-GB:
       checklist_subtitle: 'Let''s get you started on this new social frontier:'
       checklist_title: Welcome Checklist
       edit_profile_action: Personalise
-      edit_profile_step: Boost your interactions by having a comprehensive profile.
+      edit_profile_step: Pounce your interactions by having a comprehensive profile.
       edit_profile_title: Personalise your profile
       explanation: Here are some tips to get you started
       feature_action: Learn more
       feature_audience: Mastodon provides you with a unique possibility of managing your audience without middlemen. Mastodon deployed on your own infrastructure allows you to follow and be followed from any other Mastodon server online and is under no one's control but yours.
       feature_audience_title: Build your audience in confidence
-      feature_control: You know best what you want to see on your home feed. No algorithms or ads to waste your time. Follow anyone across any Mastodon server from a single account and receive their posts in chronological order, and make your corner of the Internet a little more like you.
+      feature_control: You know best what you want to see on your home feed. No algorithms or ads to waste your time. Follow anyone across any Mastodon server from a single account and receive their awoos in chronological order, and make your corner of the Internet a little more like you.
       feature_control_title: Stay in control of your own timeline
-      feature_creativity: Mastodon supports audio, video and picture posts, accessibility descriptions, polls, content warnings, animated avatars, custom emojis, thumbnail crop control, and more, to help you express yourself online. Whether you're publishing your art, your music, or your podcast, Mastodon is there for you.
+      feature_creativity: Mastodon supports audio, video and picture awoos, accessibility descriptions, polls, content warnings, animated avatars, custom emojis, thumbnail crop control, and more, to help you express yourself online. Whether you're publishing your art, your music, or your podcast, Mastodon is there for you.
       feature_creativity_title: Unparalleled creativity
       feature_moderation: Mastodon puts decision making back in your hands. Each server creates their own rules and regulations, which are enforced locally and not top-down like corporate social media, making it the most flexible in responding to the needs of different groups of people. Join a server with the rules you agree with, or host your own.
       feature_moderation_title: Moderating the way it should be
@@ -2209,7 +2209,7 @@ en-GB:
       hashtags_view_more: View more trending hashtags
       post_action: Compose
       post_step: Say hello to the world with text, photos, videos, or polls.
-      post_title: Make your first post
+      post_title: Make your first awoo
       share_step: Let your friends know how to find you on Mastodon.
       share_title: Share your Mastodon profile
       sign_in_action: Sign in
